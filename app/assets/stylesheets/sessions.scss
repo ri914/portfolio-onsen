@@ -113,3 +113,45 @@ $background-color: #FFF8E1;
   font-size: 0.9em;
   color: #444;
 }
+
+.edit-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  padding: 20px;
+  background: url("https://sakuranouta.biz/wp-content/uploads/2023/11/%E6%B8%A9%E6%B3%89_1_%E3%82%A2%E3%83%BC%E3%83%88%E3%83%9C%E3%83%BC%E3%83%89-1.jpg") no-repeat center center;
+}
+
+.current-avatar-container {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.current-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.remove-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.remove-avatar-checkbox {
+  margin-right: 5px;
+  margin-top: 9px;
+}
+
+.remove-avatar label {
+  font-size: 14px;
+  line-height: 1;
+}
