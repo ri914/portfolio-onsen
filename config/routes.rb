@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   get 'home/index', to: 'home#index'
+
+  resources :users
 end

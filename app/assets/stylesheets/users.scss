@@ -1,0 +1,73 @@
+.settings-container {
+  background: url("https://tripeditor.com/wp-content/uploads/2020/09/18121855/shutterstock_1724673550.jpg") no-repeat center center;
+}
+
+.settings-main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.profile-section, .onsens-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.current-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-link {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.edit-link:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.mypage-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.mypage-li {
+  margin: 5px 0;
+}
+
+.mypage-li a {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+.mypage-li a:hover {
+  text-decoration: underline;
+}
