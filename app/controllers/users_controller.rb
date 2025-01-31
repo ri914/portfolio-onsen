@@ -17,6 +17,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+
+    if @user.guest?
+      redirect_to request.referer || root_path, alert: t('devise.registrations.guest_account_deletion_error')
+      return
+    end
+
+    @user.destroy
+    redirect_to root_path, notice: t('devise.registrations.account_deleted')
+  end
+
   private
 
   def user_params
