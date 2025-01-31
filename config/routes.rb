@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'guest_login', to: 'users/sessions#guest_login'
   end
+
+  get 'home/index', to: 'home#index'
 end
