@@ -67,3 +67,7 @@ group :test do
 end
 
 gem 'devise'
+
+gem 'sassc-rails'
+
+gem 'bootstrap', '~> 5.0'
