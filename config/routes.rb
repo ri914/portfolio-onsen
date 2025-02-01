@@ -9,4 +9,10 @@ Rails.application.routes.draw do
   get 'home/index', to: 'home#index'
 
   resources :users
+
+  resources :onsens do
+    member do
+      post 'save'
+    end
+  end
 end

@@ -26,12 +26,32 @@
 
     <div class="onsens-section">
       <h1>お気に入りの温泉地</h1>
+      <% if @saved_onsens.any? %>
+        <ul class="mypage-ul">
+          <% @saved_onsens.each do |onsen| %>
+            <li class="mypage-li">
+              <%= link_to onsen.name, onsen_path(onsen) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
         <p class="note">お気に入りの温泉地はありません。</p>
+      <% end %>
     </div>
 
     <div class="onsens-section">
       <h1>投稿した温泉地</h1>
+      <% if @posted_onsens.any? %>
+        <ul class="mypage-ul">
+          <% @posted_onsens.each do |onsen| %>
+            <li class="mypage-li">
+              <%= link_to onsen.name, onsen_path(onsen) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
         <p class="note">投稿した温泉地はありません。</p>
+      <% end %>
     </div>
   </div>
 </div>

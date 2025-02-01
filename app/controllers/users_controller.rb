@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @saved_onsens = @user.saved_onsens
+    @posted_onsens = @user.onsens
   end
 
   def update
@@ -24,6 +26,8 @@ class UsersController < ApplicationController
       redirect_to request.referer || root_path, alert: t('devise.registrations.guest_account_deletion_error')
       return
     end
+
+    @user.onsens.destroy_all if @user.onsens.present?
 
     @user.destroy
     redirect_to root_path, notice: t('devise.registrations.account_deleted')

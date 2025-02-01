@@ -39,6 +39,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "onsens", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "location"
+    t.text "description"
+    t.string "image"
+    t.text "activities"
+    t.string "best_time_to_visit"
+    t.text "access_info"
+    t.decimal "rating", precision: 2, scale: 1
+    t.integer "user_id", null: false
+    t.integer "saved_by_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["saved_by_user_id"], name: "index_onsens_on_saved_by_user_id"
+    t.index ["user_id"], name: "index_onsens_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -55,4 +72,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "onsens", "users"
 end
