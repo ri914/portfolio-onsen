@@ -3,5 +3,6 @@ class HomeController < ApplicationController
   end
 
   def index
+    @onsens = Onsen.order(created_at: :desc)
   end
 end
