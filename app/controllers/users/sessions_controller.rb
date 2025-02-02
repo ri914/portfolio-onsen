@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   def new
+    @page_title = "ログイン"
     super
   end
 

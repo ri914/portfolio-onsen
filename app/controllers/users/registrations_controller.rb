@@ -1,5 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  def new
+    @page_title = "新規登録"
+    super 
+  end
+  
   def edit
+    @page_title = "アカウント設定"
   end
 
   def create

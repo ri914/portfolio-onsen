@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @saved_onsens = @user.saved_onsens
     @posted_onsens = @user.onsens
+    @page_title = "マイページ"
   end
 
   def update

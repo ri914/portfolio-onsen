@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @onsens = Onsen.order(created_at: :desc)
+    @page_title = "ホーム"
   end
 end
