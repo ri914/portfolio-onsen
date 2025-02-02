@@ -35,3 +35,12 @@ $(document).ready(function() {
     }
   });
 });
+
+
+$(function(){
+  setTimeout("$('.flash').fadeOut('slow')", 3000);
+});
+
+$(function(){
+  setTimeout("$('.alert').fadeOut('slow')", 3000);
+});
