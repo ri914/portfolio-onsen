@@ -1,0 +1,22 @@
+inherit_from:
+  - .rubocop-airbnb.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec_rails 
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'vendor/**/*'
+    - 'config/**/*'
+  SuggestExtensions: true 
+
+Layout/LineLength:
+  Max: 130
