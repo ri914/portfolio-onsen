@@ -68,10 +68,16 @@ RSpec.configure do |config|
     driven_by :rack_test
   end
 
-
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
   end
 
   config.include Devise::Test::IntegrationHelpers, type: :system
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end  
 end
