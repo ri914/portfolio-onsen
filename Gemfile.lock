@@ -134,7 +134,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.0.3)
+    importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -168,7 +168,7 @@ GEM
     minitest (5.25.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
-    net-imap (0.4.19)
+    net-imap (0.5.5)
       date
       net-protocol
     net-pop (0.1.2)
@@ -178,19 +178,19 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.17.2-aarch64-linux)
+    nokogiri (1.18.2)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.17.2-arm64-darwin)
+    nokogiri (1.18.2-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.17.2-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.17.2-x86_64-linux)
+    nokogiri (1.18.2-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.26.3)
     parser (3.3.7.0)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -313,8 +313,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    securerandom (0.3.2)
-    selenium-webdriver (4.26.0)
+    securerandom (0.4.1)
+    selenium-webdriver (4.28.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -329,10 +329,6 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (2.0.4)
-      mini_portile2 (~> 2.8.0)
-    sqlite3 (2.0.4-arm64-darwin)
-    sqlite3 (2.0.4-x86_64-darwin)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.5)
@@ -364,7 +360,6 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin
   x86_64-darwin
   x86_64-linux
@@ -380,6 +375,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  pg (>= 0.18)
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
   rspec-rails
@@ -389,14 +385,13 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers (~> 4.0)
   sprockets-rails
-  sqlite3 (>= 1.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
 
 RUBY VERSION
-   ruby 3.0.4p208
+   ruby 3.1.0p0
 
 BUNDLED WITH
    2.5.7
