@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +42,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "image_descriptions", force: :cascade do |t|
+    t.bigint "onsen_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["onsen_id"], name: "index_image_descriptions_on_onsen_id"
+  end
+
   create_table "onsens", force: :cascade do |t|
     t.string "name", null: false
     t.string "location"
@@ -52,8 +63,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
     t.integer "saved_by_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "region"
     t.index ["saved_by_user_id"], name: "index_onsens_on_saved_by_user_id"
     t.index ["user_id"], name: "index_onsens_on_user_id"
+  end
+
+  create_table "onsens_water_qualities", force: :cascade do |t|
+    t.bigint "onsen_id", null: false
+    t.bigint "water_quality_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["onsen_id", "water_quality_id"], name: "index_onsens_water_qualities_on_onsen_id_and_water_quality_id", unique: true
+    t.index ["onsen_id"], name: "index_onsens_water_qualities_on_onsen_id"
+    t.index ["water_quality_id"], name: "index_onsens_water_qualities_on_water_quality_id"
+  end
+
+  create_table "saved_onsens", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "onsen_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["onsen_id"], name: "index_saved_onsens_on_onsen_id"
+    t.index ["user_id"], name: "index_saved_onsens_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,7 +101,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102614) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "water_qualities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "image_descriptions", "onsens"
   add_foreign_key "onsens", "users"
+  add_foreign_key "onsens_water_qualities", "onsens"
+  add_foreign_key "onsens_water_qualities", "water_qualities"
+  add_foreign_key "saved_onsens", "onsens"
+  add_foreign_key "saved_onsens", "users"
 end
