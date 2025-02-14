@@ -1,38 +1,58 @@
-<h1>温泉地の投稿</h1>
+<div class="form-body">
+  <div class="card shadow-lg p-4">
+    <div class="card-body">
+      
+      <h1 class="text-center mb-4">新しい温泉を投稿</h1>
 
-<%= form_with model: @onsen, local: true do |form| %>
-  <% if @onsen.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@onsen.errors.count, "error") %> prohibited this onsen from being saved:</h2>
-      <ul>
-        <% @onsen.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      <%= form_with(model: @onsen, local: true, html: { id: 'onsen-form' }) do |form| %>
+        <% if @onsen.errors.any? %>
+          <div class="alert alert-danger">
+            <h4 class="alert-heading">エラー!</h4>
+            <ul>
+              <% @onsen.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+        <div class="form-group mb-3">
+          <%= form.label :name, "温泉地の名称", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <%= form.text_field :name, class: 'form-control', required: true, placeholder: '例) 箱根温泉' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :location, "都道府県", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <%= form.select :location, Onsen.prefectures, { prompt: '選択してください' }, class: 'form-select', required: true %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :water_quality_ids, "泉質", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <div class="custom-checkbox-container">
+            <%= form.collection_check_boxes :water_quality_ids, WaterQuality.all, :id, :name do |b| %>
+              <div class="custom-checkbox">
+                <%= b.check_box(class: 'check-box') %>
+                <%= b.label(class: 'check-label') %>
+              </div>
+            <% end %>
+          </div>
+          <small class="form-text text-muted">複数の泉質を選択できます。</small>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :images, "画像", class: 'form-label' %>
+          <%= form.file_field :images, multiple: true, class: 'form-control', accept: 'image/*', id: 'image-upload' %>
+          <small class="form-text text-muted">複数の画像を選択できます。</small>
+          <div id="image-preview" class="image-preview mt-3"></div>
+        </div>  
+
+        <div class="text-center">
+          <%= form.submit "投稿", class: 'btn btn-primary btn-lg' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit '投稿', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+</div>
