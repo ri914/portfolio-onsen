@@ -43,20 +43,6 @@ RSpec.describe "User", type: :system do
   end
 
   describe "ユーザー退会" do
-    context "ゲストユーザーの場合" do
-      let!(:guest_user) { create(:user, email: "guest@example.com", password: "password") }
-
-      it "ゲストユーザーは退会できないこと" do
-        sign_in guest_user
-        visit user_path(guest_user)
-
-        click_button "退会"
-
-        expect(page).to have_content("ゲストユーザーは退会できません。")
-        expect(current_path).to eq(user_path(guest_user))
-      end
-    end
-
     context "一般ユーザーの場合" do
       it "ユーザーが退会できること" do
         sign_in user

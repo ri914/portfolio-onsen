@@ -5,12 +5,12 @@
       <p class="sub-title">〜現地の人々とリアルタイムでつながる温泉情報共有サイト〜</p>
     </div>
     <div class="button-container">
-      <a href="<%= new_onsen_path %>" class="btn btn-3d-circle btn-post-onsen">
+      <a href="<%= new_onsen_path %>" class="btn btn-3d-circle btn-post-onsen" data-guest="<%= current_user.guest? %>">
         <span class="btn-3d-circle-content">
           <span class="btn-3d-circle-front">新しい温泉地を <br> 投稿する</span>
         </span>
         <span class="btn-3d-circle-back"><i class="fas fa-plus"></i></span>
-      </a>        
+      </a>
       <a href="<%#= nearby_onsens_path %>" class="btn btn-3d-circle btn-find-onsen">
         <span class="btn-3d-circle-content">
           <span class="btn-3d-circle-front">近くの温泉を <br> 探す</span>

@@ -119,3 +119,33 @@ $(document).ready(function() {
     }
   });
 });
+
+$(document).ready(function() {
+  $('.post-link').on('click', function(event) {
+    if ($(this).data('guest') === true) {
+      alert("ゲストユーザーは投稿フォームにアクセスできません。");
+      event.preventDefault();
+    }
+  });
+
+  $('.btn-post-onsen').on('click', function(event) {
+    if ($(this).data('guest') === true) {
+      alert("ゲストユーザーは投稿フォームにアクセスできません。");
+      event.preventDefault();
+    }
+  });
+
+  $('.user-dropdown-link').on('click', function(event) {
+    if ($(this).data('guest') === true) {
+      alert("ゲストユーザーはこの機能を使用できません。");
+      event.preventDefault();
+    }
+  });
+
+  $('.edit-link').on('click', function(event) {
+    if ($(this).data('guest') === true) {
+      alert("ゲストユーザーはこの機能を使用できません。");
+      event.preventDefault();
+    }
+  });
+});

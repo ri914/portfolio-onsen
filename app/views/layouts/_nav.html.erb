@@ -9,7 +9,7 @@
         </li>
         <% if user_signed_in? %>
           <li class="nav-item">
-            <a class="nav-link" href="<%= new_onsen_path %>">
+            <a class="nav-link post-link" href="<%= new_onsen_path %>" data-guest="<%= current_user.guest? %>">
               <i class="fas fa-plus-circle"></i> 投稿
             </a>
           </li>
@@ -34,7 +34,11 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="<%= user_path(current_user) %>"><i class="fas fa-user-circle"></i> マイページ</a></li>
-              <li><a class="dropdown-item" href="<%= edit_user_registration_path %>"><i class="fas fa-cog"></i> 設定</a></li>
+              <li>
+                <a class="dropdown-item user-dropdown-link" href="<%= edit_user_registration_path %>" data-guest="<%= current_user.guest? %>">
+                  <i class="fas fa-cog"></i> 設定
+                </a>
+              </li>
               <li class="nav-item">
                 <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
                   <button type="submit" class="dropdown-item d-flex align-items-center" onclick="return confirm('ログアウトしますか？');">
@@ -45,7 +49,7 @@
               </li>
               <li class="nav-item">
                 <%= form_with url: user_path(current_user), method: :delete, local: true do |form| %>
-                  <button type="submit" class="dropdown-item d-flex align-items-center" onclick="return confirm('本当に退会しますか？');">
+                  <button type="submit" class="dropdown-item d-flex align-items-center user-dropdown-link" data-guest="<%= current_user.guest? %>" onclick="return confirm('本当に退会しますか？');">
                     <i class="fas fa-user-slash me-2"></i>
                     退会
                   </button>

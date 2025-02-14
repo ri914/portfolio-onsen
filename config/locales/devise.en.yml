@@ -46,7 +46,6 @@ en:
       account_created: "アカウントを作成しました。"
       account_updated: "変更が保存されました。"
       account_deleted: "退会しました。"
-      guest_account_deletion_error: "ゲストユーザーは退会できません。" 
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
