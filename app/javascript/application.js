@@ -52,49 +52,61 @@ $(document).ready(function() {
   const $waterQualityCheckboxes = $('input[name="onsen[water_quality_ids][]"]');
 
   $imageUpload.on('change', function(event) {
-    const files = event.target.files;
+    const files = Array.from(event.target.files);
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
+    $previewContainer.empty();
 
-      if (!file.type.startsWith('image/')) {
-        alert('画像ファイルを選択してください。');
-        continue;
-      }
+    const promises = files.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
 
-      reader.onload = function(e) {
-        const $imgContainer = $('<div class="img-container"></div>');
+        reader.onload = function(e) {
+          resolve(e.target.result);
+        };
 
-        const $img = $('<img>', {
-          src: e.target.result,
-          class: 'img-preview'
+        reader.onerror = function() {
+          reject(new Error('File reading error'));
+        };
+
+        reader.readAsDataURL(file);
+      });
+    });
+
+    Promise.all(promises)
+      .then((results) => {
+        results.forEach((result, index) => {
+          const $imgContainer = $('<div class="img-container"></div>');
+
+          const $img = $('<img>', {
+            src: result,
+            class: 'img-preview'
+          });
+
+          $imgContainer.append($img);
+
+          const $descriptionInput = $('<input>', {
+            type: 'text',
+            name: 'onsen[descriptions][]',
+            placeholder: '画像の説明',
+            class: 'form-control mt-2 description-input'
+          });
+          $imgContainer.append($descriptionInput);
+
+          const $removeBtn = $('<button>', {
+            html: '&times;',
+            class: 'remove-btn',
+            click: function() {
+              $imgContainer.remove();
+            }
+          });
+          $imgContainer.append($removeBtn);
+
+          $previewContainer.append($imgContainer);
         });
-
-        $imgContainer.append($img);
-
-        const $descriptionInput = $('<input>', {
-          type: 'text',
-          name: 'onsen[descriptions][]',
-          placeholder: '画像の説明',
-          class: 'form-control mt-2 description-input'
-        });
-        $imgContainer.append($descriptionInput);
-
-        const $removeBtn = $('<button>', {
-          html: '&times;',
-          class: 'remove-btn',
-          click: function() {
-            $imgContainer.remove();
-          }
-        });
-        $imgContainer.append($removeBtn);
-
-        $previewContainer.append($imgContainer);
-      };
-
-      reader.readAsDataURL(file);
-    }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 
   $form.on('submit', function(event) {
