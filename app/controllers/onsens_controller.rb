@@ -19,8 +19,8 @@ class OnsensController < ApplicationController
     end
 
     if @onsen.save
-      if params[:onsen][:image_descriptions].present?
-        params[:onsen][:image_descriptions].each_with_index do |description, index|
+      if params[:onsen][:descriptions].present?
+        params[:onsen][:descriptions].each_with_index do |description, index|
           if index < @onsen.images.size
             @onsen.image_descriptions.create(description: description)
           end
