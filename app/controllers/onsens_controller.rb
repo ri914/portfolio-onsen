@@ -12,9 +12,15 @@ class OnsensController < ApplicationController
 
   def create
     @onsen = current_user.onsens.build(onsen_params)
+
+    if Onsen.exists?(name: @onsen.name)
+      flash[:alert] = 'この温泉地は既に投稿されています。'
+      render :new and return
+    end
+
     if @onsen.save
-      if params[:onsen][:descriptions].present?
-        params[:onsen][:descriptions].each_with_index do |description, index|
+      if params[:onsen][:image_descriptions].present?
+        params[:onsen][:image_descriptions].each_with_index do |description, index|
           if index < @onsen.images.size
             @onsen.image_descriptions.create(description: description)
           end
