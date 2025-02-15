@@ -1,5 +1,6 @@
 class OnsensController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_guest_user, only: [:new, :create]
 
   def show
     @onsen = Onsen.includes(:water_qualities, :image_descriptions).find(params[:id])
@@ -26,6 +27,13 @@ class OnsensController < ApplicationController
   end
 
   private
+
+  def check_guest_user
+    if current_user.guest?
+      flash[:alert] = 'ゲストユーザーはこの機能を使用できません。'
+      redirect_back(fallback_location: home_index_path)
+    end
+  end
 
   def onsen_params
     params.require(:onsen).permit(:name, :location, :description, images: [], water_quality_ids: [])
