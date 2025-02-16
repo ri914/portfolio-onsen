@@ -1,55 +1,46 @@
-<div class="form-body">
-  <div class="card shadow-lg p-4">
-    <div class="card-body">
-      
-      <h1 class="text-center mb-4"><%= @onsen.name %></h1>
-       
-      <div class="mb-3">
-        <strong>温泉ID:</strong>
-        <p><%= @onsen.id %></p>
-      </div>
-       
-      <div class="mb-3">
-        <strong>都道府県:</strong>
-        <p><%= @onsen.location %></p>
-      </div>
+<div class="onsen-detail-body">
+  <div class="detail-card shadow-lg p-4">
+    <div class="detail-card-body">
 
-      <div class="mb-3">
-        <strong>泉質:</strong>
-        <p>
-          <% if @onsen.water_quality_ids.any? %>
-            <% @onsen.water_quality_ids.each do |water_quality_id| %>
-              <%= WaterQuality.find(water_quality_id).name %><br>
-            <% end %>
-          <% else %>
-            <p>泉質情報はありません。</p>
-          <% end %>
-        </p>
-      </div>
-
-      <div class="mb-3">
-        <strong>画像:</strong>
-        <div id="image-preview" class="image-preview mt-3">
-          <% if @onsen.images.attached? %>
-            <% @onsen.images.each_with_index do |attachment, index| %>
-              <div class="img-container">
-                <%= image_tag rails_blob_url(attachment, only_path: true), alt: @onsen.name, class: "img-preview" %>
-                <p class="image-description">
-                  <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
-                </p>
-              </div>
-            <% end %>
-          <% else %>
-            <div class="img-container">
-              <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class: "img-preview" />
+      <div class="onsen-image-container">
+        <% if @onsen.images.attached? %>
+          <% @onsen.images.each_with_index do |image, index| %>
+            <div class="detail-image-container">
+              <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid" %>
             </div>
+            <p class="detail-image-description">
+              <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
+            </p>
           <% end %>
-        </div>
+        <% else %>
+          <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="img-fluid" />
+        <% end %>
       </div>
 
-      <div class="text-center">
-        <%= link_to "編集", edit_onsen_path(@onsen), class: 'btn btn-secondary' %>
-        <%= link_to "戻る", onsens_path, class: 'btn btn-primary' %>
+      <div class="onsen-info-container">
+        <h1 class="text-center mb-4 onsen-title"><%= @onsen.name %></h1>
+
+        <div class="onsen-info mb-3 inline-info">
+          <strong>都道府県:</strong>
+          <p class="onsen-location"><%= @onsen.location %></p>
+        </div>
+
+        <div class="onsen-info mb-3">
+          <strong>泉質:</strong>
+          <div class="water-quality-container">
+            <% if @onsen.water_quality_ids.any? %>
+              <% @onsen.water_quality_ids.each do |water_quality_id| %>
+                <span class="water-quality-name"><%= WaterQuality.find(water_quality_id).name %></span>
+              <% end %>
+            <% else %>
+              <span class="no-water-quality">泉質情報はありません。</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a class="btn btn-success btn-lg" href="#"><i class="fas fa-door-open"></i>ルームへ入室する</a>
+        </div>
       </div>
     </div>
   </div>
