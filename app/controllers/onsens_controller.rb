@@ -2,6 +2,15 @@ class OnsensController < ApplicationController
   before_action :authenticate_user!
   before_action :check_guest_user, only: [:new, :create]
 
+  def index
+    @onsens = Onsen.all.includes(:water_qualities)
+  end
+
+  def region
+    @region = params[:region]
+    @onsens = Onsen.where(location: Onsen.region_locations(@region))
+  end
+
   def show
     @onsen = Onsen.includes(:water_qualities, :image_descriptions).find(params[:id])
   end

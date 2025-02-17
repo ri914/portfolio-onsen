@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   resources :users
 
   resources :onsens do
-    member do
-      post 'save'
+    collection do
+      get 'region/:region', to: 'onsens#region', as: 'region'
     end
-  end
+  end  
 end
