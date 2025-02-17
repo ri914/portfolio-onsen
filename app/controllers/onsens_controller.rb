@@ -3,12 +3,14 @@ class OnsensController < ApplicationController
   before_action :check_guest_user, only: [:new, :create]
 
   def index
-    @onsens = Onsen.all.includes(:water_qualities)
+    @onsens = Onsen.all
+    @current_region = 'トップ'
   end
 
   def region
     @region = params[:region]
     @onsens = Onsen.where(location: Onsen.region_locations(@region))
+    @current_region = params[:region]
   end
 
   def show
