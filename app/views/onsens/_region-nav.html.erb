@@ -1,13 +1,71 @@
-<region-nav>
-    <ul>
-        <li class="<%= 'current' if @current_region == 'トップ' %>"><%= link_to 'トップ', onsens_path %></li>
-        <li class="<%= 'current' if @current_region == '北海道' %>"><%= link_to '北海道', region_onsens_path(region: '北海道') %></li>
-        <li class="<%= 'current' if @current_region == '東北' %>"><%= link_to '東北', region_onsens_path(region: '東北') %></li>
-        <li class="<%= 'current' if @current_region == '関東' %>"><%= link_to '関東', region_onsens_path(region: '関東') %></li>
-        <li class="<%= 'current' if @current_region == '中部' %>"><%= link_to '中部', region_onsens_path(region: '中部') %></li>
-        <li class="<%= 'current' if @current_region == '近畿' %>"><%= link_to '近畿', region_onsens_path(region: '近畿') %></li>
-        <li class="<%= 'current' if @current_region == '中国' %>"><%= link_to '中国', region_onsens_path(region: '中国') %></li>
-        <li class="<%= 'current' if @current_region == '四国' %>"><%= link_to '四国', region_onsens_path(region: '四国') %></li>
-        <li class="<%= 'current' if @current_region == '九州・沖縄' %>"><%= link_to '九州・沖縄', region_onsens_path(region: '九州・沖縄') %></li>
-    </ul>
-</region-nav>
+<nav class="region-nav">
+  <ul class="menu-list">
+    <li class="menu-item <%= 'current' if @current_region == 'トップ' %>">
+      <%= link_to 'トップ', onsens_path %>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '北海道' %>">
+      <%= link_to '北海道', region_onsens_path(region: '北海道') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('北海道').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '北海道', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '東北' %>">
+      <%= link_to '東北', region_onsens_path(region: '東北') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('東北').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '東北', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '関東' %>">
+      <%= link_to '関東', region_onsens_path(region: '関東') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('関東').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '関東', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '中部' %>">
+      <%= link_to '中部', region_onsens_path(region: '中部') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('中部').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '中部', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '近畿' %>">
+      <%= link_to '近畿', region_onsens_path(region: '近畿') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('近畿').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '近畿', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '中国' %>">
+      <%= link_to '中国', region_onsens_path(region: '中国') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('中国').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '中国', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '四国' %>">
+      <%= link_to '四国', region_onsens_path(region: '四国') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('四国').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '四国', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="menu-item <%= 'current' if @current_region == '九州・沖縄' %>">
+      <%= link_to '九州・沖縄', region_onsens_path(region: '九州・沖縄') %>
+      <ul class="drop-menu-list">
+        <% Onsen.region_locations('九州・沖縄').each do |prefecture| %>
+          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '九州・沖縄', prefecture: prefecture) %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+</nav>

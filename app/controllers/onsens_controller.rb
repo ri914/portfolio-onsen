@@ -11,6 +11,7 @@ class OnsensController < ApplicationController
     @region = params[:region]
     @onsens = Onsen.where(location: Onsen.region_locations(@region))
     @current_region = params[:region]
+    @prefectures = Onsen.region_locations(@region)
   end
 
   def show

@@ -1,10 +1,1 @@
 <%= render 'onsens/region-nav' %>
-
-<h1><%= @region %>の温泉</h1>
-
-<% @onsens.each do |onsen| %>
-  <div>
-    <h2><%= onsen.name %></h2>
-    <p>地域: <%= onsen.region %></p>
-  </div>
-<% end %>
