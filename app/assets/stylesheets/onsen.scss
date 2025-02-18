@@ -282,7 +282,7 @@ input[type="submit"]:hover {
   border-left: 1px solid #ccc;
 }
 
-.menu-item a {
+.menu-item .region-link {
   display: block;
   width: 100%;
   padding: 10px 0;
@@ -290,7 +290,7 @@ input[type="submit"]:hover {
   color: #aaa;
 }
 
-.menu-item a:hover {
+.menu-item .region-link:hover {
   background-color: bisque;
   border-bottom: 5px solid bisque 
 }
@@ -299,7 +299,7 @@ input[type="submit"]:hover {
   font-weight: bold;
 }
 
-.menu-item.current a {
+.menu-item.current .region-link {
   border-bottom: 5px solid #00B0F0;
   color: #00B0F0;
 }
@@ -332,7 +332,16 @@ input[type="submit"]:hover {
 }
 
 .drop-menu-item a {
-  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.drop-menu-item a:hover {
+  background-color: bisque;
+  border-bottom: 5px solid bisque
 }
 
 .onsen-list {
