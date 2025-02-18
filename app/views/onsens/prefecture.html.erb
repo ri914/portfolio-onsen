@@ -1,0 +1,11 @@
+<%= render 'onsens/region-nav' %>
+
+<h1><%= @prefecture %>の温泉</h1>
+
+<ul class="onsen-list">
+  <% @onsens.each do |onsen| %>
+    <li>
+      <%= link_to onsen.name, onsen_path(onsen) %>
+    </li>
+  <% end %>
+</ul>

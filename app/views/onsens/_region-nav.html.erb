@@ -7,7 +7,7 @@
       <%= link_to '北海道', region_onsens_path(region: '北海道'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('北海道').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '北海道', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '北海道', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -15,7 +15,7 @@
       <%= link_to '東北', region_onsens_path(region: '東北'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('東北').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '東北', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '東北', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -23,7 +23,7 @@
       <%= link_to '関東', region_onsens_path(region: '関東'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('関東').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '関東', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '関東', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -31,7 +31,7 @@
       <%= link_to '中部', region_onsens_path(region: '中部'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('中部').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '中部', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '中部', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -39,7 +39,7 @@
       <%= link_to '近畿', region_onsens_path(region: '近畿'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('近畿').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '近畿', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '近畿', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -47,7 +47,7 @@
       <%= link_to '中国', region_onsens_path(region: '中国'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('中国').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '中国', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '中国', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -55,7 +55,7 @@
       <%= link_to '四国', region_onsens_path(region: '四国'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('四国').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '四国', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '四国', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>
@@ -63,7 +63,7 @@
       <%= link_to '九州・沖縄', region_onsens_path(region: '九州・沖縄'), class: 'region-link' %>
       <ul class="drop-menu-list">
         <% Onsen.region_locations('九州・沖縄').each do |prefecture| %>
-          <li class="drop-menu-item"><%= link_to prefecture, region_onsens_path(region: '九州・沖縄', prefecture: prefecture) %></li>
+          <li class="drop-menu-item"><%= link_to prefecture, prefecture_onsens_path(region: '九州・沖縄', prefecture: prefecture) %></li>
         <% end %>
       </ul>
     </li>

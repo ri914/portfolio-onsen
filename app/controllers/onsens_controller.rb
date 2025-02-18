@@ -14,6 +14,12 @@ class OnsensController < ApplicationController
     @prefectures = Onsen.region_locations(@region)
   end
 
+  def prefecture
+    @current_region = params[:region]
+    @prefecture = params[:prefecture]
+    @onsens = Onsen.where(location: @prefecture) # 都道府県に基づいて温泉を取得
+  end
+
   def show
     @onsen = Onsen.includes(:water_qualities, :image_descriptions).find(params[:id])
   end
