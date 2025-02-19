@@ -1,11 +1,23 @@
 <%= render 'onsens/region-nav' %>
 
-<h1><%= @current_region %>の温泉</h1>
-
-<ul class="onsen-list">
-  <% @onsens.each do |onsen| %>
-    <li>
-      <%= link_to onsen.name, onsen_path(onsen) %> <!-- 温泉の詳細ページへのリンク -->
-    </li>
-  <% end %>
-</ul>
+<div class="region-onsen-list">
+  <h2 class="heading-9"><%= @current_region %>の温泉</h2>
+  <div class="d-flex flex-wrap">
+    <% @onsens.each do |onsen| %>
+      <div class="card onsen-card shadow-lg">
+        <div class="onsen-card-body">
+          <% if onsen.images.attached? %>
+            <%= link_to image_tag(onsen.images.first, class: 'card-img-top'), onsen_path(onsen) %>
+          <% else %>
+            <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="image-placeholder" />
+          <% end %>
+          <h5 class="card-title">
+            <%= link_to onsen.name, onsen_path(onsen), class: 'card-title' %>
+          </h5>
+          <p class="prefecture-name"><%= onsen.location %></p>
+          <p class="last-updated">最終更新日: <%= onsen.updated_at.strftime('%Y年%m月%d日') %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

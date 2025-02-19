@@ -347,6 +347,105 @@ input[type="submit"]:hover {
 .onsen-list {
   background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
   background-size: cover;
-  padding: 60px;
   min-height: 85vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.region-onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.prefecture-onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.onsen-card {
+  width: 310px;
+  height: 440px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.onsen-card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 10px 0;
+}
+
+.card-title a {
+  text-decoration: none; 
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+.onsen-card {
+  transition: transform 0.2s;
+}
+
+.onsen-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.heading-9 {
+  display: inline-block;
+  position: relative;
+  padding: .5em .7em;
+  border-radius: 10px;
+  background-color: #d01632;
+  color: #fff;
+}
+
+.heading-9::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-top: 11px solid #d01632;
+}
+
+.prefecture-name {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
 }
