@@ -4,19 +4,21 @@ class OnsensController < ApplicationController
 
   def index
     @onsens = Onsen.all
+    @onsens = Onsen.order(:location, :name)
     @current_region = 'トップ'
   end
 
   def region
     @region = params[:region]
     @onsens = Onsen.where(location: Onsen.region_locations(@region))
+    @region = Onsen.order(:location, :name)
     @current_region = params[:region]
     @prefectures = Onsen.region_locations(@region)
   end
 
   def prefecture
     @prefecture = params[:prefecture]
-    @onsens = Onsen.where(location: @prefecture)
+    @onsens = Onsen.where(location: @prefecture).order(:name)
   end
 
   def show
