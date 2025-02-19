@@ -14,14 +14,11 @@ class OnsensController < ApplicationController
     @prefectures = Onsen.region_locations(@region)
   end
 
-  def prefecture
-    @current_region = params[:region]
-    @prefecture = params[:prefecture]
-    @onsens = Onsen.where(location: @prefecture) # 都道府県に基づいて温泉を取得
-  end
-
   def show
     @onsen = Onsen.includes(:water_qualities, :image_descriptions).find(params[:id])
+    @user = current_user
+    @saved_onsens = @user.saved_onsens.includes(:onsen) if @user
+    @posted_onsens = @user.onsens if @user
   end
 
   def new
@@ -29,6 +26,11 @@ class OnsensController < ApplicationController
   end
 
   def create
+    unless current_user
+      flash[:alert] = 'ログインしてください。'
+      redirect_to new_user_session_path and return
+    end
+
     @onsen = current_user.onsens.build(onsen_params)
 
     if Onsen.exists?(name: @onsen.name)
@@ -46,8 +48,22 @@ class OnsensController < ApplicationController
       end
       redirect_to @onsen, notice: t('notices.onsen_created')
     else
+      flash.now[:alert] = '温泉の投稿に失敗しました。'
       render :new
     end
+  end
+
+  def bookmark
+    @onsen = Onsen.find(params[:id])
+    saved_onsen = SavedOnsen.find_or_initialize_by(user: current_user, onsen: @onsen)
+
+    if saved_onsen.new_record?
+      saved_onsen.save
+    else
+      saved_onsen.destroy
+    end
+
+    redirect_to onsens_path
   end
 
   private

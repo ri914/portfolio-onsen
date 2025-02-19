@@ -11,6 +11,6 @@ class User < ApplicationRecord
   end
 
   has_many :onsens, dependent: :destroy
-  has_many :saved_onsens, class_name: 'Onsen', foreign_key: 'saved_by_user_id'
+  has_many :saved_onsens, dependent: :destroy
   has_one_attached :avatar
 end

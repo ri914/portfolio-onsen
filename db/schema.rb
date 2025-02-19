@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_15_091359) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_19_035229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,8 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_15_091359) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "image_descriptions", "onsens"
   add_foreign_key "onsens", "users"
-  add_foreign_key "onsens_water_qualities", "onsens"
-  add_foreign_key "onsens_water_qualities", "water_qualities"
   add_foreign_key "saved_onsens", "onsens"
   add_foreign_key "saved_onsens", "users"
 end

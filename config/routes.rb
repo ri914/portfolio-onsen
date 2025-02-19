@@ -15,5 +15,9 @@ Rails.application.routes.draw do
       get 'region/:region', to: 'onsens#region', as: 'region'
       get 'region/:region/prefecture/:prefecture', to: 'onsens#prefecture', as: 'prefecture'
     end
+  
+    member do
+      post :bookmark
+    end
   end
 end

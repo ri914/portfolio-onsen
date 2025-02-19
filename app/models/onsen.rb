@@ -3,6 +3,8 @@ class Onsen < ApplicationRecord
   belongs_to :saved_by_user, class_name: 'User', optional: true
   has_many_attached :images
   has_many :image_descriptions, dependent: :destroy
+  has_many :saved_onsens, dependent: :destroy
+  has_many :users, through: :saved_onsens
   has_and_belongs_to_many :water_qualities
 
   validates :name, presence: true
@@ -103,5 +105,9 @@ class Onsen < ApplicationRecord
     else
       []
     end
+  end
+
+  def bookmarked_by?(user)
+    bookmarks.where(user_id: user).exists?
   end
 end
