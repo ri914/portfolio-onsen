@@ -149,3 +149,34 @@ $(document).ready(function() {
     }
   });
 });
+
+$(document).ready(function() {
+  $('.save-button').on('click', function(event) {
+    event.preventDefault();
+    
+    const onsenId = $(this).data('onsen-id');
+    const form = $(`#bookmark-form-${onsenId}`);
+    
+    $.ajax({
+      url: form.attr('action'),
+      method: form.attr('method'),
+      data: form.serialize(),
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      success: function(data) {
+        const button = $(`#bookmark-button-${onsenId}`);
+        if (data.saved) {
+          button.addClass('saved');
+          button.find('i').removeClass('fa-bookmark-o').addClass('fa-bookmark');
+        } else {
+          button.removeClass('saved');
+          button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
+        }
+      },
+      error: function(error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+});

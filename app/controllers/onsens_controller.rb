@@ -61,16 +61,21 @@ class OnsensController < ApplicationController
   end
 
   def bookmark
-    @onsen = Onsen.find(params[:id])
+    @onsen = Onsen.find(params[:onsen_id])
     saved_onsen = SavedOnsen.find_or_initialize_by(user: current_user, onsen: @onsen)
 
     if saved_onsen.new_record?
       saved_onsen.save
+      saved = true
     else
       saved_onsen.destroy
+      saved = false
     end
 
-    redirect_to onsens_path
+    respond_to do |format|
+      format.json { render json: { saved: saved } }
+      format.html { redirect_to onsens_path }
+    end
   end
 
   private
