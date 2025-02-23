@@ -160,35 +160,43 @@ input[type="submit"]:hover {
 }
 
 .onsen-detail-body {
-  margin: 0 auto;
   padding: 20px;
   background: url("https://user0514.cdnw.net/shared/img/thumb/YAMA_DSC1754_TP_V.jpg") no-repeat center center;
   background-size: cover;
 }
 
 .detail-card {
-  border: none;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 70%;
   margin: 20px auto;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  background-color: white;
 }
 
 .detail-card-body {
+  padding: 20px;
   display: flex;
+  position: relative;
+}
+
+.onsen-detail-content {
+  display: flex;
+  gap: 20px;
 }
 
 .onsen-image-container {
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-right: 30px;
+  width: 50%;
 }
 
 .detail-image-container {
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   aspect-ratio: 1 / 1;
   margin-bottom: 10px;
   overflow: hidden;
@@ -214,49 +222,156 @@ input[type="submit"]:hover {
 }
 
 .onsen-info-container {
-  flex: 1;
   padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  width: 50%;
 }
 
-.inline-info {
-  display: inline-block;
-  margin-right: 20px;
-  vertical-align: top;
-}
-
-.onsen-info {
-  font-size: 1.5rem;
+.onsen-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.onsen-location {
-  font-weight: bold;
-}
-
-.water-quality-container {
+.onsen-info {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
 }
 
-.water-quality-name {
-  padding: 8px 12px;
-  border-radius: 5px;
-  background-color: #e0f7fa;
+.detail-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 5px;
+  display: block;
 }
 
-.btn {
-  margin-top: 30px;
-  padding: 12px 24px;
-  font-size: 1.2rem;
+.detail-name p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.onsen-location,
+.water-quality-container,
+.post-user {
+  font-size: 16px;
+  color: #333;
+}
+
+.detail-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.detail-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.detail-button .edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #666;
+}
+
+.detail-button .edit-button i {
+  font-size: 36px;
+}
+
+.detail-button .edit-button:hover {
+  color: rgba(108, 117, 125, 0.8);
+}
+
+.show-save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.show-save-button .save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #aaa;
+  width: auto;
+  padding: 0;
+}
+
+.show-save-button .save-button:hover {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.show-save-button .save-button.saved {
+  background: none;
+  border: none;
+  color: darkorange;
+}
+
+.show-save-button .save-button i {
+  font-size: 36px;
+}
+
+.enter-button a {
+  background-color: rgb(169, 31, 40);
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 10px 25px;
+  font-family: "Noto Sans Japanese";
+  color: #fff;
+  line-height: 2.5;
+  text-decoration: none;
   text-align: center;
-  display: inline-block;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  position: relative;
+  top: 30px;
 }
 
-.btn:hover {
-  background-color: rgba(0, 123, 255, 0.8);
+.enter-button a:hover {
+  background-color: #fff;
+  color: rgb(169, 31, 40);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 31, 40);
+}
+
+.enter-button a:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-radius: 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.enter-button a:hover:after {
+  border-color: #FFF;
 }
 
 .region-nav {
@@ -292,7 +407,7 @@ input[type="submit"]:hover {
 
 .menu-item .region-link:hover {
   background-color: bisque;
-  border-bottom: 5px solid bisque 
+  border-bottom: 5px solid bisque;
 }
 
 .menu-item.current {
@@ -300,7 +415,8 @@ input[type="submit"]:hover {
 }
 
 .menu-item.current .region-link {
-  border-bottom: 5px solid #00B0F0;
+  border-bottom: 
+  5px solid #00B0F0;
   color: #00B0F0;
 }
 
@@ -321,7 +437,6 @@ input[type="submit"]:hover {
   list-style: none; 
   margin: 0 auto;
   padding: 0;
-  width: 100%;
   text-align: center;
 }
 
@@ -341,7 +456,7 @@ input[type="submit"]:hover {
 
 .drop-menu-item a:hover {
   background-color: bisque;
-  border-bottom: 5px solid bisque
+  border-bottom: 5px solid bisque;
 }
 
 .onsen-list {
@@ -450,7 +565,7 @@ input[type="submit"]:hover {
   margin: 5px 0;
 }
 
-.save-button {
+.table-save-button .save-button {
   position: absolute;
   top: 10px;
   right: 0px;
@@ -460,18 +575,17 @@ input[type="submit"]:hover {
   transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.save-button:hover {
+.table-save-button .save-button:hover {
   transform: scale(0.90);
   background: transparent;
 }
 
-
-.save-button.saved {
+.table-save-button .save-button.saved {
   background: none;
   border: none;
   color: darkorange;
 }
 
-.save-button i {
+.table-save-button .save-button i {
   font-size: 24px;
 }

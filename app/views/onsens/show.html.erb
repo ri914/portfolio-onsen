@@ -1,45 +1,75 @@
+<%= render 'onsens/region-nav' %>
+
 <div class="onsen-detail-body">
   <div class="detail-card shadow-lg p-4">
     <div class="detail-card-body">
+        
+        <div class="detail-button d-flex">
+          
+          <div class="show-save-button">
+            <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: @onsen.id) ? 'saved' : '' %>" 
+                    title="ブックマーク" 
+                    data-onsen-id="<%= @onsen.id %>"
+                    id="bookmark-button-<%= @onsen.id %>">
+              <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: @onsen.id) ? '' : '-o' %>"></i>
+            </button>
 
-      <div class="onsen-image-container">
-        <% if @onsen.images.attached? %>
-          <% @onsen.images.each_with_index do |image, index| %>
-            <div class="detail-image-container">
-              <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid" %>
-            </div>
-            <p class="detail-image-description">
-              <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
-            </p>
-          <% end %>
-        <% else %>
-          <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="img-fluid" />
-        <% end %>
-      </div>
-
-      <div class="onsen-info-container">
-        <h1 class="text-center mb-4 onsen-title"><%= @onsen.name %></h1>
-
-        <div class="onsen-info mb-3 inline-info">
-          <strong>都道府県:</strong>
-          <p class="onsen-location"><%= @onsen.location %></p>
-        </div>
-
-        <div class="onsen-info mb-3">
-          <strong>泉質:</strong>
-          <div class="water-quality-container">
-            <% if @onsen.water_quality_ids.any? %>
-              <% @onsen.water_quality_ids.each do |water_quality_id| %>
-                <span class="water-quality-name"><%= WaterQuality.find(water_quality_id).name %></span>
-              <% end %>
-            <% else %>
-              <span class="no-water-quality">泉質情報はありません。</span>
+            <%= form_with(url: bookmark_onsen_path(@onsen), method: :post, local: true, id: "bookmark-form-#{@onsen.id}") do %>
+              <%= hidden_field_tag :onsen_id, @onsen.id %>
             <% end %>
+          </div>
+         
+          <div class="show-edit-button">
+             <%= link_to '<i class="fas fa-cog"></i>'.html_safe, edit_onsen_path(@onsen), class: 'edit-button', title: '編集' %>
           </div>
         </div>
 
-        <div class="text-center">
-          <a class="btn btn-success btn-lg" href="#"><i class="fas fa-door-open"></i>ルームへ入室する</a>
+      <div class="onsen-detail-content">
+        <div class="onsen-image-container">
+          <% if @onsen.images.attached? %>
+            <% @onsen.images.each_with_index do |image, index| %>
+              <div class="detail-image-container">
+                <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded" %>
+              </div>
+              <p class="detail-image-description">
+                <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
+              </p>
+            <% end %>
+          <% else %>
+            <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="img-fluid rounded" />
+          <% end %>
+        </div>
+
+        <div class="onsen-info-container"> <!-- 温泉情報 -->
+          <h1 class="text-center mb-4 onsen-title"><%= @onsen.name %></h1>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">都道府県</strong>
+            <p class="onsen-location"><%= @onsen.location %></p>
+          </div>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">泉質</strong>
+            <div class="water-quality-container">
+              <% if @onsen.water_quality_ids.any? %>
+                <%= @onsen.water_quality_ids.map { |water_quality_id| WaterQuality.find(water_quality_id).name }.join('、') %>
+              <% else %>
+                <span class="no-water-quality">泉質情報はありません。</span>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">投稿者</strong>
+            <p class="post-user"><%= @onsen.user.name %></p>
+          </div>
+          
+          <div class="enter-button">
+            <a href="#">
+              <i class="fas fa-door-open"></i> ルームへ入室
+            </a>
+          </div>
+
         </div>
       </div>
     </div>

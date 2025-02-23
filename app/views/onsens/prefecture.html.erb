@@ -16,16 +16,18 @@
           </h5>
           <p class="prefecture-name"><%= onsen.location %></p>
           <p class="last-updated">最終更新日: <%= onsen.updated_at.strftime('%Y年%m月%d日') %></p>
-          <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? 'saved' : '' %>" 
-                  title="ブックマーク" 
-                  data-onsen-id="<%= onsen.id %>"
-                  id="bookmark-button-<%= onsen.id %>">
-            <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? '' : '-o' %>"></i>
-          </button>
+          <div class="table-save-button">
+            <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? 'saved' : '' %>" 
+                    title="ブックマーク" 
+                    data-onsen-id="<%= onsen.id %>"
+                    id="bookmark-button-<%= onsen.id %>">
+              <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? '' : '-o' %>"></i>
+            </button>
 
-          <%= form_with(url: bookmark_onsen_path(onsen), method: :post, local: true, id: "bookmark-form-#{onsen.id}") do %>
-            <%= hidden_field_tag :onsen_id, onsen.id %>
-          <% end %>
+            <%= form_with(url: bookmark_onsen_path(onsen), method: :post, local: true, id: "bookmark-form-#{onsen.id}") do %>
+              <%= hidden_field_tag :onsen_id, onsen.id %>
+            <% end %>       
+          </div>
         </div>
       </div>
     <% end %>
