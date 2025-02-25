@@ -36,12 +36,11 @@ $(document).ready(function() {
   });
 });
 
-
-$(function(){
+$(function() {
   setTimeout("$('.flash').fadeOut('slow')", 3000);
 });
 
-$(function(){
+$(function() {
   setTimeout("$('.alert').fadeOut('slow')", 3000);
 });
 
@@ -51,67 +50,90 @@ $(document).ready(function() {
   const $form = $('#onsen-form');
   const $waterQualityCheckboxes = $('input[name="onsen[water_quality_ids][]"]');
 
+  let imageIndex = $('.img-container').length;
+  const dataTransfer = new DataTransfer();
+
+  $('.existing-image').each(function() {
+    const imageId = $(this).data('id');
+    const $imgContainer = $('<div class="img-container"></div>').attr('data-id', imageId);
+    
+    const $img = $('<img>', { src: $(this).find('img').attr('src'), class: 'img-preview' });
+    $imgContainer.append($img);
+
+    const $descriptionInput = $('<input>', {
+      type: 'text',
+      name: `onsen[descriptions][${imageId}]`,
+      placeholder: '画像の説明',
+      class: 'form-control mt-2 description-input',
+      value: $(this).find('.description-input').val() || ''
+    });
+    $imgContainer.append($descriptionInput);
+
+    const $removeBtn = $('<button>', {
+      html: '&times;',
+      class: 'remove-btn',
+      click: function() {
+        $('<input>').attr({
+          type: 'hidden',
+          name: 'onsen[remove_image_ids][]',
+          value: imageId
+        }).appendTo($form);
+        $imgContainer.remove();
+      }
+    });
+    $imgContainer.append($removeBtn);
+
+    $previewContainer.append($imgContainer);
+  });
+
   $imageUpload.on('change', function(event) {
     const files = Array.from(event.target.files);
 
-    $previewContainer.empty();
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const $imgContainer = $('<div class="img-container new-image"></div>').attr('data-index', imageIndex);
+        
+        const $img = $('<img>', { src: e.target.result, class: 'img-preview' });
+        $imgContainer.append($img);
 
-    const promises = files.map((file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          resolve(e.target.result);
-        };
-
-        reader.onerror = function() {
-          reject(new Error('File reading error'));
-        };
-
-        reader.readAsDataURL(file);
-      });
-    });
-
-    Promise.all(promises)
-      .then((results) => {
-        results.forEach((result, index) => {
-          const $imgContainer = $('<div class="img-container"></div>');
-
-          const $img = $('<img>', {
-            src: result,
-            class: 'img-preview'
-          });
-
-          $imgContainer.append($img);
-
-          const $descriptionInput = $('<input>', {
-            type: 'text',
-            name: 'onsen[descriptions][]',
-            placeholder: '画像の説明',
-            class: 'form-control mt-2 description-input'
-          });
-          $imgContainer.append($descriptionInput);
-
-          const $removeBtn = $('<button>', {
-            html: '&times;',
-            class: 'remove-btn',
-            click: function() {
-              $imgContainer.remove();
-            }
-          });
-          $imgContainer.append($removeBtn);
-
-          $previewContainer.append($imgContainer);
+        const $descriptionInput = $('<input>', {
+          type: 'text',
+          name: 'onsen[new_descriptions][]',
+          placeholder: '画像の説明',
+          class: 'form-control mt-2 description-input'
         });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        $imgContainer.append($descriptionInput);
+
+        const $removeBtn = $('<button>', {
+          html: '&times;',
+          class: 'remove-btn',
+          click: function() {
+            $imgContainer.remove();
+            updateFileList(file);
+          }
+        });
+        $imgContainer.append($removeBtn);
+
+        $previewContainer.append($imgContainer);
+        dataTransfer.items.add(file);
+        $imageUpload[0].files = dataTransfer.files;
+
+        imageIndex++;
+      };
+      reader.readAsDataURL(file);
+    });
   });
+
+  function updateFileList(fileToRemove) {
+    const updatedFiles = Array.from(dataTransfer.files).filter(file => file.name !== fileToRemove.name);
+    dataTransfer.items.clear();
+    updatedFiles.forEach(file => dataTransfer.items.add(file));
+    $imageUpload[0].files = dataTransfer.files;
+  }
 
   $form.on('submit', function(event) {
     const anyChecked = $waterQualityCheckboxes.is(':checked');
-
     if (!anyChecked) {
       event.preventDefault();
       alert('泉質を選択してください。');

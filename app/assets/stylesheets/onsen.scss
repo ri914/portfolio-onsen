@@ -191,7 +191,8 @@ input[type="submit"]:hover {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 70%;
+  position: relative;
 }
 
 .detail-image-container {
@@ -210,15 +211,41 @@ input[type="submit"]:hover {
 }
 
 .detail-image-description {
-  width: 100%;
-  font-size: 1.5rem;
-  color: #333;
-  text-align: center;
-  padding: 5px;
-  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin-top: 5px;
+  font-size: 1rem;
+}
+
+.carousel-indicators {
+  bottom: 10px;
+}
+
+.carousel-inner {
+  position: relative;
+}
+
+.image-slide {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: none !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
 }
 
 .onsen-info-container {
@@ -415,8 +442,7 @@ input[type="submit"]:hover {
 }
 
 .menu-item.current .region-link {
-  border-bottom: 
-  5px solid #00B0F0;
+  border-bottom: 5px solid #00B0F0;
   color: #00B0F0;
 }
 

@@ -59,13 +59,14 @@ class OnsensController < ApplicationController
     end
 
     if @onsen.save
-      if params[:onsen][:descriptions].present?
-        params[:onsen][:descriptions].each_with_index do |description, index|
-          if index < @onsen.images.size
+      if params[:onsen][:new_descriptions].present?
+        params[:onsen][:new_descriptions].each_with_index do |description, index|
+          if @onsen.images.attached? && index < @onsen.images.count
             @onsen.image_descriptions.create(description: description)
           end
         end
       end
+
       redirect_to @onsen, notice: t('notices.onsen_created')
     else
       flash.now[:alert] = '温泉の投稿に失敗しました。'

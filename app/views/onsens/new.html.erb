@@ -45,7 +45,8 @@
         <div class="form-group mb-3">
           <%= form.label :images, "画像", class: 'form-label' %>
           <%= form.file_field :images, multiple: true, class: 'form-control', accept: 'image/*', id: 'image-upload' %>
-          <small class="form-text text-muted">複数の画像を選択できます。</small>
+          <small class="form-text text-muted">※複数の画像を選択できます。</small> <br>
+          <small class="form-text text-muted text-warning">※左上の画像がサムネイルとして表示されます。</small>
           <div id="image-preview" class="image-preview mt-3"></div>
         </div>  
 
