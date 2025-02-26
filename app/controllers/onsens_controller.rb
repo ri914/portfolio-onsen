@@ -120,6 +120,17 @@ class OnsensController < ApplicationController
     end
   end
 
+  def bookmarked
+    @onsens = current_user.saved_onsens.includes(:onsen).map(&:onsen)
+
+    @onsens = @onsens.sort_by do |onsen|
+      [
+        Onsen.region_order[onsen.region],
+        Onsen.prefecture_order[onsen.location],
+      ]
+    end
+  end
+
   def destroy
     @onsen = Onsen.find(params[:id])
 
