@@ -84,9 +84,9 @@ class OnsensController < ApplicationController
       redirect_to new_user_session_path and return
     end
 
-    @onsen = current_user.onsens.build(onsen_params)
+    @onsen = current_user.onsens.find(params[:id])
 
-    if @onsen.save
+    if @onsen.update(onsen_params)
       if params[:onsen][:new_descriptions].present?
         params[:onsen][:new_descriptions].each_with_index do |description, index|
           if @onsen.images.attached? && index < @onsen.images.count
