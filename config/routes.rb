@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   
     member do
       post :bookmark
+      delete :destroy 
     end
   end
 end

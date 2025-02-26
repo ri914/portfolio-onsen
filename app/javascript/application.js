@@ -202,3 +202,11 @@ $(document).ready(function() {
     });
   });
 });
+
+$(document).ready(function() {
+  $('.delete-onsen-btn').on('click', function(event) {
+    if (!confirm('この温泉を削除しますか？')) {
+      event.preventDefault();
+    }
+  });
+});

@@ -30,4 +30,5 @@
 en:
   hello: "Hello world"
   notices:
-    onsen_created: "温泉が作成されました"
+    onsen_created: "温泉が作成されました。"
+    onsen_updated: "温泉情報が更新されました。"
