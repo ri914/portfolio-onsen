@@ -1,4 +1,3 @@
-# spec/system/onsens_spec.rb
 require 'rails_helper'
 
 RSpec.describe "温泉一覧ページ", type: :system do
@@ -17,9 +16,12 @@ RSpec.describe "温泉一覧ページ", type: :system do
 
       expect(page).to have_content(onsen1.name)
       expect(page).to have_content(onsen1.location)
+      expect(page).to have_content(onsen1.updated_at.strftime('%Y年%m月%d日'))
       expect(page).to have_css("img[src*='sample_image.jpg']")
       expect(page).to have_content(onsen2.name)
       expect(page).to have_content(onsen2.location)
+      expect(page).to have_content(onsen2.updated_at.strftime('%Y年%m月%d日'))
+      expect(page).to have_button('ブックマーク')
     end
   end
 
@@ -29,7 +31,9 @@ RSpec.describe "温泉一覧ページ", type: :system do
 
       expect(page).to have_content(onsen1.name)
       expect(page).to have_content(onsen1.location)
+      expect(page).to have_content(onsen1.updated_at.strftime('%Y年%m月%d日'))
       expect(page).not_to have_content(onsen2.name)
+      expect(page).to have_button('ブックマーク')
     end
   end
 
@@ -39,7 +43,9 @@ RSpec.describe "温泉一覧ページ", type: :system do
 
       expect(page).to have_content(onsen1.name)
       expect(page).to have_content(onsen1.location)
+      expect(page).to have_content(onsen1.updated_at.strftime('%Y年%m月%d日'))
       expect(page).not_to have_content(onsen2.name)
+      expect(page).to have_button('ブックマーク')
     end
   end
 end
