@@ -13,6 +13,8 @@ class OnsensController < ApplicationController
     end
 
     @current_region = 'トップ'
+
+    @page_title = "全国の温泉"
   end
 
   def region
@@ -27,11 +29,15 @@ class OnsensController < ApplicationController
 
     @current_region = @region
     @prefectures = Onsen.region_locations(@region)
+
+    @page_title = "#{@region}の温泉"
   end
 
   def prefecture
     @prefecture = params[:prefecture]
     @onsens = Onsen.where(location: @prefecture)
+
+    @page_title = "#{@prefecture}の温泉"
   end
 
   def show
@@ -39,14 +45,20 @@ class OnsensController < ApplicationController
     @user = current_user
     @saved_onsens = @user.saved_onsens.includes(:onsen) if @user
     @posted_onsens = @user.onsens if @user
+
+    @page_title = @onsen.name
   end
 
   def new
     @onsen = Onsen.new
+
+    @page_title = "編集ページ"
   end
 
   def edit
     @onsen = Onsen.find(params[:id])
+
+    @page_title = "温泉情報設定"
   end
 
   def create
@@ -129,6 +141,8 @@ class OnsensController < ApplicationController
         Onsen.prefecture_order[onsen.location],
       ]
     end
+
+    @page_title = "保存済みの温泉"
   end
 
   def destroy
