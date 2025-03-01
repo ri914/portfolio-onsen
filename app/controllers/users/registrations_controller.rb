@@ -26,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def check_guest_user
     if current_user.guest?
-      flash[:alert] = 'ゲストユーザーはこの機能を使用できません。'
+      flash[:alert] = I18n.t('alerts.guest_user')
       redirect_back(fallback_location: home_index_path)
     end
   end

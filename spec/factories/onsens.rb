@@ -8,7 +8,7 @@ FactoryBot.define do
 
     after(:build) do |onsen|
       onsen.images.attach(
-        io: File.open(Rails.root.join('spec/fixtures/files/sample_image.jpg')),
+        io: Rails.root.join('spec/fixtures/files/sample_image.jpg').open,
         filename: 'sample_image.jpg',
         content_type: 'image/jpeg'
       )

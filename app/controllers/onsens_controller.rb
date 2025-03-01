@@ -3,9 +3,7 @@ class OnsensController < ApplicationController
   before_action :check_guest_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @onsens = Onsen.all
-
-    @onsens = @onsens.sort_by do |onsen|
+    @onsens = Onsen.all.sort_by do |onsen|
       [
         Onsen.region_order[onsen.region],
         Onsen.prefecture_order[onsen.location],
@@ -13,30 +11,23 @@ class OnsensController < ApplicationController
     end
 
     @current_region = 'トップ'
-
     @page_title = "全国の温泉"
   end
 
   def region
     @region = params[:region]
-    @onsens = Onsen.where(location: Onsen.region_locations(@region))
-
-    @onsens = @onsens.sort_by do |onsen|
-      [
-        Onsen.prefecture_order[onsen.location],
-      ]
+    @onsens = Onsen.where(location: Onsen.region_locations(@region)).sort_by do |onsen|
+      Onsen.prefecture_order[onsen.location]
     end
 
     @current_region = @region
     @prefectures = Onsen.region_locations(@region)
-
     @page_title = "#{@region}の温泉"
   end
 
   def prefecture
     @prefecture = params[:prefecture]
     @onsens = Onsen.where(location: @prefecture)
-
     @page_title = "#{@prefecture}の温泉"
   end
 
@@ -45,33 +36,30 @@ class OnsensController < ApplicationController
     @user = current_user
     @saved_onsens = @user.saved_onsens.includes(:onsen) if @user
     @posted_onsens = @user.onsens if @user
-
     @page_title = @onsen.name
   end
 
   def new
     @onsen = Onsen.new
-
     @page_title = "編集ページ"
   end
 
   def edit
     @onsen = Onsen.find(params[:id])
-
     @page_title = "温泉情報設定"
   end
 
   def create
     unless current_user
-      flash[:alert] = 'ログインしてください。'
-      redirect_to new_user_session_path and return
+      flash[:alert] = I18n.t('alerts.login_required')
+      redirect_to new_user_session_path && return
     end
 
     @onsen = current_user.onsens.build(onsen_params)
 
     if Onsen.exists?(name: @onsen.name)
-      flash[:alert] = 'この温泉地は既に投稿されています。'
-      render :new and return
+      flash.now[:alert] = I18n.t('alerts.already_posted')
+      render :new && return
     end
 
     if @onsen.save
@@ -83,17 +71,17 @@ class OnsensController < ApplicationController
         end
       end
 
-      redirect_to @onsen, notice: t('notices.onsen_created')
+      redirect_to @onsen, notice: I18n.t('notices.onsen_created')
     else
-      flash.now[:alert] = '温泉の投稿に失敗しました。'
+      flash.now[:alert] = I18n.t('alerts.post_failed')
       render :new
     end
   end
 
   def update
     unless current_user
-      flash[:alert] = 'ログインしてください。'
-      redirect_to new_user_session_path and return
+      flash[:alert] = I18n.t('alerts.login_required')
+      redirect_to new_user_session_path && return
     end
 
     @onsen = current_user.onsens.find(params[:id])
@@ -107,9 +95,9 @@ class OnsensController < ApplicationController
         end
       end
 
-      redirect_to @onsen, notice: t('notices.onsen_updated')
+      redirect_to @onsen, notice: I18n.t('notices.onsen_updated')
     else
-      flash.now[:alert] = '温泉情報の更新に失敗しました。'
+      flash.now[:alert] = I18n.t('alerts.update_failed')
       render :edit
     end
   end
@@ -133,9 +121,7 @@ class OnsensController < ApplicationController
   end
 
   def bookmarked
-    @onsens = current_user.saved_onsens.includes(:onsen).map(&:onsen)
-
-    @onsens = @onsens.sort_by do |onsen|
+    @onsens = current_user.saved_onsens.includes(:onsen).map(&:onsen).sort_by do |onsen|
       [
         Onsen.region_order[onsen.region],
         Onsen.prefecture_order[onsen.location],
@@ -149,9 +135,9 @@ class OnsensController < ApplicationController
     @onsen = Onsen.find(params[:id])
 
     if @onsen.destroy
-      redirect_to onsens_path, notice: '温泉情報が削除されました。'
+      redirect_to onsens_path, notice: I18n.t('notices.onsen_deleted')
     else
-      redirect_to onsens_path, alert: '温泉情報の削除に失敗しました。'
+      redirect_to onsens_path, alert: I18n.t('alerts.delete_failed')
     end
   end
 
@@ -159,7 +145,7 @@ class OnsensController < ApplicationController
 
   def check_guest_user
     if current_user.guest?
-      flash[:alert] = 'ゲストユーザーはこの機能を使用できません。'
+      flash[:alert] = I18n.t('alerts.guest_user')
       redirect_back(fallback_location: home_index_path)
     end
   end
