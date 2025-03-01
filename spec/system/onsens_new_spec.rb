@@ -15,6 +15,7 @@ RSpec.describe '新規投稿ページ', type: :system do
       fill_in '温泉地の名称', with: '箱根温泉'
       select '神奈川県', from: '都道府県'
       check '単純温泉', visible: :all
+      attach_file "onsen[images][]", Rails.root.join('spec/fixtures/files/sample_image.jpg')
       click_button '投稿'
 
       expect(page).to have_content '温泉情報が作成されました。'
