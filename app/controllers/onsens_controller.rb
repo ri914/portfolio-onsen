@@ -57,9 +57,11 @@ class OnsensController < ApplicationController
 
     @onsen = current_user.onsens.build(onsen_params)
 
-    if Onsen.exists?(name: @onsen.name)
-      flash.now[:alert] = I18n.t('alerts.already_posted')
-      render :new && return
+    existing_onsen = Onsen.find_by(name: onsen_params[:name], location: onsen_params[:location])
+
+    if existing_onsen
+      @error_message = I18n.t('alerts.onsen_already_exists')
+      render :new and return
     end
 
     if @onsen.save
@@ -85,6 +87,13 @@ class OnsensController < ApplicationController
     end
 
     @onsen = current_user.onsens.find(params[:id])
+
+    existing_onsen = Onsen.where.not(id: @onsen.id).find_by(name: onsen_params[:name], location: onsen_params[:location])
+
+    if existing_onsen
+      flash.now[:alert] = I18n.t('alerts.onsen_already_exists')
+      render :edit and return
+    end
 
     if @onsen.update(onsen_params)
       if params[:onsen][:new_descriptions].present?

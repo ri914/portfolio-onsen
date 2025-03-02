@@ -36,7 +36,7 @@ en:
 
   alerts:
     login_required: 'ログインしてください。'
-    already_posted: 'この温泉地は既に投稿されています。'
+    onsen_already_exists: "この温泉はすでに投稿されています。"
     post_failed: '温泉の投稿に失敗しました。'
     update_failed: '温泉情報の更新に失敗しました。'
     delete_failed: '温泉情報の削除に失敗しました。'
