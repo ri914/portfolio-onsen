@@ -61,7 +61,8 @@ class OnsensController < ApplicationController
 
     if existing_onsen
       @error_message = I18n.t('alerts.onsen_already_exists')
-      render :new and return
+      render :new
+      return
     end
 
     if @onsen.save
@@ -91,8 +92,9 @@ class OnsensController < ApplicationController
     existing_onsen = Onsen.where.not(id: @onsen.id).find_by(name: onsen_params[:name], location: onsen_params[:location])
 
     if existing_onsen
-      flash.now[:alert] = I18n.t('alerts.onsen_already_exists')
-      render :edit and return
+      @error_message = I18n.t('alerts.onsen_already_exists')
+      render :edit
+      return
     end
 
     if @onsen.update(onsen_params)
