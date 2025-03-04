@@ -154,15 +154,17 @@ class OnsensController < ApplicationController
 
   def search
     @keyword = params[:keyword]
+    @onsens = []
 
     if @keyword.present?
       @onsens = Onsen.where("name LIKE ? OR location LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
-    else
-      @onsens = Onsen.all
     end
 
     @page_title = "検索結果"
     render 'result'
+  end
+
+  def detail_search
   end
 
   private

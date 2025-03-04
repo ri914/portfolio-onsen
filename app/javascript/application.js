@@ -213,7 +213,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $('.btn-primary').on('click', function(event) {
+  $('.btn-primary, .search-button').on('click', function(event) {
     var keyword = $('.search-input').val().trim();
 
     if (keyword === '') {
