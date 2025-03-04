@@ -162,7 +162,7 @@ class OnsensController < ApplicationController
     end
 
     @page_title = "検索結果"
-    render 'search'
+    render 'result'
   end
 
   private
