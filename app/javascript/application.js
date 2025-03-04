@@ -210,3 +210,15 @@ $(document).ready(function() {
     }
   });
 });
+
+
+$(document).ready(function() {
+  $('.btn-primary').on('click', function(event) {
+    var keyword = $('.search-input').val().trim();
+
+    if (keyword === '') {
+      event.preventDefault();
+      alert('キーワードを入力してください。');
+    }
+  });
+});
