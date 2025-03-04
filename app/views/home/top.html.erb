@@ -3,13 +3,15 @@
     <div id="login-container">
       <h2>日本の温泉地</h2>
       <div class="search-container">
-        <input type="text" placeholder="キーワードを入力..." class="search-input">
-        <button class="search-button">🔍</button>
+        <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2", id: "search-form" do |form| %>
+          <input type="text" placeholder="キーワードを入力..." class="search-input" name="keyword" id="search-keyword">
+          <button class="search-button" id="search-btn" data-guest="<%= user_signed_in? %>">🔍</button>
+        <% end %>
       </div>
       <div class="login-links">
         <a href="<%= new_user_registration_path %>" class="login-link">新規登録</a>
         <a href="<%= new_user_session_path %>" class="login-link">ログイン</a>
-        <a href="<%= guest_login_path %>" class="login-link">ゲストログイン</a>
+        <a href="#" class="login-link" id="guest-login-link">ゲストログイン</a>
       </div>
     </div>
   </section>

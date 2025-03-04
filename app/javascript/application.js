@@ -222,3 +222,21 @@ $(document).ready(function() {
     }
   });
 });
+
+$(document).ready(function() {
+  const searchBtn = $('#search-btn');
+  const guestLoginLink = $('#guest-login-link');
+
+  if (searchBtn.length) {
+    searchBtn.on('click', function(e) {
+      const isGuest = searchBtn.data('guest') === false;
+      const keyword = $('#search-keyword').val().trim();
+
+      if (isGuest && keyword !== '') {
+        e.preventDefault();
+        const url = `/guest_login?keyword=${encodeURIComponent(keyword)}`;
+        window.location.href = url;
+      }
+    });
+  }
+});
