@@ -240,3 +240,20 @@ $(document).ready(function() {
     });
   }
 });
+
+$(document).ready(function() {
+  $('#detail-search-form').on('submit', function(e) {
+    var keyword = $('#detail-search-form input[name="keyword"]').val().trim();
+    var location = $('select[name="location"]').val(); 
+    var waterQualityIds = $('input[name="water_quality_ids[]"]:checked').length;
+
+    console.log("Keyword:", keyword);
+    console.log("Location:", location);
+    console.log("Water Quality IDs:", waterQualityIds);
+
+    if (keyword === '' && (!location || location === '選択してください') && waterQualityIds === 0) {
+      e.preventDefault();
+      alert('キーワード、都道府県、または泉質のいずれかを入力してください。');
+    }
+  });
+});

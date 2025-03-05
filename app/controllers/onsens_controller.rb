@@ -154,10 +154,11 @@ class OnsensController < ApplicationController
 
   def search
     @keyword = params[:keyword]
-    @onsens = []
 
     if @keyword.present?
-      @onsens = Onsen.where("name LIKE ? OR location LIKE ?", "%#{@keyword}%", "%#{@keyword}%")
+      @onsens = Onsen.where("onsens.name LIKE ?", "%#{@keyword}%")
+    else
+      @onsens = []
     end
 
     @page_title = "検索結果"
@@ -165,6 +166,31 @@ class OnsensController < ApplicationController
   end
 
   def detail_search
+    @locations = Onsen.prefectures
+    @water_qualities = WaterQuality.all
+  end
+
+  def search_with_details
+    @keyword = params[:keyword]
+    @location = params[:location]
+    @water_quality_ids = params[:water_quality_ids].reject(&:blank?)
+
+    @onsens = Onsen.select('DISTINCT onsens.*')
+
+    if @keyword.present?
+      @onsens = @onsens.where("onsens.name LIKE ?", "%#{@keyword}%")
+    end
+
+    if @location.present?
+      @onsens = @onsens.where(location: @location)
+    end
+
+    if @water_quality_ids.present?
+      @onsens = @onsens.joins(:water_qualities).where(water_qualities: { id: @water_quality_ids })
+    end
+
+    @page_title = "詳細検索結果"
+    render 'result'
   end
 
   private

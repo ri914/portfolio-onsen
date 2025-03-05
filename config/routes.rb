@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get 'bookmarked', to: 'onsens#bookmarked', as: 'bookmarked'
       get 'search'
       get 'detail_search'
+      get 'search_with_details'
     end
   
     member do

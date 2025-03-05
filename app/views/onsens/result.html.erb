@@ -2,7 +2,7 @@
 
 <% if @onsens.present? %>
   <div class="onsen-list">
-    <h2 class="heading-9"><%= @keyword.present? ? "「#{@keyword}」の検索結果" : "温泉一覧" %></h2>
+    <h2 class="heading-9"><%= @keyword.present? ? "「#{@keyword}」の検索結果" : "検索結果" %></h2>
     <div class="d-flex flex-wrap">
       <% @onsens.each do |onsen| %>
         <div class="card onsen-card shadow-lg position-relative">
@@ -37,6 +37,6 @@
   </div>
 <% else %>
   <div class="onsen-list">
-    <h2 class="heading-9"><%= @keyword.present? ? "「#{@keyword}」の検索結果はありません。" : "温泉一覧" %></h2>
+    <h2 class="heading-9"><%= @keyword.present? ? "「#{@keyword}」の検索結果はありません。" : "検索結果" %></h2>
   </div>
 <% end %>
