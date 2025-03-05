@@ -175,7 +175,7 @@ class OnsensController < ApplicationController
     @location = params[:location]
     @water_quality_ids = params[:water_quality_ids].reject(&:blank?)
 
-    @onsens = Onsen.select('DISTINCT onsens.*')
+    @onsens = Onsen.all.distinct
 
     if @keyword.present?
       @onsens = @onsens.where("onsens.name LIKE ?", "%#{@keyword}%")
@@ -187,6 +187,15 @@ class OnsensController < ApplicationController
 
     if @water_quality_ids.present?
       @onsens = @onsens.joins(:water_qualities).where(water_qualities: { id: @water_quality_ids })
+    end
+
+    @onsens = @onsens.to_a
+
+    @onsens = @onsens.sort_by do |onsen|
+      [
+        Onsen.region_order[onsen.region],
+        Onsen.prefecture_order[onsen.location],
+      ]
     end
 
     @page_title = "詳細検索結果"
