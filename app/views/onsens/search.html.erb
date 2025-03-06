@@ -12,7 +12,7 @@
             <% else %>
               <%= image_tag 'default_onsen_image.png', alt: 'デフォルトの温泉画像', class: 'image-placeholder' %>
             <% end %>
-            <h5 class="card-title">
+            <h5 class="cardtitle">
               <%= link_to onsen.name, onsen_path(onsen), class: 'card-title' %>
             </h5>
             <p class="prefecture-name"><%= onsen.location %></p>
