@@ -4,7 +4,7 @@
       <h2>日本の温泉地</h2>
       <div class="search-container">
         <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2", id: "search-form" do |form| %>
-          <input type="text" placeholder="キーワードを入力..." class="search-input" name="keyword" id="search-keyword">
+          <input type="text" placeholder="キーワードを入力" class="search-input" name="keyword" id="search-keyword">
           <button class="search-button" id="search-btn" data-guest="<%= user_signed_in? %>">🔍</button>
         <% end %>
       </div>

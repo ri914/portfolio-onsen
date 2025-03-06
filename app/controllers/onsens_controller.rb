@@ -174,6 +174,7 @@ class OnsensController < ApplicationController
   def detail_search
     @locations = Onsen.prefectures
     @water_qualities = WaterQuality.all
+    @page_title = "詳細検索"
   end
 
   def search_with_details

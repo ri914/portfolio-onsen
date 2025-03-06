@@ -6,12 +6,12 @@ RSpec.describe '温泉検索', type: :system do
   let!(:onsen1) { create(:onsen, user: user, water_quality_ids: [water_quality.id]) }
   let!(:onsen2) { create(:onsen, :in_aomori, user: user, water_quality_ids: [water_quality.id]) }
 
-  before do
-    sign_in user
-    visit home_index_path
-  end
+  describe 'ナビメニューのキーワード検索' do
+    before do
+      sign_in user
+      visit home_index_path
+    end
 
-  describe '検索機能' do
     context 'キーワード未入力で検索ボタンを押した場合', js: true do
       it 'アラートが表示されること' do
         find('.btn-primary').click
@@ -37,6 +37,25 @@ RSpec.describe '温泉検索', type: :system do
       it '青森県→神奈川県の順に表示されること' do
         onsens = all('.card-title').map(&:text)
         expect(onsens).to eq ['酸ヶ湯温泉', '箱根温泉']
+      end
+    end
+  end
+
+  describe 'トップページでログインしていない状態で検索する場合' do
+    before do
+      visit root_path
+      fill_in 'キーワードを入力', with: '箱根'
+      find('#search-btn').click
+    end
+
+    context 'キーワードを入力して検索ボタンを押した場合', js: true do
+      it "ゲストユーザーとしてログインできること" do
+        expect(page).to have_content("ゲストユーザーとしてログインしました。")
+      end
+
+      it "該当する温泉が表示されること" do
+        expect(page).to have_content '箱根温泉'
+        expect(page).not_to have_content '酸ヶ湯温泉'
       end
     end
   end
