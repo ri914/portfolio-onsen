@@ -49,26 +49,14 @@ $(document).ready(function() {
   const $previewContainer = $('#image-preview');
   const $form = $('#onsen-form');
   const $waterQualityCheckboxes = $('input[name="onsen[water_quality_ids][]"]');
-
+  const $existingPreview  = $('#edit-image-preview');
+  
   let imageIndex = $('.img-container').length;
   const dataTransfer = new DataTransfer();
 
   $('.existing-image').each(function() {
     const imageId = $(this).data('id');
-    const $imgContainer = $('<div class="img-container"></div>').attr('data-id', imageId);
-    
-    const $img = $('<img>', { src: $(this).find('img').attr('src'), class: 'img-preview' });
-    $imgContainer.append($img);
-
-    const $descriptionInput = $('<input>', {
-      type: 'text',
-      name: `onsen[descriptions][${imageId}]`,
-      placeholder: '画像の説明',
-      class: 'form-control mt-2 description-input',
-      value: $(this).find('.description-input').val() || ''
-    });
-    $imgContainer.append($descriptionInput);
-
+    const $imgContainer = $(this);
     const $removeBtn = $('<button>', {
       html: '&times;',
       class: 'remove-btn',
@@ -81,9 +69,8 @@ $(document).ready(function() {
         $imgContainer.remove();
       }
     });
-    $imgContainer.append($removeBtn);
 
-    $previewContainer.append($imgContainer);
+    $imgContainer.append($removeBtn);
   });
 
   $imageUpload.on('change', function(event) {

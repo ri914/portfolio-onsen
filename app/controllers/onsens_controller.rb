@@ -97,7 +97,11 @@ class OnsensController < ApplicationController
       return
     end
 
-    if @onsen.update(onsen_params)
+    images_params = onsen_params[:images].present? ? onsen_params[:images] : @onsen.images.blobs
+
+    if @onsen.update(onsen_params.except(:images))
+      @onsen.images.attach(images_params) if images_params.is_a?(Array)
+
       if params[:onsen][:new_descriptions].present?
         params[:onsen][:new_descriptions].each_with_index do |description, index|
           if @onsen.images.attached? && index < @onsen.images.count

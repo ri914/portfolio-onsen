@@ -615,8 +615,58 @@ input[type="submit"]:hover {
   font-size: 24px;
 }
 
-.form-body-search {
-  background: url("https://www.mapple.net/cms/wp-content/uploads/2018/02/0f620923173a52b5f893de6dea1e5106.jpg") no-repeat center center;
-  background-size: cover;
-  padding: 60px;
+.edit-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  width: calc(30% - 30px);
+  position: relative;
+}
+
+.edit-img-preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.edit-img-preview:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+.edit-description-input {
+  margin-top: 5px;
+  width: 100px;
+  transition: all 0.3s ease;
 }
