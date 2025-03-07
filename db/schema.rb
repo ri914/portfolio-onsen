@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_18_115439) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_06_230608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,13 +68,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_115439) do
     t.index ["user_id"], name: "index_onsens_on_user_id"
   end
 
-  create_table "onsens_water_qualities", force: :cascade do |t|
-    t.bigint "onsen_id", null: false
-    t.bigint "water_quality_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["onsen_id"], name: "index_onsens_water_qualities_on_onsen_id"
-    t.index ["water_quality_id"], name: "index_onsens_water_qualities_on_water_quality_id"
+  create_table "onsens_water_qualities", id: :serial, force: :cascade do |t|
+    t.integer "onsen_id", null: false
+    t.integer "water_quality_id", null: false
+    t.datetime "created_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
+
+    t.unique_constraint ["onsen_id", "water_quality_id"], name: "onsens_water_qualities_onsen_id_water_quality_id_key"
   end
 
   create_table "saved_onsens", force: :cascade do |t|
@@ -110,8 +110,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_115439) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "image_descriptions", "onsens"
   add_foreign_key "onsens", "users"
-  add_foreign_key "onsens_water_qualities", "onsens"
-  add_foreign_key "onsens_water_qualities", "water_qualities"
+  add_foreign_key "onsens_water_qualities", "onsens", name: "onsens_water_qualities_onsen_id_fkey"
+  add_foreign_key "onsens_water_qualities", "water_qualities", name: "onsens_water_qualities_water_quality_id_fkey"
   add_foreign_key "saved_onsens", "onsens"
   add_foreign_key "saved_onsens", "users"
 end
