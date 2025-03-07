@@ -90,5 +90,37 @@ RSpec.describe '温泉検索', type: :system do
       expect(page).to have_content '箱根温泉郷'
       expect(page).not_to have_content '酸ヶ湯温泉'
     end
+
+    it 'キーワードと都道府県を指定して検索できること' do
+      fill_in 'キーワードを入力', with: '箱根'
+      select '神奈川県', from: 'location'
+      find('.btn-lg').click
+
+      expect(page).to have_content '箱根温泉'
+      expect(page).not_to have_content '酸ヶ湯温泉'
+    end
+
+    it 'キーワードと泉質を指定して検索できること' do
+      fill_in 'キーワードを入力', with: '箱根'
+      check '単純温泉', visible: :all
+      find('.btn-lg').click
+
+      expect(page).to have_content '箱根温泉'
+      expect(page).not_to have_content '酸ヶ湯温泉'
+    end
+
+    it '都道府県と泉質を指定して検索できること' do
+      select '青森県', from: 'location'
+      check '硫黄泉', visible: :all
+      find('.btn-lg').click
+
+      expect(page).not_to have_content '箱根温泉'
+      expect(page).to have_content '酸ヶ湯温泉'
+    end
+
+    it '何も入力せずに検索ボタンを押した場合、アラートが表示されること', js: true do
+      find('.btn-lg').click
+      expect(page.accept_alert).to eq 'キーワード、都道府県、または泉質のいずれかを入力してください。'
+    end
   end
 end
