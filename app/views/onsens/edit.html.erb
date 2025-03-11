@@ -49,23 +49,32 @@
         </div>
 
         <div class="form-group mb-3">
-          <%= form.label :images, "画像", class: 'form-label' %>
+          <%= form.label :images, "新規画像", class: 'form-label' %>
           <%= form.file_field :images, multiple: true, class: 'form-control', accept: 'image/*', id: 'image-upload' %>
           <small class="form-text text-muted">※複数の画像を選択できます。</small> <br>
-          <small class="form-text text-muted text-warning">※左上の画像がサムネイルとして表示されます。</small>
+          <small class="form-text text-muted text-warning">※左上の画像がサムネイルとして表示されます。</small> <br>
+          <small class="form-text text-muted text-warning">※新規画像を追加した場合、既存画像は削除されます。</small>
           <div id="image-preview" class="image-preview mt-3"></div>
           
+          <h5 class="form-label">既存画像</h5>
           <div id="edit-image-preview" class="edit-image-preview mt-3">
             <% if @onsen.images.attached? %>
-              <% @onsen.images.each do |image| %>
+              <% @onsen.images.each_with_index do |image, index| %>
                 <div class="edit-img-container existing-image">
-                  <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "edit-img-preview" %>
-                  <input type="text" class="edit-description-input" placeholder="画像の説明" name="onsen[image_descriptions][]" />
+                  <div class="carousel-inner">
+                    <div class="detail-image-container">
+                      <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded" %>
+                    </div>
+                    <p class="edit-image-description">
+                      <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
+                    </p>
+                  </div>           
                   <input type="hidden" name="onsen[existing_image_ids][]" value="<%= image.id %>" />
                 </div>
               <% end %>
             <% end %>
           </div>
+
         </div>
 
         <div class="text-center">
