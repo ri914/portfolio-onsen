@@ -54,25 +54,6 @@ $(document).ready(function() {
   let imageIndex = $('.img-container').length;
   const dataTransfer = new DataTransfer();
 
-  $('.existing-image').each(function() {
-    const imageId = $(this).data('id');
-    const $imgContainer = $(this);
-    const $removeBtn = $('<button>', {
-      html: '&times;',
-      class: 'remove-btn',
-      click: function() {
-        $('<input>').attr({
-          type: 'hidden',
-          name: 'onsen[remove_image_ids][]',
-          value: imageId
-        }).appendTo($form);
-        $imgContainer.remove();
-      }
-    });
-
-    $imgContainer.append($removeBtn);
-  });
-
   $imageUpload.on('change', function(event) {
     const files = Array.from(event.target.files);
 
