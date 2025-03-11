@@ -41,7 +41,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="<%= user_signed_in? ? home_index_path : root_path %>">
+            <a class="nav-link active" href="<%= home_index_path %>">
               <i class="fas fa-home"></i> ホーム
             </a>
           </li>
@@ -51,12 +51,12 @@
               <i class="fas fa-plus-circle"></i> 投稿
             </a>
           </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= onsens_path %>">
-            <i class="fas fa-hot-tub"></i>
-            <span class="d-none d-lg-inline"> 温泉地一覧</span>
-          </a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= onsens_path %>">
+              <i class="fas fa-hot-tub"></i>
+              <span class="d-none d-lg-inline"> 温泉地一覧</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= bookmarked_onsens_path %>">
               <i class="fas fa-bookmark"></i> 保存済み
@@ -80,6 +80,11 @@
             </div>
           </li>
         <% else %>
+          <li class="nav-item">
+            <a class="nav-link active" href="<%= root_path %>">
+              <i class="fas fa-home"></i> ホーム
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= new_user_registration_path %>">
               <i class="fas fa-user-plus"></i> 新規登録
