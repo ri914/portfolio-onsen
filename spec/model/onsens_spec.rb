@@ -6,7 +6,7 @@ RSpec.describe 'モデルのバリデーションとアソシエーション', t
 
     describe "バリデーション" do
       it "有効な属性を持つ場合は有効であること" do
-        onsen = Onsen.new(name: "箱根温泉", location: "神奈川県", user: user)
+        onsen = Onsen.new(name: "箱根温泉郷", location: "神奈川県", user: user)
         expect(onsen).to be_valid
       end
 
