@@ -97,29 +97,16 @@ class OnsensController < ApplicationController
       return
     end
 
-    # 削除する画像のIDを取得（空の値を除外）
-    remove_image_ids = params[:onsen][:remove_image_ids].reject(&:blank?) if params[:onsen][:remove_image_ids].present?
+    new_images = params[:onsen][:images].compact_blank if params[:onsen][:images].present?
+    new_descriptions = params[:onsen][:new_descriptions].compact_blank if params[:onsen][:new_descriptions].present?
 
-    # 新しい画像が選択されているか確認
-    new_images = params[:onsen][:images].reject(&:blank?) if params[:onsen][:images].present?
-    new_descriptions = params[:onsen][:new_descriptions] if params[:onsen][:new_descriptions].present?
-
-    # 既存の画像の削除処理
-    if remove_image_ids.present?
-      remove_image_ids.each do |remove_id|
-        image = @onsen.images.find_by(id: remove_id)
-        image.purge if image.present?
-      end
-    end
-
-    if @onsen.update(onsen_params.except(:images, :image_descriptions, :remove_image_ids))
-
+    if @onsen.update(onsen_params.except(:images, :image_descriptions))
       if new_images.present?
         @onsen.images.destroy_all
+        @onsen.image_descriptions.destroy_all
         @onsen.images.attach(new_images)
 
         if new_descriptions.present?
-          @onsen.image_descriptions.destroy_all
 
           new_descriptions.each_with_index do |description, index|
             if @onsen.images.attached? && index < @onsen.images.count
@@ -203,7 +190,7 @@ class OnsensController < ApplicationController
   def search_with_details
     @keyword = params[:keyword]
     @location = params[:location]
-    @water_quality_ids = params[:water_quality_ids].reject(&:blank?)
+    @water_quality_ids = params[:water_quality_ids].compact_blank
 
     @onsens = Onsen.all
 
