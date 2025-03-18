@@ -156,6 +156,8 @@ $(document).ready(function() {
       },
       success: function(data) {
         const button = $(`#bookmark-button-${onsenId}`);
+        const countElement = $(`#count-${onsenId}`);
+
         if (data.saved) {
           button.addClass('saved');
           button.find('i').removeClass('fa-bookmark-o').addClass('fa-bookmark');
@@ -164,7 +166,7 @@ $(document).ready(function() {
           button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
         }
         
-        $('#count-' + onsenId).text(data.bookmarked_count);
+        countElement.text(data.bookmarked_count);
       },
       error: function(error) {
         console.error('Error:', error);
