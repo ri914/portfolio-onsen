@@ -831,3 +831,17 @@ input[type="submit"]:hover {
   right: 0;
   background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 }
+
+.sort-dropdown {
+  text-align: right;
+  margin-right: 30px;
+}
+
+#sort-select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}

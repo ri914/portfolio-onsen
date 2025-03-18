@@ -2,6 +2,12 @@
 
 <div class="prefecture-onsen-list">
   <h2 class="heading-9"><%= @prefecture %>の温泉</h2>
+  <div class="sort-dropdown">
+    <select id="sort-select">
+      <option value="<%= prefecture_onsens_path(prefecture: @prefecture) %>" <%= params[:sort].nil? ? 'selected' : '' %>>都道府県順</option>
+      <option value="<%= prefecture_onsens_path(prefecture: @prefecture, sort: 'bookmarks') %>" <%= params[:sort] == 'bookmarks' ? 'selected' : '' %>>人気順</option>
+    </select>
+  </div>
   <div class="d-flex flex-wrap">
       <% @onsens.each do |onsen| %>
       <div class="card onsen-card shadow-lg">
