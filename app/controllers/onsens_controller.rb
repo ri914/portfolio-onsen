@@ -135,8 +135,10 @@ class OnsensController < ApplicationController
       saved = false
     end
 
+    bookmarked_count = current_user.saved_onsens.count
+
     respond_to do |format|
-      format.json { render json: { saved: saved } }
+      format.json { render json: { saved: saved, bookmarked_count: bookmarked_count } }
       format.html { redirect_to onsens_path }
     end
   end

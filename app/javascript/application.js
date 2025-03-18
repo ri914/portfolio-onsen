@@ -163,6 +163,8 @@ $(document).ready(function() {
           button.removeClass('saved');
           button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
         }
+        
+        $('#count-' + onsenId).text(data.bookmarked_count);
       },
       error: function(error) {
         console.error('Error:', error);
