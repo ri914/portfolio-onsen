@@ -25,19 +25,56 @@
       </a>
     </div>
   </main>
-  <h2>人気の温泉地</h2>
-  <div>
-    <% @onsens.each do |onsen| %>
-      <div>
-        <div>
-          <img src="<%= onsen.image || 'default_image.jpg' %>" alt="<%= onsen.name %>" style="height: 200px; object-fit: cover;">
-          <div>
-            <h5><%= link_to onsen.name, onsen_path(onsen) %></h5>
-            <p><%= truncate(onsen.description, length: 100) %></p>
-            <a href="<%= onsen_path(onsen) %>">詳細を見る</a>
+
+  <div class="popular-onsens">
+    <h2 class="popular-title">人気の温泉地</h2>
+
+    <div class="onsen-scroll-container">
+      <div class="onsen-scroll-content">
+        <% @onsens.each_with_index do |onsen, index| %>
+          <div class="card onsen-card-popular shadow-lg position-relative">
+            
+            <div class="ranking">
+              <% if index == 0 %>
+                <span class="crown">🥇</span>
+              <% elsif index == 1 %>
+                <span class="crown">🥈</span>
+              <% elsif index == 2 %>
+                <span class="crown">🥉</span>
+              <% else %>
+                <span class="ranking-badge"><%= index + 1 %>位</span>
+              <% end %>
+            </div>
+
+            <div class="onsen-card-body">
+              <% if onsen.images.attached? %>
+                <%= link_to image_tag(onsen.images.first, class: 'card-img-top'), onsen_path(onsen) %>
+              <% else %>
+                <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="image-placeholder" />
+              <% end %>
+              <h5 class="cardtitle">
+                <%= link_to onsen.name, onsen_path(onsen), class: 'card-title' %>
+              </h5>
+              <p class="prefecture-name"><%= onsen.location %></p>
+              <p class="last-updated">最終更新日: <%= onsen.updated_at.strftime('%Y年%m月%d日') %></p>
+              <p class="saved-count">保存された数: <span id="count-<%= onsen.id %>"><%= onsen.saved_onsens.count %></span> 件</p>
+            </div>
+
+            <div class="table-save-button">
+              <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? 'saved' : '' %>" 
+                      title="ブックマーク" 
+                      data-onsen-id="<%= onsen.id %>"
+                      id="bookmark-button-<%= onsen.id %>">
+                <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? '' : '-o' %>"></i>
+              </button>
+
+              <%= form_with(url: bookmark_onsen_path(onsen), method: :post, local: true, id: "bookmark-form-#{onsen.id}") do %>
+                <%= hidden_field_tag :onsen_id, onsen.id %>
+              <% end %>       
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
