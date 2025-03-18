@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_18_115439) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_18_102615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_115439) do
     t.bigint "water_quality_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["onsen_id", "water_quality_id"], name: "index_onsens_water_qualities_on_onsen_id_and_water_quality_id", unique: true
     t.index ["onsen_id"], name: "index_onsens_water_qualities_on_onsen_id"
     t.index ["water_quality_id"], name: "index_onsens_water_qualities_on_water_quality_id"
   end

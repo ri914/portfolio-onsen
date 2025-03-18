@@ -71,6 +71,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
+  gem 'webrick'
 end
 
 gem 'devise'
@@ -80,3 +81,6 @@ gem 'sassc-rails'
 gem 'bootstrap', '~> 5.0'
 
 gem 'jquery-rails'
+
+gem 'pry'
+gem 'pry-rails'

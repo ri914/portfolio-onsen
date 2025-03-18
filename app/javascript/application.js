@@ -49,42 +49,10 @@ $(document).ready(function() {
   const $previewContainer = $('#image-preview');
   const $form = $('#onsen-form');
   const $waterQualityCheckboxes = $('input[name="onsen[water_quality_ids][]"]');
-
+  const $existingPreview  = $('#edit-image-preview');
+  
   let imageIndex = $('.img-container').length;
   const dataTransfer = new DataTransfer();
-
-  $('.existing-image').each(function() {
-    const imageId = $(this).data('id');
-    const $imgContainer = $('<div class="img-container"></div>').attr('data-id', imageId);
-    
-    const $img = $('<img>', { src: $(this).find('img').attr('src'), class: 'img-preview' });
-    $imgContainer.append($img);
-
-    const $descriptionInput = $('<input>', {
-      type: 'text',
-      name: `onsen[descriptions][${imageId}]`,
-      placeholder: '画像の説明',
-      class: 'form-control mt-2 description-input',
-      value: $(this).find('.description-input').val() || ''
-    });
-    $imgContainer.append($descriptionInput);
-
-    const $removeBtn = $('<button>', {
-      html: '&times;',
-      class: 'remove-btn',
-      click: function() {
-        $('<input>').attr({
-          type: 'hidden',
-          name: 'onsen[remove_image_ids][]',
-          value: imageId
-        }).appendTo($form);
-        $imgContainer.remove();
-      }
-    });
-    $imgContainer.append($removeBtn);
-
-    $previewContainer.append($imgContainer);
-  });
 
   $imageUpload.on('change', function(event) {
     const files = Array.from(event.target.files);
@@ -207,6 +175,53 @@ $(document).ready(function() {
   $('.delete-onsen-btn').on('click', function(event) {
     if (!confirm('この温泉を削除しますか？')) {
       event.preventDefault();
+    }
+  });
+});
+
+
+$(document).ready(function() {
+  $('.btn-primary, .search-button').on('click', function(event) {
+    var keyword = $('.search-input').val().trim();
+
+    if (keyword === '') {
+      event.preventDefault();
+      alert('キーワードを入力してください。');
+    }
+  });
+});
+
+$(document).ready(function() {
+  const searchBtn = $('#search-btn');
+  const guestLoginLink = $('#guest-login-link');
+
+  if (searchBtn.length) {
+    searchBtn.on('click', function(e) {
+      const isGuest = searchBtn.data('guest') === false;
+      const keyword = $('#search-keyword').val().trim();
+
+      if (isGuest && keyword !== '') {
+        e.preventDefault();
+        const url = `/guest_login?keyword=${encodeURIComponent(keyword)}`;
+        window.location.href = url;
+      }
+    });
+  }
+});
+
+$(document).ready(function() {
+  $('#detail-search-form').on('submit', function(e) {
+    var keyword = $('#detail-search-form input[name="keyword"]').val().trim();
+    var location = $('select[name="location"]').val(); 
+    var waterQualityIds = $('input[name="water_quality_ids[]"]:checked').length;
+
+    console.log("Keyword:", keyword);
+    console.log("Location:", location);
+    console.log("Water Quality IDs:", waterQualityIds);
+
+    if (keyword === '' && (!location || location === '選択してください') && waterQualityIds === 0) {
+      e.preventDefault();
+      alert('キーワード、都道府県、または泉質のいずれかを入力してください。');
     }
   });
 });

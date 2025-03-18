@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'home#top'
+  
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   devise_scope :user do
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
       get 'region/:region', to: 'onsens#region', as: 'region'
       get 'region/:region/prefecture/:prefecture', to: 'onsens#prefecture', as: 'prefecture'
       get 'bookmarked', to: 'onsens#bookmarked', as: 'bookmarked'
+      get 'search'
+      get 'detail_search'
+      get 'search_with_details'
     end
   
     member do

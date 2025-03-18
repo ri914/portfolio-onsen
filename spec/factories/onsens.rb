@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :onsen do
     association :user
-    name { '箱根温泉' }
+    name { '箱根温泉郷' }
     location { '神奈川県' }
     region { '関東' }
     water_quality_ids { [] }

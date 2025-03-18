@@ -169,7 +169,7 @@ input[type="submit"]:hover {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 70%;
+  max-width: 75%;
   margin: 20px auto;
 }
 
@@ -181,7 +181,7 @@ input[type="submit"]:hover {
 
 .onsen-detail-content {
   display: flex;
-  gap: 20px;
+  gap: 35px;
 }
 
 .onsen-image-container {
@@ -191,7 +191,8 @@ input[type="submit"]:hover {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 600px;
+  height: 400px;
   position: relative;
 }
 
@@ -531,12 +532,12 @@ input[type="submit"]:hover {
   padding: 15px;
 }
 
-.card-title {
+.cardtitle {
   font-size: 1.25rem;
   margin: 10px 0;
 }
 
-.card-title a {
+.cardtitle a {
   text-decoration: none; 
 }
 
@@ -612,4 +613,72 @@ input[type="submit"]:hover {
 
 .table-save-button .save-button i {
   font-size: 24px;
+}
+
+.edit-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  width: calc(30% - 30px);
+  position: relative;
+}
+
+.edit-img-preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.edit-img-preview:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+.edit-description-input {
+  margin-top: 5px;
+  width: 100px;
+  transition: all 0.3s ease;
+}
+
+.edit-image-description {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
 }
