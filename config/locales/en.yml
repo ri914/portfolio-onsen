@@ -29,3 +29,15 @@
 
 en:
   hello: "Hello world"
+  notices:
+    onsen_created: "温泉情報が作成されました。"
+    onsen_updated: "温泉情報が更新されました。"
+    onsen_deleted: '温泉情報が削除されました。'
+
+  alerts:
+    login_required: 'ログインしてください。'
+    onsen_already_exists: "この温泉はすでに投稿されています。"
+    post_failed: '温泉の投稿に失敗しました。'
+    update_failed: '温泉情報の更新に失敗しました。'
+    delete_failed: '温泉情報の削除に失敗しました。'
+    guest_user: 'ゲストユーザーはこの機能を使用できません。'

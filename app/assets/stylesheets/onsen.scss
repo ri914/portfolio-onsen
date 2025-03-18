@@ -1,0 +1,615 @@
+.form-body {
+  background: url("https://user0514.cdnw.net/shared/img/thumb/YAMA_DSC1754_TP_V.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 60px;
+}
+
+.card {
+  border: none;
+  width: 70%;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.text-center {
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.card-body {
+  padding: 30px;
+  max-height: 696.63px;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input,
+textarea,
+select {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  background-color: #007bff;
+  transition: background-color 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 14px;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.check-label {
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  width: calc(30% - 30px);
+  position: relative;
+}
+
+.img-preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.img-preview:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+.description-input {
+  margin-top: 5px;
+  width: 100px;
+  transition: all 0.3s ease;
+}
+
+.onsen-detail-body {
+  padding: 20px;
+  background: url("https://user0514.cdnw.net/shared/img/thumb/YAMA_DSC1754_TP_V.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 70%;
+  margin: 20px auto;
+}
+
+.detail-card-body {
+  padding: 20px;
+  display: flex;
+  position: relative;
+}
+
+.onsen-detail-content {
+  display: flex;
+  gap: 20px;
+}
+
+.onsen-image-container {
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  position: relative;
+}
+
+.detail-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.detail-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.detail-image-description {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.carousel-indicators {
+  bottom: 10px;
+}
+
+.carousel-inner {
+  position: relative;
+}
+
+.image-slide {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: none !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.onsen-info-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.onsen-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.onsen-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.detail-name p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.onsen-location,
+.water-quality-container,
+.post-user {
+  font-size: 16px;
+  color: #333;
+}
+
+.detail-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.detail-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.detail-button .edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #666;
+}
+
+.detail-button .edit-button i {
+  font-size: 36px;
+}
+
+.detail-button .edit-button:hover {
+  color: rgba(108, 117, 125, 0.8);
+}
+
+.show-save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.show-save-button .save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #aaa;
+  width: auto;
+  padding: 0;
+}
+
+.show-save-button .save-button:hover {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.show-save-button .save-button.saved {
+  background: none;
+  border: none;
+  color: darkorange;
+}
+
+.show-save-button .save-button i {
+  font-size: 36px;
+}
+
+.enter-button a {
+  background-color: rgb(169, 31, 40);
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 10px 25px;
+  font-family: "Noto Sans Japanese";
+  color: #fff;
+  line-height: 2.5;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  position: relative;
+  top: 30px;
+}
+
+.enter-button a:hover {
+  background-color: #fff;
+  color: rgb(169, 31, 40);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 31, 40);
+}
+
+.enter-button a:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-radius: 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.enter-button a:hover:after {
+  border-color: #FFF;
+}
+
+.region-nav {
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-list {
+  display: table;
+  margin: 0 auto;
+  padding: 0;
+  width: 80%;
+  text-align: center;
+}
+
+.menu-item {
+  display: table-cell;
+  min-width: 50px;
+  border-right: 1px solid #ccc;
+  position: relative;
+}
+
+.menu-item:first-child {
+  border-left: 1px solid #ccc;
+}
+
+.menu-item .region-link {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #aaa;
+}
+
+.menu-item .region-link:hover {
+  background-color: bisque;
+  border-bottom: 5px solid bisque;
+}
+
+.menu-item.current {
+  font-weight: bold;
+}
+
+.menu-item.current .region-link {
+  border-bottom: 5px solid #00B0F0;
+  color: #00B0F0;
+}
+
+.menu-item:hover .drop-menu-list {
+  transform: scaleY(1);
+}
+
+.drop-menu-list {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  transform: scaleY(0);
+  transform-origin: center top;
+  transition: transform .3s;
+  z-index: 1;
+  width: 100%;
+  list-style: none; 
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.drop-menu-item {
+  transition: opacity .3s;
+  border: 1px solid #ccc;
+  background-color: darksalmon;
+}
+
+.drop-menu-item a {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.drop-menu-item a:hover {
+  background-color: bisque;
+  border-bottom: 5px solid bisque;
+}
+
+.onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.region-onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.prefecture-onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.onsen-card {
+  width: 310px;
+  height: 440px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.onsen-card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 10px 0;
+}
+
+.card-title a {
+  text-decoration: none; 
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+.onsen-card {
+  transition: transform 0.2s;
+}
+
+.onsen-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.heading-9 {
+  display: inline-block;
+  position: relative;
+  padding: .5em .7em;
+  border-radius: 10px;
+  background-color: #d01632;
+  color: #fff;
+}
+
+.heading-9::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-top: 11px solid #d01632;
+}
+
+.prefecture-name {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.table-save-button .save-button {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-save-button .save-button:hover {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.table-save-button .save-button.saved {
+  background: none;
+  border: none;
+  color: darkorange;
+}
+
+.table-save-button .save-button i {
+  font-size: 24px;
+}

@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
 
   describe "アソシエーション" do
     it { should have_many(:onsens).dependent(:destroy) }
-    it { should have_many(:saved_onsens).class_name('Onsen').with_foreign_key('saved_by_user_id') }
+    it { should have_many(:saved_onsens).dependent(:destroy) }
     it { should have_one_attached(:avatar) }
   end
 

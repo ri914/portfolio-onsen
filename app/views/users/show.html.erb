@@ -20,17 +20,17 @@
       <% end %>     
       <p>名前: <%= @user.name.present? ? @user.name : "ゲスト" %></p>
       <p>メールアドレス: <%= @user.email %></p>
-      <p>パスワード: ******</p>
-      <%= link_to '編集', edit_user_registration_path, class: "edit-link btn btn-primary" %>
+      <p>パスワード: ****** </p>
+      <%= link_to '編集', edit_user_registration_path, class: "edit-link btn btn-primary", data: { guest: current_user.guest? } %>
     </div>
 
     <div class="onsens-section">
       <h1>お気に入りの温泉地</h1>
       <% if @saved_onsens.any? %>
-        <ul class="mypage-ul">
-          <% @saved_onsens.each do |onsen| %>
+        <ul>
+          <% @saved_onsens.each do |saved_onsen| %>
             <li class="mypage-li">
-              <%= link_to onsen.name, onsen_path(onsen) %>
+              <%= link_to saved_onsen.onsen.name, onsen_path(saved_onsen.onsen) %>
             </li>
           <% end %>
         </ul>
