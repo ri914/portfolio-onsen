@@ -44,6 +44,7 @@ class OnsensController < ApplicationController
         Onsen.prefecture_order[onsen.location]
       end
     end
+
     @page_title = "#{@region}の温泉"
   end
 
@@ -60,6 +61,7 @@ class OnsensController < ApplicationController
     else
       @onsens = Onsen.where(location: @prefecture).order(:id)
     end
+
     @page_title = "#{@prefecture}の温泉"
   end
 
@@ -68,18 +70,21 @@ class OnsensController < ApplicationController
     @user = current_user
     @saved_onsens = @user.saved_onsens.includes(:onsen) if @user
     @posted_onsens = @user.onsens if @user
+
     @page_title = @onsen.name
   end
 
   def new
     @onsen = Onsen.new
-    @page_title = "編集ページ"
+
+    @page_title = "投稿ページ"
   end
 
   def edit
     @onsen = Onsen.find(params[:id])
-    @page_title = "温泉情報設定"
     @new_images = params[:onsen] ? params[:onsen][:images] : []
+
+    @page_title = "温泉情報設定"
   end
 
   def create
@@ -176,8 +181,6 @@ class OnsensController < ApplicationController
   end
 
   def bookmarked
-    @page_title = "保存済みの温泉"
-
     if params[:sort] == "bookmarks"
       @onsens = current_user.saved_onsens.
         includes(:onsen).
@@ -191,6 +194,8 @@ class OnsensController < ApplicationController
         [Onsen.region_order[onsen.region], Onsen.prefecture_order[onsen.location]]
       end
     end
+
+    @page_title = "保存済みの温泉"
   end
 
   def destroy
@@ -225,6 +230,7 @@ class OnsensController < ApplicationController
   def detail_search
     @locations = Onsen.prefectures
     @water_qualities = WaterQuality.all
+
     @page_title = "詳細検索"
   end
 

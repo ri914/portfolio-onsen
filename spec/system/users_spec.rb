@@ -24,6 +24,7 @@ RSpec.describe "User", type: :system do
       visit edit_user_registration_path
 
       check "user[remove_avatar]"
+      fill_in "現在のパスワード", with: user.password
       click_button "変更を保存"
 
       expect(page).to have_content("変更が保存されました。")
@@ -35,6 +36,7 @@ RSpec.describe "User", type: :system do
       visit edit_user_registration_path
 
       fill_in "user[name]", with: "Updated User"
+      fill_in "現在のパスワード", with: user.password
       click_button "変更を保存"
 
       expect(page).to have_content("変更が保存されました。")

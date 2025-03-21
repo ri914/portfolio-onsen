@@ -9,13 +9,18 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if params[:user][:remove_avatar] == "1"
-      @user.avatar.purge
-    end
+    if @user.valid_password?(params[:user][:current_password])
+      if params[:user][:remove_avatar] == "1"
+        @user.avatar.purge
+      end
 
-    if @user.update(params.require(:user).permit(:name, :avatar))
-      redirect_to user_path(@user), notice: t('devise.registrations.account_updated')
+      if @user.update(params.require(:user).permit(:name, :avatar))
+        redirect_to user_path(@user), notice: t('devise.registrations.account_updated')
+      else
+        render 'devise/registrations/edit'
+      end
     else
+      flash[:alert] = t('devise.registrations.invalid_current_password')
       render 'devise/registrations/edit'
     end
   end
