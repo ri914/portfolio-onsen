@@ -7,6 +7,10 @@
         <div class="detail-button d-flex">
           
           <div class="show-save-button">
+            <div id="bookmarked-count-<%= @onsen.id %>" class="bookmarked-count">
+              <span id="count-<%= @onsen.id %>"><%= @onsen.saved_onsens.count %></span> 件
+            </div>
+
             <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: @onsen.id) ? 'saved' : '' %>" 
                     title="ブックマーク" 
                     data-onsen-id="<%= @onsen.id %>"
@@ -18,7 +22,7 @@
               <%= hidden_field_tag :onsen_id, @onsen.id %>
             <% end %>
           </div>
-         
+
           <div class="show-edit-button">
              <%= link_to '<i class="fas fa-cog"></i>'.html_safe, edit_onsen_path(@onsen), class: 'edit-button', title: '編集' %>
           </div>

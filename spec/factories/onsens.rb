@@ -19,5 +19,11 @@ FactoryBot.define do
       location { '青森県' }
       region { '東北' }
     end
+
+    trait :in_hokkaido do
+      name { '湯の川温泉' }
+      location { '北海道' }
+      region { '北海道' }
+    end
   end
 end

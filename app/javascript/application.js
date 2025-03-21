@@ -156,6 +156,8 @@ $(document).ready(function() {
       },
       success: function(data) {
         const button = $(`#bookmark-button-${onsenId}`);
+        const countElement = $(`#count-${onsenId}`);
+
         if (data.saved) {
           button.addClass('saved');
           button.find('i').removeClass('fa-bookmark-o').addClass('fa-bookmark');
@@ -163,6 +165,8 @@ $(document).ready(function() {
           button.removeClass('saved');
           button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
         }
+        
+        countElement.text(data.bookmarked_count);
       },
       error: function(error) {
         console.error('Error:', error);
@@ -223,5 +227,11 @@ $(document).ready(function() {
       e.preventDefault();
       alert('キーワード、都道府県、または泉質のいずれかを入力してください。');
     }
+  });
+});
+
+$(document).ready(function () {
+  $("#sort-select").change(function () {
+    window.location.href = $(this).val();
   });
 });

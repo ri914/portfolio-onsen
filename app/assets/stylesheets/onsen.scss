@@ -548,6 +548,13 @@ input[type="submit"]:hover {
   margin-bottom: 5px;
 }
 
+.saved-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .image-placeholder {
   width: 100%;
   height: 200px;
@@ -681,4 +688,160 @@ input[type="submit"]:hover {
   padding: 10px;
   border-radius: 5px;
   font-size: 1rem;
+}
+
+.form-body-search {
+  background: url("https://www.mapple.net/cms/wp-content/uploads/2018/02/0f620923173a52b5f893de6dea1e5106.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 60px;
+}
+
+.bookmarked-count {
+  margin-right: 5px;
+}
+
+.popular-onsens {
+  position: relative;
+  padding: 40px;
+  background: url("https://www.photolibrary.jp/mhd1/img785/450-20200725133654377777.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.onsen-card-popular {
+  flex: 0 0 auto;
+  width: 300px;
+  min-width: 200px;
+  scroll-snap-align: start;
+}
+
+.popular-title {
+  font-size: 2.5rem !important;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.popular-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 5px;
+  background-color: #f3a847;
+}
+
+.popular-title .icon {
+  font-size: 3rem;
+  margin-right: 10px;
+  color: #f3a847;
+  vertical-align: middle;
+}
+
+.popular-title span {
+  vertical-align: middle;
+}
+
+.crown {
+  font-size: 3rem;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.ranking-badge {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popular-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.onsen-scroll-container{
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  scroll-behavior: smooth;
+  cursor: grab;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.onsen-scroll-container.active {
+  cursor: grabbing;
+}
+
+.onsen-scroll-content {
+  display: flex;
+  gap: 15px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.popular-onsens::before,
+.popular-onsens::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.popular-onsens::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.popular-onsens::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.sort-dropdown {
+  text-align: right;
+  margin-right: 30px;
+}
+
+#sort-select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
 }

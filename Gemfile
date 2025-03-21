@@ -84,3 +84,5 @@ gem 'jquery-rails'
 
 gem 'pry'
 gem 'pry-rails'
+
+gem 'aws-sdk-s3'
