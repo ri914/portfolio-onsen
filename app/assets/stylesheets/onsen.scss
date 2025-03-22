@@ -169,7 +169,7 @@ input[type="submit"]:hover {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 75%;
+  max-width: 80%;
   margin: 20px auto;
 }
 
@@ -191,7 +191,7 @@ input[type="submit"]:hover {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 650px;
   height: 400px;
   position: relative;
 }
@@ -290,6 +290,7 @@ input[type="submit"]:hover {
 .post-user {
   font-size: 16px;
   color: #333;
+  margin-bottom: 0px;
 }
 
 .detail-button {
@@ -361,7 +362,7 @@ input[type="submit"]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 10px auto;
   max-width: 400px;
   padding: 10px 25px;
   font-family: "Noto Sans Japanese";
@@ -371,8 +372,6 @@ input[type="submit"]:hover {
   text-align: center;
   transition: 0.3s ease-in-out;
   font-weight: 500;
-  position: relative;
-  top: 30px;
 }
 
 .enter-button a:hover {
@@ -549,6 +548,13 @@ input[type="submit"]:hover {
 }
 
 .saved-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.weather {
   font-size: 0.9rem;
   color: #666;
   margin-top: 5px;
@@ -844,4 +850,23 @@ input[type="submit"]:hover {
   border-radius: 5px;
   background: white;
   cursor: pointer;
+}
+
+.onsen-weather {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.onsen-weather img {
+  width: 50px;
+  height: 50px;
+}
+
+.onsen-weather h2 {
+  margin-right: 20px;
+}
+
+.onsen-weather p {
+  margin: 0;
 }

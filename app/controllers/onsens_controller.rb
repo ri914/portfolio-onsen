@@ -72,6 +72,8 @@ class OnsensController < ApplicationController
     @posted_onsens = @user.onsens if @user
 
     @page_title = @onsen.name
+
+    @weather = WeatherService.fetch_weather_for(@onsen.location)
   end
 
   def new
@@ -263,6 +265,19 @@ class OnsensController < ApplicationController
     end.uniq
 
     render 'search'
+  end
+
+  def roten
+    @onsens = Onsen.all
+
+    valid_weather_conditions = ['晴天']
+
+    @onsens = @onsens.select do |onsen|
+      weather = WeatherService.fetch_weather_for(onsen.location)
+      weather && valid_weather_conditions.include?(weather[:description])
+    end
+
+    @page_title = "露天日和"
   end
 
   private
