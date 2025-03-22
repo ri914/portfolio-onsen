@@ -21,10 +21,10 @@
 
             <% weather = WeatherService.fetch_weather_for(onsen.location) %>
             <% if weather %>
-              <p class="whether">天気: <%= weather[:description] %></p>
-              <p class="whether">気温: <%= weather[:temperature] %>°C</p>
+              <p class="weather">天気: <%= weather[:description] %></p>
+              <p class="weather">気温: <%= weather[:temperature] %>°C</p>
             <% else %>
-              <p class="whether">天気情報が取得できませんでした。</p>
+              <p class="weather">天気情報が取得できませんでした。</p>
             <% end %>
           </div>
 

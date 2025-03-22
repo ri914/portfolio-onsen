@@ -6,7 +6,11 @@ class WeatherService
   def self.fetch_weather_for(prefecture)
     city_name = prefecture_to_city_name(prefecture)
 
-    uri = URI.parse("#{Rails.application.config_for(:weather_api)[:url]}?q=#{city_name},jp&appid=#{Rails.application.config_for(:weather_api)[:api_key]}&units=metric&lang=ja")
+    uri = URI.parse(
+      "#{Rails.application.config_for(:weather_api)[:url]}?q=#{city_name},jp" \
+      "&appid=#{Rails.application.config_for(:weather_api)[:api_key]}" \
+      "&units=metric&lang=ja"
+    )
 
     response = Net::HTTP.get(uri)
 
