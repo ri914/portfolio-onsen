@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get 'search'
       get 'detail_search'
       get 'search_with_details'
+      get 'roten', to: 'onsens#roten'
     end
   
     member do

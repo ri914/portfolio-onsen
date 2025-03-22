@@ -267,6 +267,17 @@ class OnsensController < ApplicationController
     render 'search'
   end
 
+  def roten
+    @onsens = Onsen.all
+
+    valid_weather_conditions = ['晴天']
+
+    @onsens = @onsens.select do |onsen|
+      weather = WeatherService.fetch_weather_for(onsen.location)
+      weather && valid_weather_conditions.include?(weather[:description])
+    end
+  end
+
   private
 
   def check_guest_user
