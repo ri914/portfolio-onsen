@@ -127,7 +127,7 @@ class OnsensController < ApplicationController
       redirect_to new_user_session_path && return
     end
 
-    @onsen = current_user.onsens.find(params[:id])
+    @onsen = Onsen.find(params[:id])
 
     existing_onsen = Onsen.where.not(id: @onsen.id).find_by(name: onsen_params[:name], location: onsen_params[:location])
     if existing_onsen
