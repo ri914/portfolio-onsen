@@ -276,6 +276,8 @@ class OnsensController < ApplicationController
       weather = WeatherService.fetch_weather_for(onsen.location)
       weather && valid_weather_conditions.include?(weather[:description])
     end
+
+    @page_title = "露天日和"
   end
 
   private
