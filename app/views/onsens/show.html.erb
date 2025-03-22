@@ -93,7 +93,23 @@
             <strong class="detail-name">投稿者</strong>
             <p class="post-user"><%= @onsen.user.name %></p>
           </div>
-          
+
+          <div class="onsen-info mb-3">
+            <div class="d-flex align-items-center">
+              <strong class="detail-name">天気</strong>
+              <small class="text-muted text-warning ms-2">※主要都市の天気を表示しています。</small>
+            </div>
+            <div class="onsen-weather">
+              <% if @weather %>
+                <p>気温: <%= @weather[:temperature] %>°C</p>
+                <p><%= @weather[:description] %></p>
+                <img src="http://openweathermap.org/img/wn/<%= @weather[:icon] %>@2x.png" alt="天気アイコン">
+              <% else %>
+                <p>天気情報が取得できませんでした。</p>
+              <% end %>
+            </div>
+          </div>
+              
           <div class="enter-button">
             <a href="#">
               <i class="fas fa-door-open"></i> ルームへ入室

@@ -72,6 +72,8 @@ class OnsensController < ApplicationController
     @posted_onsens = @user.onsens if @user
 
     @page_title = @onsen.name
+
+    @weather = WeatherService.fetch_weather_for(@onsen.location)
   end
 
   def new
