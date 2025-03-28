@@ -26,5 +26,7 @@ Rails.application.routes.draw do
       post :bookmark
       delete :destroy 
     end
+
+    resource :room, only: [:show, :create]
   end
 end

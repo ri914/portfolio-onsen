@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_18_102615) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_28_164940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102615) do
     t.index ["onsen_id"], name: "index_image_descriptions_on_onsen_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "onsens", force: :cascade do |t|
     t.string "name", null: false
     t.string "location"
@@ -76,6 +86,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102615) do
     t.index ["onsen_id", "water_quality_id"], name: "index_onsens_water_qualities_on_onsen_id_and_water_quality_id", unique: true
     t.index ["onsen_id"], name: "index_onsens_water_qualities_on_onsen_id"
     t.index ["water_quality_id"], name: "index_onsens_water_qualities_on_water_quality_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "onsen_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["onsen_id"], name: "index_rooms_on_onsen_id"
   end
 
   create_table "saved_onsens", force: :cascade do |t|
@@ -110,9 +127,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_102615) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "image_descriptions", "onsens"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "onsens", "users"
   add_foreign_key "onsens_water_qualities", "onsens"
   add_foreign_key "onsens_water_qualities", "water_qualities"
+  add_foreign_key "rooms", "onsens"
   add_foreign_key "saved_onsens", "onsens"
   add_foreign_key "saved_onsens", "users"
 end

@@ -1,0 +1,22 @@
+<%= render 'onsens/region-nav' %>
+
+<div class="onsen-detail-body">
+  <div class="detail-card shadow-lg p-4">
+    <div class="detail-card-body">
+      <h1><%= @onsen.name %>の掲示板</h1>
+
+      <div class="messages">
+        <% @messages.each do |message| %>
+          <div class="message">
+            <p><strong><%= message.user.name %>:</strong> <%= message.content %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form_with(model: @message, url: onsen_room_path(@onsen)) do |f| %>
+        <%= f.text_area :content %>
+        <%= f.submit '投稿' %>
+      <% end %>
+
+  </div>
+</div>
