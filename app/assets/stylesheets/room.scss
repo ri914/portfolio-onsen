@@ -69,6 +69,13 @@
   position: relative;
 }
 
+.uploaded-image {
+  width: 600px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
 .message-form {
   position: sticky;
   bottom: 0;
@@ -82,18 +89,37 @@
 
 .message-input {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
   width: 100%;
 }
 
-.message-textarea {
+.form-elements {
+  display: flex;
+  align-items: center;
   width: 100%;
+}
+
+.message-textarea {
+  flex: 1;
   height: 50px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
   resize: none;
+}
+
+.image-upload-label {
+  cursor: pointer;
+  font-size: 56px;
+  color: #64b5f6;
+  margin: 0 10px;
+}
+
+.image-upload-label:hover {
+  color: #42a5f5;
 }
 
 .message-submit {
@@ -119,11 +145,4 @@
 
 .delete-button:hover {
   background: none;
-}
-
-.uploaded-image {
-  width: 600px;
-  height: auto;
-  object-fit: contain;
-  border-radius: 10px;
 }

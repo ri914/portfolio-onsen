@@ -36,9 +36,16 @@
 
   <div class="message-form">
     <%= form_with(model: @message, url: onsen_room_path(@onsen), html: { multipart: true }, class: "message-input") do |f| %>
-      <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを入力..." %>
-      <%= f.file_field :image, class: "message-file-input" %>
-      <%= f.submit '送信', class: "message-submit" %>
+      <div class="form-elements">
+        <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを入力..." %>
+
+        <label for="image-upload" class="image-upload-label">
+          <i class="fa-solid fa-image"></i>
+        </label>
+        <%= f.file_field :image, id: "image-upload", class: "d-none" %>
+
+        <%= f.submit '送信', class: "message-submit" %>
+      </div>
     <% end %>
   </div>
 </div>
