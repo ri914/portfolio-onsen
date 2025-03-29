@@ -1,22 +1,44 @@
 <%= render 'onsens/region-nav' %>
 
-<div class="onsen-detail-body">
-  <div class="detail-card shadow-lg p-4">
-    <div class="detail-card-body">
-      <h1><%= @onsen.name %>の掲示板</h1>
+<div class="room">
+  <h1 class="room-title"><%= @onsen.name %>の掲示板</h1>
 
-      <div class="messages">
-        <% @messages.each do |message| %>
-          <div class="message">
-            <p><strong><%= message.user.name %>:</strong> <%= message.content %></p>
+  <div class="messages">
+    <% @messages.each do |message| %>
+      <div class="message-container" id="message-<%= message.id %>">
+        <div class="user-info">
+          <% if message.user.avatar.attached? %>
+            <%= image_tag message.user.avatar, class: "user-icon" %>
+          <% else %>
+            <%= image_tag 'default_avatar.png', class: "user-icon" %>
+          <% end %>
+          <div class="user-details">
+            <span class="user-name"><%= message.user.name %></span>
+            <span class="message-time"><%= message.created_at.strftime("%Y/%m/%d %H:%M") %></span>
           </div>
-        <% end %>
+          <% if message.user == current_user %>
+            <%= button_to '削除', destroy_message_onsen_room_path(@onsen, message.id), method: :delete, class: 'delete-button' %>
+          <% end %>
+        </div>
+        <div class="message-content">
+          <div class="bubble">
+            <%= message.content %>
+            <% if message.image.attached? %>
+              <div class="message-image">
+                <%= image_tag message.image, class: "uploaded-image" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
+    <% end %>
+  </div>
 
-      <%= form_with(model: @message, url: onsen_room_path(@onsen)) do |f| %>
-        <%= f.text_area :content %>
-        <%= f.submit '投稿' %>
-      <% end %>
-
+  <div class="message-form">
+    <%= form_with(model: @message, url: onsen_room_path(@onsen), html: { multipart: true }, class: "message-input") do |f| %>
+      <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを入力..." %>
+      <%= f.file_field :image, class: "message-file-input" %>
+      <%= f.submit '送信', class: "message-submit" %>
+    <% end %>
   </div>
 </div>

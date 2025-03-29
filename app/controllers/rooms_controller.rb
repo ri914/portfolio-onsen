@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_onsen, only: [:show, :create]
+  before_action :set_onsen, only: [:show, :create, :destroy_message]
+  before_action :set_room, only: [:show, :destroy_message]
+  before_action :set_message, only: [:destroy_message]
 
   def show
     @room = @onsen.room || @onsen.create_room
@@ -22,13 +24,31 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy_message
+    if @message.user == current_user
+      @message.image.purge if @message.image.attached?
+      @message.destroy
+      redirect_to onsen_room_path(@onsen), notice: "メッセージを削除しました。"
+    else
+      redirect_to onsen_room_path(@onsen), alert: "他のユーザーのメッセージは削除できません。"
+    end
+  end
+
   private
 
   def set_onsen
     @onsen = Onsen.find(params[:onsen_id])
   end
 
+  def set_room
+    @room = @onsen.room || @onsen.create_room
+  end
+
+  def set_message
+    @message = Message.find(params[:id])
+  end
+
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :image)
   end
 end

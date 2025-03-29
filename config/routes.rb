@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       delete :destroy 
     end
 
-    resource :room, only: [:show, :create]
+    resource :room, only: [:show, :create] do
+      delete 'messages/:id', to: 'rooms#destroy_message', as: 'destroy_message'
+    end
   end
 end

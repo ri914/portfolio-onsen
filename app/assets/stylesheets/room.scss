@@ -1,0 +1,129 @@
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f4f4f4;
+}
+
+.messages {
+  flex: 1;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  width: 100%;
+}
+
+.room-title {
+  text-align: center;
+  margin: 20px;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  align-self: flex-start;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 25px;
+  color: #666;
+  text-align: left;
+  margin-bottom: 3px
+}
+
+.message-time {
+  font-size: 14px;
+  color: #999;
+}
+
+.message-content {
+  font-size: 30px;
+}
+
+.bubble {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.message-form {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.message-input {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.message-textarea {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+}
+
+.message-submit {
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.message-submit:hover {
+  background-color: #42a5f5;
+}
+
+.delete-button {
+  background: none;
+  color: deeppink;
+  padding: 0;
+  font-weight: 10;
+}
+
+.delete-button:hover {
+  background: none;
+}
+
+.uploaded-image {
+  width: 600px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
