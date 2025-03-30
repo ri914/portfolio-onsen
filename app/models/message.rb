@@ -1,8 +1,9 @@
 class Message < ApplicationRecord
   belongs_to :room
   belongs_to :user
+  belongs_to :parent_message, class_name: "Message", optional: true
+  has_many :replies, class_name: "Message", foreign_key: "parent_message_id", dependent: :destroy
   has_one_attached :image
 
-  validates :content, presence: true, unless: -> { image.attached? }
-  validates :image, presence: true, unless: -> { content.present? }
+  validates :content, presence: true
 end

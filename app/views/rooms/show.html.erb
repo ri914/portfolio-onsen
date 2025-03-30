@@ -4,9 +4,14 @@
   <h1 class="room-title"><%= @onsen.name %>の掲示板</h1>
 
   <div class="messages">
-    <% @messages.each do |message| %>
+    <% @messages.each_with_index do |message, index| %>
       <div class="message-container" id="message-<%= message.id %>">
         <div class="user-info">
+          <span class="message-number">
+            <a href="#" class="reply-link" data-message-id="<%= message.id %>" data-message-number="<%= index + 1 %>" data-message-content="<%= message.content %>">
+              #<%= index + 1 %>
+            </a>
+          </span>
           <% if message.user.avatar.attached? %>
             <%= image_tag message.user.avatar, class: "user-icon" %>
           <% else %>
@@ -20,7 +25,18 @@
             <%= button_to '削除', destroy_message_onsen_room_path(@onsen, message.id), method: :delete, class: 'delete-button' %>
           <% end %>
         </div>
+
         <div class="message-content">
+          <% if message.parent_message_id.present? %>
+            <% parent_message = @messages.find { |m| m.id == message.parent_message_id } %>
+            <% if parent_message %>
+              <div class="reply-to">
+                返信先: <a href="#message-<%= parent_message.id %>">#<%= @messages.find_index(parent_message) + 1 %></a>
+                「<%= truncate(parent_message.content, length: 50) %>」
+              </div>
+            <% end %>
+          <% end %>
+
           <div class="bubble">
             <%= message.content %>
             <% if message.image.attached? %>
@@ -36,6 +52,12 @@
 
   <div class="message-form">
     <%= form_with(model: @message, url: onsen_room_path(@onsen), html: { multipart: true }, class: "message-input") do |f| %>
+      <%= hidden_field_tag :parent_message_id, nil, id: "parent_message_id" %>
+
+      <div class="reply-info" id="reply-info" style="display: none;">
+        返信先: <span id="reply-target"></span> <button type="button" id="clear-reply">×</button>
+      </div>
+
       <div class="form-elements">
         <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを入力..." %>
 

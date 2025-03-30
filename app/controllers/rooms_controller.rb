@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = @onsen.room || @onsen.create_room
-    @messages = @room.messages.includes(:user)
+    @messages = @room.messages.includes(:user, :replies)
     @message = Message.new
     @page_title = "#{@onsen.name}の掲示板"
   end
@@ -15,6 +15,7 @@ class RoomsController < ApplicationController
     @room = @onsen.room || @onsen.create_room
     @message = @room.messages.build(message_params)
     @message.user = current_user
+    @message.parent_message_id = params[:parent_message_id].present? ? params[:parent_message_id] : nil
 
     if @message.save
       redirect_to onsen_room_path(@onsen)

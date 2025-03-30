@@ -230,8 +230,26 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function () {
-  $("#sort-select").change(function () {
-    window.location.href = $(this).val();
+$(document).ready(function() {
+  const replyInfo = $("#reply-info");
+  const replyTarget = $("#reply-target");
+  const parentMessageInput = $("#parent_message_id");
+  const clearReplyButton = $("#clear-reply");
+
+  $(".reply-link").on("click", function(event) {
+    event.preventDefault();
+    
+    const messageId = $(this).data("message-id");
+    const messageNumber = $(this).data("message-number");
+    const messageContent = $(this).data("message-content");
+
+    parentMessageInput.val(messageId);
+    replyTarget.html(`#${messageNumber} 「${messageContent.substring(0, 50)}」`);
+    replyInfo.show();
+  });
+
+  clearReplyButton.on("click", function() {
+    parentMessageInput.val("");
+    replyInfo.hide();
   });
 });
