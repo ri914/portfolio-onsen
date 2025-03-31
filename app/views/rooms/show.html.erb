@@ -8,8 +8,8 @@
       <div class="message-container" id="message-<%= message.id %>">
         <div class="user-info">
           <span class="message-number">
-            <a href="#" class="reply-link" data-message-id="<%= message.id %>" data-message-number="<%= index + 1 %>" data-message-content="<%= message.content %>">
-              #<%= index + 1 %>
+            <a href="#" class="reply-link" data-message-id="<%= message.id %>" data-message-number="<%= @start_index + index %>" data-message-content="<%= message.content %>">
+              #<%= @start_index + index %>
             </a>
           </span>
           <% if message.user.avatar.attached? %>
@@ -28,10 +28,14 @@
 
         <div class="message-content">
           <% if message.parent_message_id.present? %>
-            <% parent_message = @messages.find { |m| m.id == message.parent_message_id } %>
+            <% parent_message = Message.find_by(id: message.parent_message_id) %>
             <% if parent_message %>
+              <% parent_page = (Message.where("id <= ?", parent_message.id).count / 15.0).ceil %>
               <div class="reply-to">
-                返信先: <a href="#message-<%= parent_message.id %>">#<%= @messages.find_index(parent_message) + 1 %></a>
+                返信先: 
+                <a href="<%= onsen_room_path(@onsen, page: parent_page, parent_message_id: parent_message.id) %>#message-<%= parent_message.id %>">
+                  #<%= Message.where("id <= ?", parent_message.id).count %>
+                </a>
                 「<%= truncate(parent_message.content, length: 50) %>」
               </div>
             <% end %>
@@ -59,7 +63,7 @@
       <%= hidden_field_tag :parent_message_id, nil, id: "parent_message_id" %>
 
       <div class="reply-info" id="reply-info" style="display: none;">
-        返信先: <span id="reply-target"></span> <button type="button" id="clear-reply">×</button>
+        >> <span id="reply-target"></span> <button type="button" class="clear-reply">×</button>
       </div>
 
       <div class="form-elements">

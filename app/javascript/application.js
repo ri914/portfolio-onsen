@@ -246,10 +246,18 @@ $(document).ready(function() {
     parentMessageInput.val(messageId);
     replyTarget.html(`#${messageNumber} 「${messageContent.substring(0, 50)}」`);
     replyInfo.show();
+
+    const replyUrl = new URL(window.location);
+    replyUrl.searchParams.set("parent_message_id", messageId);
+    window.history.replaceState({}, "", replyUrl);
   });
 
   clearReplyButton.on("click", function() {
     parentMessageInput.val("");
     replyInfo.hide();
+
+    const replyUrl = new URL(window.location);
+    replyUrl.searchParams.delete("parent_message_id");
+    window.history.replaceState({}, "", replyUrl);
   });
 });

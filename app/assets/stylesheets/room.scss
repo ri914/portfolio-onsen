@@ -147,6 +147,14 @@
   background: none;
 }
 
+.reply-info {
+  display: flex;
+}
+
+.clear-reply {
+  justify-content: center;
+}
+
 .pagination {
   display: flex;
   justify-content: center;

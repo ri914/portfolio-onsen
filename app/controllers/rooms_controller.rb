@@ -9,6 +9,11 @@ class RoomsController < ApplicationController
     @messages = @room.messages.includes(:user, :replies).page(params[:page]).per(15)
     @message = Message.new
     @page_title = "#{@onsen.name}の掲示板"
+    @start_index = (@messages.current_page - 1) * @messages.limit_value + 1
+
+    if params[:parent_message_id].present?
+      @parent_message = Message.find_by(id: params[:parent_message_id])
+    end
   end
 
   def create
