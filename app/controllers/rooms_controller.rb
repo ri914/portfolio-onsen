@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = @onsen.room || @onsen.create_room
-    @messages = @room.messages.includes(:user, :replies)
+    @messages = @room.messages.includes(:user, :replies).page(params[:page]).per(15)
     @message = Message.new
     @page_title = "#{@onsen.name}の掲示板"
   end

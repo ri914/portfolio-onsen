@@ -146,3 +146,24 @@
 .delete-button:hover {
   background: none;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+  padding: 8px 12px;
+  margin: 0 4px;
+  text-decoration: none;
+  border-radius: 5px;
+  background: #f4f4f4;
+  color: #333;
+}
+
+.pagination .current {
+  font-weight: bold;
+  background: #333;
+  color: white;
+}
