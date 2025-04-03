@@ -272,3 +272,28 @@ $(document).ready(function() {
     }
   }
 });
+
+$(document).ready(function () {
+  function updateRemainingTimes() {
+    $('.edit-time-remaining').each(function () {
+      const editableUntil = parseInt($(this).data('editable-until'), 10);
+      const now = Math.floor(Date.now() / 1000);
+      const remainingSeconds = editableUntil - now;
+
+      if (remainingSeconds > 0) {
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = remainingSeconds % 60;
+        $(this).text(`(残り${minutes}分${seconds}秒)`);
+      } else {
+        $(this).text('(編集期限切れ)');
+        const editButton = $(this).prev('.edit-button');
+        if (editButton.length) {
+          editButton.hide();
+        }
+      }
+    });
+  }
+
+  updateRemainingTimes();
+  setInterval(updateRemainingTimes, 1000);
+});

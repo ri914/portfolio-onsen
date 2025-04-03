@@ -34,10 +34,15 @@ class RoomsController < ApplicationController
   end
 
   def edit_message
+    if @message.editable_until.present? && Time.now > @message.editable_until
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
+    end
   end
 
   def update_message
-    if @message.update(message_params)
+    if @message.editable_until.present? && Time.now > @message.editable_until
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
+    elsif @message.update(message_params)
       redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), notice: "メッセージを編集しました。"
     else
       render :edit_message
@@ -59,12 +64,14 @@ class RoomsController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content, :image)
+    params.require(:message).permit(:content, :image, :remove_image) # remove_image を許可
   end
 
   def ensure_correct_user
     unless @message.user == current_user
-      redirect_to onsen_room_path(@onsen), alert: "自分以外のメッセージは編集・削除できません。"
+      redirect_to onsen_room_path(@onsen), alert: "自分以外のメッセージは編集できません。"
+      elseif @message.editable_until.present? && Time.now > @message.editable_until
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
     end
   end
 end
