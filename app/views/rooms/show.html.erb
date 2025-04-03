@@ -21,9 +21,10 @@
             <span class="user-name"><%= message.user.name %></span>
             <span class="message-time"><%= message.created_at.strftime("%Y/%m/%d %H:%M") %></span>
           </div>
-          <% if message.user == current_user %>
-            <%= button_to '削除', destroy_message_onsen_room_path(@onsen, message.id), method: :delete, class: 'delete-button' %>
-          <% end %>
+            <% if message.user == current_user %>
+              <%= link_to '編集', edit_message_onsen_room_path(@onsen, message), class: 'edit-button' %>
+              <%= button_to '削除', destroy_message_onsen_room_path(@onsen, message.id), method: :delete, class: 'delete-button' %>
+            <% end %>
         </div>
 
         <div class="message-content">

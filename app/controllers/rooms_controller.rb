@@ -1,8 +1,9 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_onsen, only: [:show, :create, :destroy_message]
-  before_action :set_room, only: [:show, :destroy_message]
-  before_action :set_message, only: [:destroy_message]
+  before_action :set_onsen, only: [:show, :create, :destroy_message, :edit_message, :update_message]
+  before_action :set_room, only: [:show, :destroy_message, :edit_message, :update_message]
+  before_action :set_message, only: [:destroy_message, :edit_message, :update_message]
+  before_action :ensure_correct_user, only: [:edit_message, :update_message, :destroy_message] # 投稿者本人か確認する
 
   def show
     @room = @onsen.room || @onsen.create_room
@@ -23,20 +24,30 @@ class RoomsController < ApplicationController
     @message.parent_message_id = params[:parent_message_id].present? ? params[:parent_message_id] : nil
 
     if @message.save
-      redirect_to onsen_room_path(@onsen)
+      last_page = (@room.messages.count.to_f / 15).ceil
+      redirect_to onsen_room_path(@onsen, page: last_page, anchor: "message-#{@message.id}")
     else
-      @messages = @room.messages.includes(:user)
+      @messages = @room.messages.includes(:user).page(params[:page]).per(15)
+      @start_index = (@messages.current_page - 1) * @messages.limit_value + 1
       render :show
     end
   end
 
   def destroy_message
-    if @message.user == current_user
-      @message.image.purge if @message.image.attached?
-      @message.destroy
-      redirect_to onsen_room_path(@onsen), notice: "メッセージを削除しました。"
+    @message.image.purge if @message.image.attached?
+    @message.destroy
+    redirect_to onsen_room_path(@onsen), notice: "メッセージを削除しました。"
+  end
+
+  def edit_message
+    # @message は before_action でセット済み
+  end
+
+  def update_message
+    if @message.update(message_params)
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), notice: "メッセージを編集しました。"
     else
-      redirect_to onsen_room_path(@onsen), alert: "他のユーザーのメッセージは削除できません。"
+      render :edit_message
     end
   end
 
@@ -56,5 +67,11 @@ class RoomsController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content, :image)
+  end
+
+  def ensure_correct_user
+    unless @message.user == current_user
+      redirect_to onsen_room_path(@onsen), alert: "自分以外のメッセージは編集・削除できません。"
+    end
   end
 end

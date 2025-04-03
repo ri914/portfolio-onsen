@@ -1,0 +1,24 @@
+<h1><%= @onsen.name %>の掲示板 - メッセージ編集</h1>
+
+<%= form_with(model: [@onsen, @message], url: update_message_onsen_room_path(@onsen, @message), method: :patch, html: { multipart: true }, class: "message-input") do |f| %>
+  <div class="form-elements">
+    <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを編集...", rows: 5 %>
+
+    <label for="image-upload" class="image-upload-label">
+      <i class="fa-solid fa-image"></i>
+    </label>
+    <%= f.file_field :image, id: "image-upload", class: "d-none" %>
+    <% if @message.image.attached? %>
+      <div class="current-image">
+        <%= image_tag @message.image, class: "uploaded-image" %>
+        <label>
+          <%= f.check_box :remove_image %> 画像を削除
+        </label>
+      </div>
+    <% end %>
+
+    <%= f.submit '更新', class: 'message-submit' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', onsen_room_path(@onsen, anchor: "message-#{@message.id}") %>

@@ -261,3 +261,14 @@ $(document).ready(function() {
     window.history.replaceState({}, "", replyUrl);
   });
 });
+
+$(document).ready(function() {
+  if (window.location.hash) {
+    var element = $(window.location.hash);
+    if (element.length) {
+      $('html, body').animate({
+        scrollTop: element.offset().top
+      }, 'slow');
+    }
+  }
+});
