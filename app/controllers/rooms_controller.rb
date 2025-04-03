@@ -64,7 +64,7 @@ class RoomsController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content, :image, :remove_image) # remove_image を許可
+    params.require(:message).permit(:content, :image, :remove_image)
   end
 
   def ensure_correct_user

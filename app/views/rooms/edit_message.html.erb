@@ -1,24 +1,32 @@
-<h1><%= @onsen.name %>の掲示板 - メッセージ編集</h1>
-
-<%= form_with(model: [@onsen, @message], url: update_message_onsen_room_path(@onsen, @message), method: :patch, html: { multipart: true }, class: "message-input") do |f| %>
-  <div class="form-elements">
-    <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを編集...", rows: 5 %>
-
-    <label for="image-upload" class="image-upload-label">
-      <i class="fa-solid fa-image"></i>
-    </label>
-    <%= f.file_field :image, id: "image-upload", class: "d-none" %>
-    <% if @message.image.attached? %>
-      <div class="current-image">
-        <%= image_tag @message.image, class: "uploaded-image" %>
-        <label>
-          <%= f.check_box :remove_image %> 画像を削除
-        </label>
-      </div>
-    <% end %>
-
-    <%= f.submit '更新', class: 'message-submit' %>
+<div class="edit-room">
+  <div class="edit-room__header">
+    <h1 class="edit-room__title"><%= @onsen.name %>の掲示板 - 編集ページ</h1>
   </div>
-<% end %>
 
-<%= link_to '戻る', onsen_room_path(@onsen, anchor: "message-#{@message.id}") %>
+  <%= form_with(model: [@onsen, @message], url: update_message_onsen_room_path(@onsen, @message), method: :patch, html: { multipart: true }, class: "edit-room__form message-input") do |f| %>
+    <div class="edit-room__form-elements">
+      <%= f.text_area :content, class: "edit-room__textarea message-textarea", placeholder: "メッセージを編集...", rows: 5 %>
+
+      <div class="edit-room__image-upload">
+        <label for="image-upload" class="edit-room__image-upload-label image-upload-label">
+          <i class="fa-solid fa-image"></i>
+        </label>
+        <%= f.file_field :image, id: "image-upload", class: "d-none" %>
+        <% if @message.image.attached? %>
+          <div class="edit-room__current-image current-image">
+            <%= image_tag @message.image, class: "edit-room__uploaded-image uploaded-image" %>
+            <label class="edit-room__remove-image-label">
+              <%= f.check_box :remove_image %> 画像を削除
+            </label>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.submit '更新', class: 'edit-room__submit message-submit' %>
+    </div>
+  <% end %>
+
+  <div class="edit-room__footer">
+    <%= link_to '戻る', onsen_room_path(@onsen, anchor: "message-#{@message.id}"), class: 'edit-room__back-link' %>
+  </div>
+</div>

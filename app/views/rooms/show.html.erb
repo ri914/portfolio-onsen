@@ -36,15 +36,14 @@
               <% parent_message_index = @messages.find_index { |m| m.id == parent_message.id } %>
               <% if parent_message_index.present? %>
                 <div class="reply-to">
-                  返信先:
+                  >>
                   <a href="<%= onsen_room_path(@onsen, page: params[:page], parent_message_id: parent_message.id) %>#message-<%= parent_message.id %>">
                     #<%= @start_index + parent_message_index %>
                   </a>
-                  「<%= truncate(parent_message.content, length: 50) %>」
                 </div>
               <% else %>
                 <div class="reply-to">
-                  返信先: (メッセージが見つかりません)
+                  >>(メッセージが見つかりません)
                 </div>
               <% end %>
             <% end %>
@@ -72,7 +71,7 @@
       <%= hidden_field_tag :parent_message_id, nil, id: "parent_message_id" %>
 
       <div class="reply-info" id="reply-info" style="display: none;">
-        >> <span id="reply-target"></span> <button type="button" class="clear-reply">×</button>
+        >> <span id="reply-target"></span> <button type="button" id="clear-reply">×</button>
       </div>
 
       <div class="form-elements">
