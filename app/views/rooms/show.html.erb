@@ -23,7 +23,6 @@
           </div>
             <% if message.user == current_user %>
               <%= link_to '編集', edit_message_onsen_room_path(@onsen, message), class: 'edit-button' %>
-              <%= button_to '削除', destroy_message_onsen_room_path(@onsen, message.id), method: :delete, class: 'delete-button' %>
             <% end %>
         </div>
 

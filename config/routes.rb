@@ -28,9 +28,8 @@ Rails.application.routes.draw do
     end
 
     resource :room, only: [:show, :create] do
-      delete 'messages/:id', to: 'rooms#destroy_message', as: 'destroy_message'
-      get 'messages/:id/edit', to: 'rooms#edit_message', as: 'edit_message' # 編集画面へのGETリクエスト
-      patch 'messages/:id', to: 'rooms#update_message', as: 'update_message' # 更新処理へのPATCHリクエスト
+      get 'messages/:id/edit', to: 'rooms#edit_message', as: 'edit_message'
+      patch 'messages/:id', to: 'rooms#update_message', as: 'update_message'
     end
   end
 end

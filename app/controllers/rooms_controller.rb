@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_onsen, only: [:show, :create, :destroy_message, :edit_message, :update_message]
-  before_action :set_room, only: [:show, :destroy_message, :edit_message, :update_message]
-  before_action :set_message, only: [:destroy_message, :edit_message, :update_message]
-  before_action :ensure_correct_user, only: [:edit_message, :update_message, :destroy_message] # 投稿者本人か確認する
+  before_action :set_onsen, only: [:show, :create, :edit_message, :update_message]
+  before_action :set_room, only: [:show, :edit_message, :update_message]
+  before_action :set_message, only: [:edit_message, :update_message]
+  before_action :ensure_correct_user, only: [:edit_message, :update_message]
 
   def show
     @room = @onsen.room || @onsen.create_room
@@ -33,14 +33,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def destroy_message
-    @message.image.purge if @message.image.attached?
-    @message.destroy
-    redirect_to onsen_room_path(@onsen), notice: "メッセージを削除しました。"
-  end
-
   def edit_message
-    # @message は before_action でセット済み
   end
 
   def update_message
