@@ -149,6 +149,8 @@
 
 .reply-info {
   display: flex;
+  align-items: center;
+  height: 50px;
 }
 
 .reply-link {
@@ -164,9 +166,26 @@
   text-decoration: none;
 }
 
-.clear-reply {
-  justify-content: center;
+#reply-target {
+  font-size: 36px;
 }
+
+.clear-reply {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 36px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.clear-reply:hover {
+  text-decoration: underline;
+  background: none;
+  border: none;
+}
+
 
 .pagination {
   display: flex;
@@ -190,114 +209,132 @@
 }
 
 .edit-room {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 30px;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  &__header {
-    margin-bottom: 20px;
-    text-align: center;
-  }
+.edit-room__header {
+  margin-bottom: 20px;
+}
 
-  &__title {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
+.edit-room__title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
 
-  &__form {
-    margin-bottom: 20px;
-  }
+.edit-room__form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-  &__form-elements {
-    display: flex;
-    flex-direction: column;
-  }
+.edit-room__form-elements {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-  &__textarea {
-    padding: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    line-height: 1.6;
-    resize: vertical;
-  }
+.edit-room__textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  height: 40px;
+}
 
-  &__image-upload {
-    margin-bottom: 15px;
-  }
+.edit-room__textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
 
-  &__image-upload-label {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
+.edit-room__image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
+.edit-room__image-upload-label {
+  font-size: 36px;
+  color: #007bff;
+  cursor: pointer;
+}
 
-  &__current-image {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-  }
+.edit-room__image-upload-label:hover {
+  text-decoration: underline;
+}
 
-  &__uploaded-image {
-    max-width: 150px;
-    height: auto;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    margin-right: 15px;
-  }
+.edit-room__current-image {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
 
-  &__remove-image-label {
-    font-size: 14px;
-    color: #555;
-  }
+.edit-room__uploaded-image {
+  max-width: 100%;
+  border-radius: 8px;
+}
 
-  &__submit {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.edit-room__remove-image-label {
+  font-size: 14px;
+  color: #e74c3c;
+  cursor: pointer;
+}
 
-    &:hover {
-      background-color: #1e7e34;
-    }
-  }
+.edit-room__remove-image-label:hover {
+  text-decoration: underline;
+}
 
-  &__footer {
-    text-align: right;
-  }
+.edit-room__submit {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  &__back-link {
-    display: inline-block;
-    padding: 8px 15px;
-    color: #007bff;
-    text-decoration: none;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.edit-room__submit:hover {
+  background-color: #0056b3;
+}
 
-    &:hover {
-      background-color: #007bff;
-      color: white;
-    }
-  }
+.edit-room__footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.edit-room__back-link {
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.edit-room__back-link:hover {
+  color: #0056b3;
+}
+
+.edit-room__current-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-room__uploaded-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }

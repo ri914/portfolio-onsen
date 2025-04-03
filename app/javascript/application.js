@@ -244,7 +244,7 @@ $(document).ready(function() {
     const messageContent = $(this).data("message-content");
 
     parentMessageInput.val(messageId);
-    replyTarget.html(`#${messageNumber} 「${messageContent.substring(0, 50)}」`);
+    replyTarget.html(`>>#${messageNumber}`);
     replyInfo.show();
 
     const replyUrl = new URL(window.location);
@@ -296,4 +296,27 @@ $(document).ready(function () {
 
   updateRemainingTimes();
   setInterval(updateRemainingTimes, 1000);
+});
+
+$(document).ready(function() {
+  const $imageInput = $('#image-upload');
+  const $previewContainer = $('.edit-room__current-image');
+
+  $imageInput.on('change', function(event) {
+    const files = event.target.files;
+    if (files && files[0]) {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $previewContainer.html(`
+          <img src="${e.target.result}" class="edit-room__uploaded-image uploaded-image" />
+          <label class="edit-room__remove-image-label">
+            <input type="checkbox" name="message[remove_image]" value="1" /> 画像を削除
+          </label>
+        `);
+      };
+      
+      reader.readAsDataURL(files[0]);
+    }
+  });
 });
