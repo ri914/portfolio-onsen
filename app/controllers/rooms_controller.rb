@@ -22,11 +22,6 @@ class RoomsController < ApplicationController
         end
       end
     end
-
-    unless params[:page]
-      last_page = @messages.total_pages
-      redirect_to onsen_room_path(@onsen, page: last_page) and return if last_page > 1
-    end
   end
 
   def create
@@ -55,7 +50,10 @@ class RoomsController < ApplicationController
     if @message.editable_until.present? && Time.now > @message.editable_until
       redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
     elsif @message.update(message_params)
-      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), notice: "メッセージを編集しました。"
+      message_index = @room.messages.order(:created_at).pluck(:id).index(@message.id)
+      message_page = (message_index / 15) + 1 if message_index
+
+      redirect_to onsen_room_path(@onsen, page: message_page, anchor: "message-#{@message.id}"), notice: "メッセージを編集しました。"
     else
       render :edit_message
     end
