@@ -1,7 +1,8 @@
 <%= render 'onsens/region-nav' %>
 
 <div class="room">
-  <h1 class="room-title"><%= @onsen.name %>の掲示板</h1>
+  <h1 class="room-title"><%= link_to @onsen.name, onsen_path(@onsen) %>の掲示板</h1>
+  <%= link_to '詳細ページ', onsen_path(@onsen), class: "back-link" %>
 
   <div class="messages">
     <% @messages.each_with_index do |message, index| %>

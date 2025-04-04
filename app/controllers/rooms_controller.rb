@@ -22,19 +22,24 @@ class RoomsController < ApplicationController
         end
       end
     end
+
+    unless params[:page]
+      last_page = @messages.total_pages
+      redirect_to onsen_room_path(@onsen, page: last_page) and return if last_page > 1
+    end
   end
 
   def create
     @room = @onsen.room || @onsen.create_room
     @message = @room.messages.build(message_params)
     @message.user = current_user
-    @message.parent_message_id = params[:parent_message_id].present? ? params[:parent_message_id] : nil
+    @message.parent_message_id = params[:parent_message_id].presence
 
     if @message.save
       last_page = (@room.messages.count.to_f / 15).ceil
       redirect_to onsen_room_path(@onsen, page: last_page, anchor: "message-#{@message.id}")
     else
-      @messages = @room.messages.includes(:user).page(params[:page]).per(15)
+      @messages = @room.messages.includes(:user).order(created_at: :asc).page(params[:page]).per(15)
       @start_index = (@messages.current_page - 1) * @messages.limit_value + 1
       render :show
     end

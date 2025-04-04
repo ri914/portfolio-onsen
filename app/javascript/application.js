@@ -362,3 +362,10 @@ $(document).ready(function () {
     }
   });
 });
+
+$(document).ready(function () {
+  const lastMessage = $(".message-container").last();
+  if (lastMessage.length) {
+    $("room").animate({ scrollTop: lastMessage.offset().top }, 500);
+  }
+});

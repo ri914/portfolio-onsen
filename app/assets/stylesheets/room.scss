@@ -16,6 +16,12 @@
 .room-title {
   text-align: center;
   margin: 20px;
+  border: none;
+}
+
+.room-title a {
+  text-decoration: none;
+  color: black;
 }
 
 .message-container {
