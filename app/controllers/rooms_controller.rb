@@ -14,6 +14,13 @@ class RoomsController < ApplicationController
 
     if params[:parent_message_id].present?
       @parent_message = Message.find_by(id: params[:parent_message_id])
+
+      if @parent_message
+        parent_index = @room.messages.order(:created_at).pluck(:id).index(@parent_message.id)
+        if parent_index
+          @parent_page = (parent_index / 15) + 1
+        end
+      end
     end
   end
 

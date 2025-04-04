@@ -33,18 +33,21 @@
           <% if message.parent_message_id.present? %>
             <% parent_message = Message.find_by(id: message.parent_message_id) %>
             <% if parent_message %>
-              <% parent_message_index = @messages.find_index { |m| m.id == parent_message.id } %>
-              <% if parent_message_index.present? %>
+              <% parent_index = @room.messages.order(:created_at).pluck(:id).index(parent_message.id) %>
+              <% if parent_index.present? %>
+                <% parent_page = (parent_index / 15) + 1 %>
                 <div class="reply-to">
                   >>
-                  <a href="<%= onsen_room_path(@onsen, page: params[:page], parent_message_id: parent_message.id) %>#message-<%= parent_message.id %>">
-                    #<%= @start_index + parent_message_index %>
-                  </a>
+                  <% if parent_page == params[:page].to_i %>
+                    <a href="#message-<%= parent_message.id %>">#<%= parent_index + 1 %></a>
+                  <% else %>
+                    <a href="<%= onsen_room_path(@onsen, page: parent_page, parent_message_id: parent_message.id) %>#message-<%= parent_message.id %>">
+                      #<%= parent_index + 1 %>
+                    </a>
+                  <% end %>
                 </div>
               <% else %>
-                <div class="reply-to">
-                  >>(メッセージが見つかりません)
-                </div>
+                <div class="reply-to">>>(メッセージが見つかりません)</div>
               <% end %>
             <% end %>
           <% end %>

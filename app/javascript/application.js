@@ -260,15 +260,12 @@ $(document).ready(function() {
     replyUrl.searchParams.delete("parent_message_id");
     window.history.replaceState({}, "", replyUrl);
   });
-});
 
-$(document).ready(function() {
-  if (window.location.hash) {
-    var element = $(window.location.hash);
-    if (element.length) {
-      $('html, body').animate({
-        scrollTop: element.offset().top
-      }, 'slow');
+  const parentMessageId = new URL(window.location).searchParams.get("parent_message_id");
+  if (parentMessageId) {
+    const targetMessage = $("#message-" + parentMessageId);
+    if (targetMessage.length > 0) {
+      $("html, body").animate({ scrollTop: targetMessage.offset().top - 100 }, 500);
     }
   }
 });
@@ -347,28 +344,21 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
   const modal = $("#image-modal");
   const modalImg = $("#modal-image");
 
-  $(".clickable-image").on("click", function() {
-    modalImg.attr("src", $(this).data("src"));
+  modal.hide();
+
+  $(".message-image img").on("click", function () {
+    let imageUrl = $(this).attr("src");
+    modalImg.attr("src", imageUrl);
     modal.fadeIn();
   });
 
-  $(".close-modal, #image-modal").on("click", function() {
-    modal.fadeOut();
-  });
-});
-
-$(document).ready(function () {
-  $(".message-image img").on("click", function () {
-    let imageUrl = $(this).attr("src");
-    $("#modal-image").attr("src", imageUrl);
-    $("#image-modal").fadeIn();
-  });
-
-  $(".close-modal, #image-modal").on("click", function () {
-    $("#image-modal").fadeOut();
+  $(".close-modal, #image-modal").on("click", function (event) {
+    if (event.target === this) {
+      modal.fadeOut();
+    }
   });
 });
