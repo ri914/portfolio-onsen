@@ -320,3 +320,55 @@ $(document).ready(function() {
     }
   });
 });
+
+$(document).ready(function() {
+  const imageInput = $("#image-upload");
+  const previewContainer = $("#room-preview-container");
+  const previewImage = $("#room-preview");
+  const removeImageBtn = $("#remove-room-image");
+
+  imageInput.on("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        previewImage.attr("src", e.target.result);
+        previewContainer.show();
+      };
+      
+      reader.readAsDataURL(file);
+    }
+  });
+
+  removeImageBtn.on("click", function() {
+    imageInput.val("");
+    previewContainer.hide();
+  });
+});
+
+$(document).ready(function() {
+  const modal = $("#image-modal");
+  const modalImg = $("#modal-image");
+
+  $(".clickable-image").on("click", function() {
+    modalImg.attr("src", $(this).data("src"));
+    modal.fadeIn();
+  });
+
+  $(".close-modal, #image-modal").on("click", function() {
+    modal.fadeOut();
+  });
+});
+
+$(document).ready(function () {
+  $(".message-image img").on("click", function () {
+    let imageUrl = $(this).attr("src");
+    $("#modal-image").attr("src", imageUrl);
+    $("#image-modal").fadeIn();
+  });
+
+  $(".close-modal, #image-modal").on("click", function () {
+    $("#image-modal").fadeOut();
+  });
+});
