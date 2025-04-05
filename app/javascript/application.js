@@ -230,18 +230,18 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
+  // --- リプライ機能 ---
   const replyInfo = $("#reply-info");
   const replyTarget = $("#reply-target");
   const parentMessageInput = $("#parent_message_id");
   const clearReplyButton = $("#clear-reply");
 
-  $(".reply-link").on("click", function(event) {
+  $(".reply-link").on("click", function (event) {
     event.preventDefault();
-    
+
     const messageId = $(this).data("message-id");
     const messageNumber = $(this).data("message-number");
-    const messageContent = $(this).data("message-content");
 
     parentMessageInput.val(messageId);
     replyTarget.html(`>>#${messageNumber}`);
@@ -252,7 +252,7 @@ $(document).ready(function() {
     window.history.replaceState({}, "", replyUrl);
   });
 
-  clearReplyButton.on("click", function() {
+  clearReplyButton.on("click", function () {
     parentMessageInput.val("");
     replyInfo.hide();
 
@@ -265,12 +265,10 @@ $(document).ready(function() {
   if (parentMessageId) {
     const targetMessage = $("#message-" + parentMessageId);
     if (targetMessage.length > 0) {
-      $("room").animate({ scrollTop: targetMessage.offset().top - 100 }, 500);
+      $(".room").animate({ scrollTop: targetMessage.offset().top }, 500);
     }
   }
-});
 
-$(document).ready(function () {
   function updateRemainingTimes() {
     $('.edit-time-remaining').each(function () {
       const editableUntil = parseInt($(this).data('editable-until'), 10);
@@ -293,18 +291,16 @@ $(document).ready(function () {
 
   updateRemainingTimes();
   setInterval(updateRemainingTimes, 1000);
-});
 
-$(document).ready(function() {
   const $imageInput = $('#image-upload');
   const $previewContainer = $('.edit-room__current-image');
 
-  $imageInput.on('change', function(event) {
+  $imageInput.on('change', function (event) {
     const files = event.target.files;
     if (files && files[0]) {
       const reader = new FileReader();
-      
-      reader.onload = function(e) {
+
+      reader.onload = function (e) {
         $previewContainer.html(`
           <img src="${e.target.result}" class="edit-room__uploaded-image uploaded-image" />
           <label class="edit-room__remove-image-label">
@@ -312,39 +308,34 @@ $(document).ready(function() {
           </label>
         `);
       };
-      
+
       reader.readAsDataURL(files[0]);
     }
   });
-});
 
-$(document).ready(function() {
-  const imageInput = $("#image-upload");
   const previewContainer = $("#room-preview-container");
   const previewImage = $("#room-preview");
   const removeImageBtn = $("#remove-room-image");
 
-  imageInput.on("change", function(event) {
+  $imageInput.on("change", function (event) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      
-      reader.onload = function(e) {
+
+      reader.onload = function (e) {
         previewImage.attr("src", e.target.result);
         previewContainer.show();
       };
-      
+
       reader.readAsDataURL(file);
     }
   });
 
-  removeImageBtn.on("click", function() {
-    imageInput.val("");
+  removeImageBtn.on("click", function () {
+    $imageInput.val("");
     previewContainer.hide();
   });
-});
 
-$(document).ready(function () {
   const modal = $("#image-modal");
   const modalImg = $("#modal-image");
 
@@ -361,11 +352,20 @@ $(document).ready(function () {
       modal.fadeOut();
     }
   });
-});
 
-$(document).ready(function () {
   const lastMessage = $(".message-container").last();
   if (lastMessage.length) {
-    $("room").animate({ scrollTop: lastMessage.offset().top }, 500);
+    $(".room").animate({ scrollTop: lastMessage.offset().top }, 500);
   }
+
+  $('.message-input').on('submit', function (e) {
+    const content = $('.message-textarea').val().trim();
+    const imageInput = $('#image-upload')[0];
+    const hasImage = imageInput && imageInput.files.length > 0;
+
+    if (!content && !hasImage) {
+      alert('メッセージ内容または画像を入力してください');
+      e.preventDefault();
+    }
+  });
 });

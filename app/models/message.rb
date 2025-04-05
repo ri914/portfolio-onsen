@@ -10,11 +10,17 @@ class Message < ApplicationRecord
   before_validation { image.purge if remove_image == '1' }
   before_create :set_editable_until
 
-  validates :content, presence: true
+  validate :content_or_image_present
 
   private
 
   def set_editable_until
     self.editable_until = 30.minutes.from_now
+  end
+
+  def content_or_image_present
+    if content.blank? && !image.attached?
+      errors.add(:base, "メッセージ内容または画像を入力してください")
+    end
   end
 end
