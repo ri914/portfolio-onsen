@@ -265,7 +265,7 @@ $(document).ready(function() {
   if (parentMessageId) {
     const targetMessage = $("#message-" + parentMessageId);
     if (targetMessage.length > 0) {
-      $("html, body").animate({ scrollTop: targetMessage.offset().top - 100 }, 500);
+      $("room").animate({ scrollTop: targetMessage.offset().top - 100 }, 500);
     }
   }
 });
