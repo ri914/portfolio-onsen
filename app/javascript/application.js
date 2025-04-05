@@ -231,7 +231,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-  // --- リプライ機能 ---
   const replyInfo = $("#reply-info");
   const replyTarget = $("#reply-target");
   const parentMessageInput = $("#parent_message_id");
@@ -265,7 +264,7 @@ $(document).ready(function () {
   if (parentMessageId) {
     const targetMessage = $("#message-" + parentMessageId);
     if (targetMessage.length > 0) {
-      $(".room").animate({ scrollTop: targetMessage.offset().top }, 500);
+      $("html").animate({ scrollTop: targetMessage.offset().top }, 500);
     }
   }
 
@@ -355,7 +354,16 @@ $(document).ready(function () {
 
   const lastMessage = $(".message-container").last();
   if (lastMessage.length) {
-    $(".room").animate({ scrollTop: lastMessage.offset().top }, 500);
+    const room = $(".room");
+    const lastMessageBottom = lastMessage.offset().top + lastMessage.outerHeight();
+    const roomScrollTop = room.scrollTop();
+    const roomHeight = room.height();
+  
+    const scrollToPosition = lastMessageBottom - roomHeight;
+  
+    const finalScrollTop = Math.max(0, scrollToPosition);
+  
+    room.animate({ scrollTop: finalScrollTop }, 500);
   }
 
   $('.message-input').on('submit', function (e) {

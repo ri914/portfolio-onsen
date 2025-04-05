@@ -92,4 +92,40 @@ RSpec.describe "Rooms", type: :system do
       end
     end
   end
+
+  describe "リプライ機能" do
+    let!(:parent_message) { create(:message, content: '親メッセージ', user: user, room: room) }
+    let!(:reply_message) { create(:message, content: '返信メッセージ', user: user, room: room, parent_message_id: parent_message.id) }
+
+    before do
+      visit onsen_room_path(onsen)
+    end
+
+    it '親メッセージが表示されること' do
+      expect(page).to have_content('親メッセージ')
+    end
+
+    it 'リプライリンクが表示されること' do
+      expect(page).to have_selector('.reply-link', text: '#1')
+    end
+
+    it 'リプライリンクをクリックすると返信フォームが表示されること' do
+      find('.reply-link', text: '#1').click
+      expect(page).to have_selector('textarea#message_content')
+    end
+
+    it 'リプライを送信できること' do
+      find('.reply-link', text: '#1').click
+      fill_in 'message[content]', with: '返信メッセージ'
+      click_button '送信'
+      expect(page).to have_content('返信メッセージ')
+    end
+
+    it '返信メッセージに親メッセージへのリンクが表示されること' do
+      find('.reply-link', text: '#1').click
+      fill_in 'message[content]', with: '返信メッセージ'
+      click_button '送信'
+      expect(page).to have_content(">> #1")
+    end
+  end
 end
