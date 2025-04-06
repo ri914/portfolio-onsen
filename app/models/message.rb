@@ -7,6 +7,16 @@ class Message < ApplicationRecord
 
   attr_accessor :remove_image
 
+  attribute :editable_until, :datetime
+
+  def editable_until
+    read_attribute(:editable_until)
+  end
+
+  def editable_until=(value)
+    write_attribute(:editable_until, value)
+  end
+
   before_validation { image.purge if remove_image == '1' }
   before_create :set_editable_until
 
