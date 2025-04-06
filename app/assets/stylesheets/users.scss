@@ -1,35 +1,38 @@
 .settings-container {
   background: url("https://tripeditor.com/wp-content/uploads/2020/09/18121855/shutterstock_1724673550.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 40px 0;
 }
 
 .settings-main {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
+  padding: 30px;
+  background-color: #fff;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   font-size: 24px;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.profile-section, .onsens-section {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+.profile-section,
+.onsens-section {
+  margin-bottom: 40px;
+  padding: 25px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .avatar-container {
   display: flex;
   justify-content: center;
-  margin: 15px 0;
+  margin: 20px 0;
 }
 
 .current-avatar {
@@ -37,16 +40,18 @@ h1 {
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #ccc;
 }
 
+/* 編集ボタン */
 .edit-link {
   display: inline-block;
-  padding: 10px 15px;
+  padding: 10px 20px;
   background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
+  color: #fff;
+  border-radius: 6px;
   text-decoration: none;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .edit-link:hover {
@@ -55,19 +60,31 @@ h1 {
 }
 
 .mypage-ul {
-  list-style-type: none;
-  padding: 0;
+  list-style: none;
+  padding-left: 0;
 }
 
 .mypage-li {
-  margin: 5px 0;
+  margin: 8px 0;
 }
 
 .mypage-li a {
-  text-decoration: none;
   color: #007BFF;
+  text-decoration: none;
+  font-weight: 500;
+  color: #2e7d32; 
 }
 
 .mypage-li a:hover {
   text-decoration: underline;
+}
+
+.alert.alert-danger {
+  background-color: #ffe5e5;
+  color: #d9534f;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  color: #1b5e20;
 }
