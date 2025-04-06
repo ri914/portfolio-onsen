@@ -325,10 +325,6 @@ class OnsensController < ApplicationController
 
     respond_to do |format|
       format.json { render json: { error: 'ゲストユーザーはブックマーク機能を利用できません。' }, status: :forbidden }
-      format.html do
-        flash[:alert] = 'ゲストユーザーはブックマーク機能を利用できません。'
-        redirect_to onsens_path
-      end
     end
   end
 end

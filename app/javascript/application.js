@@ -127,21 +127,21 @@ $(document).ready(function() {
 
   $('.bookmark-link').on('click', function(event) {
     if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはブックマーク機能を使用できません。");
+      alert("ゲストユーザーはブックマーク機能を利用できません。");
       event.preventDefault();
     }
   });
 
   $('.user-dropdown-link').on('click', function(event) {
     if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を使用できません。");
+      alert("ゲストユーザーはこの機能を利用できません。");
       event.preventDefault();
     }
   });
 
   $('.edit-link').on('click', function(event) {
     if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を使用できません。");
+      alert("ゲストユーザーはこの機能を利用できません。");
       event.preventDefault();
     }
   });
@@ -150,12 +150,6 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('.save-button').on('click', function(event) {
     const isGuest = $(this).data('guest') === true || $(this).data('guest') === 'true';
-    
-    if (isGuest) {
-      event.preventDefault();
-      alert("ゲストユーザーは温泉地をブックマークできません。");
-      return;
-    }
 
     event.preventDefault();
 
