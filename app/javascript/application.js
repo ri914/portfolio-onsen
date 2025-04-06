@@ -231,7 +231,149 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-  $("#sort-select").change(function () {
-    window.location.href = $(this).val();
+  const replyInfo = $("#reply-info");
+  const replyTarget = $("#reply-target");
+  const parentMessageInput = $("#parent_message_id");
+  const clearReplyButton = $("#clear-reply");
+
+  $(".reply-link").on("click", function (event) {
+    event.preventDefault();
+
+    const messageId = $(this).data("message-id");
+    const messageNumber = $(this).data("message-number");
+
+    parentMessageInput.val(messageId);
+    replyTarget.html(`>>#${messageNumber}`);
+    replyInfo.show();
+
+    const replyUrl = new URL(window.location);
+    replyUrl.searchParams.set("parent_message_id", messageId);
+    window.history.replaceState({}, "", replyUrl);
+  });
+
+  clearReplyButton.on("click", function () {
+    parentMessageInput.val("");
+    replyInfo.hide();
+
+    const replyUrl = new URL(window.location);
+    replyUrl.searchParams.delete("parent_message_id");
+    window.history.replaceState({}, "", replyUrl);
+  });
+
+  const parentMessageId = new URL(window.location).searchParams.get("parent_message_id");
+  if (parentMessageId) {
+    const targetMessage = $("#message-" + parentMessageId);
+    if (targetMessage.length > 0) {
+      $("html").animate({ scrollTop: targetMessage.offset().top }, 500);
+    }
+  }
+
+  function updateRemainingTimes() {
+    $('.edit-time-remaining').each(function () {
+      const editableUntil = parseInt($(this).data('editable-until'), 10);
+      const now = Math.floor(Date.now() / 1000);
+      const remainingSeconds = editableUntil - now;
+
+      if (remainingSeconds > 0) {
+        const minutes = Math.floor(remainingSeconds / 60);
+        const seconds = remainingSeconds % 60;
+        $(this).text(`(残り${minutes}分${seconds}秒)`);
+      } else {
+        $(this).text('(編集期限切れ)');
+        const editButton = $(this).prev('.edit-button');
+        if (editButton.length) {
+          editButton.hide();
+        }
+      }
+    });
+  }
+
+  updateRemainingTimes();
+  setInterval(updateRemainingTimes, 1000);
+
+  const $imageInput = $('#image-upload');
+  const $previewContainer = $('.edit-room__current-image');
+
+  $imageInput.on('change', function (event) {
+    const files = event.target.files;
+    if (files && files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        $previewContainer.html(`
+          <img src="${e.target.result}" class="edit-room__uploaded-image uploaded-image" />
+          <label class="edit-room__remove-image-label">
+            <input type="checkbox" name="message[remove_image]" value="1" /> 画像を削除
+          </label>
+        `);
+      };
+
+      reader.readAsDataURL(files[0]);
+    }
+  });
+
+  const previewContainer = $("#room-preview-container");
+  const previewImage = $("#room-preview");
+  const removeImageBtn = $("#remove-room-image");
+
+  $imageInput.on("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        previewImage.attr("src", e.target.result);
+        previewContainer.show();
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  removeImageBtn.on("click", function () {
+    $imageInput.val("");
+    previewContainer.hide();
+  });
+
+  const modal = $("#image-modal");
+  const modalImg = $("#modal-image");
+
+  modal.hide();
+
+  $(".message-image img").on("click", function () {
+    let imageUrl = $(this).attr("src");
+    modalImg.attr("src", imageUrl);
+    modal.fadeIn();
+  });
+
+  $(".close-modal, #image-modal").on("click", function (event) {
+    if (event.target === this) {
+      modal.fadeOut();
+    }
+  });
+
+  const lastMessage = $(".message-container").last();
+  if (lastMessage.length) {
+    const room = $(".room");
+    const lastMessageBottom = lastMessage.offset().top + lastMessage.outerHeight();
+    const roomScrollTop = room.scrollTop();
+    const roomHeight = room.height();
+  
+    const scrollToPosition = lastMessageBottom - roomHeight;
+  
+    const finalScrollTop = Math.max(0, scrollToPosition);
+  
+    room.animate({ scrollTop: finalScrollTop }, 500);
+  }
+
+  $('.message-input').on('submit', function (e) {
+    const content = $('.message-textarea').val().trim();
+    const imageInput = $('#image-upload')[0];
+    const hasImage = imageInput && imageInput.files.length > 0;
+
+    if (!content && !hasImage) {
+      alert('メッセージ内容または画像を入力してください');
+      e.preventDefault();
+    }
   });
 });

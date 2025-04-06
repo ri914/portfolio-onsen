@@ -26,5 +26,10 @@ Rails.application.routes.draw do
       post :bookmark
       delete :destroy 
     end
+
+    resource :room, only: [:show, :create] do
+      get 'messages/:id/edit', to: 'rooms#edit_message', as: 'edit_message'
+      patch 'messages/:id', to: 'rooms#update_message', as: 'update_message'
+    end
   end
 end

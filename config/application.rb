@@ -27,5 +27,9 @@ module PortfolioOnsen
     config.before_initialize do
       config.weather_api = config_for(:weather_api)
     end
+
+    config.time_zone = 'Asia/Tokyo'
+
+    config.active_record.default_timezone = :local
   end
 end

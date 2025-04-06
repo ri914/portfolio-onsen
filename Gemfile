@@ -86,3 +86,5 @@ gem 'pry'
 gem 'pry-rails'
 
 gem 'aws-sdk-s3'
+
+gem 'kaminari'
