@@ -42,18 +42,19 @@ class RoomsController < ApplicationController
 
   def edit_message
     if @message.editable_until.present? && Time.now > @message.editable_until
-      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: t("alerts.edit_expired")
     end
   end
 
   def update_message
     if @message.editable_until.present? && Time.now > @message.editable_until
-      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: t("alerts.edit_expired")
     elsif @message.update(message_params)
       message_index = @room.messages.order(:created_at).pluck(:id).index(@message.id)
       message_page = (message_index / 15) + 1 if message_index
 
-      redirect_to onsen_room_path(@onsen, page: message_page, anchor: "message-#{@message.id}"), notice: "メッセージを編集しました。"
+      redirect_to onsen_room_path(@onsen, page: message_page, anchor: "message-#{@message.id}"),
+notice: t("notices.message_updated")
     else
       render :edit_message
     end
@@ -79,9 +80,9 @@ class RoomsController < ApplicationController
 
   def ensure_correct_user
     unless @message.user == current_user
-      redirect_to onsen_room_path(@onsen), alert: "自分以外のメッセージは編集できません。"
+      redirect_to onsen_room_path(@onsen), alert: t("alerts.not_authorized_to_edit")
       elseif @message.editable_until.present? && Time.now > @message.editable_until
-      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: "編集期限が過ぎました。"
+      redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: t("alerts.edit_expired")
     end
   end
 end

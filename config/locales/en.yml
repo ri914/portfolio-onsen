@@ -32,7 +32,8 @@ en:
   notices:
     onsen_created: "温泉情報が作成されました。"
     onsen_updated: "温泉情報が更新されました。"
-    onsen_deleted: '温泉情報が削除されました。'
+    onsen_deleted: "温泉情報が削除されました。"
+    message_updated: "メッセージを編集しました。"
 
   alerts:
     login_required: 'ログインしてください。'
@@ -41,3 +42,5 @@ en:
     update_failed: '温泉情報の更新に失敗しました。'
     delete_failed: '温泉情報の削除に失敗しました。'
     guest_user: 'ゲストユーザーはこの機能を使用できません。'
+    edit_expired: "編集期限が過ぎました。"
+    not_authorized_to_edit: "自分以外のメッセージは編集できません。"
