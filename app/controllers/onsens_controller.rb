@@ -1,7 +1,8 @@
 class OnsensController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_guest_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :check_guest_user, only: [:new, :create, :edit, :update, :destroy, :bookmarked]
   before_action :transfer_guest_bookmarks, only: [:bookmarked, :bookmark], if: :user_signed_in?
+  before_action :reject_guest_bookmark, only: [:bookmark]
 
   def index
     if params[:sort] == "bookmarks"
@@ -317,5 +318,17 @@ class OnsensController < ApplicationController
       images: [],
       image_descriptions: []
     )
+  end
+
+  def reject_guest_bookmark
+    return unless current_user.guest?
+
+    respond_to do |format|
+      format.json { render json: { error: 'ゲストユーザーはブックマーク機能を利用できません。' }, status: :forbidden }
+      format.html do
+        flash[:alert] = 'ゲストユーザーはブックマーク機能を利用できません。'
+        redirect_to onsens_path
+      end
+    end
   end
 end

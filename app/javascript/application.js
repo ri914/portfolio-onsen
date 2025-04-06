@@ -125,6 +125,13 @@ $(document).ready(function() {
     }
   });
 
+  $('.bookmark-link').on('click', function(event) {
+    if ($(this).data('guest') === true) {
+      alert("ゲストユーザーはブックマーク機能を使用できません。");
+      event.preventDefault();
+    }
+  });
+
   $('.user-dropdown-link').on('click', function(event) {
     if ($(this).data('guest') === true) {
       alert("ゲストユーザーはこの機能を使用できません。");
@@ -142,11 +149,19 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('.save-button').on('click', function(event) {
-    event.preventDefault();
+    const isGuest = $(this).data('guest') === true || $(this).data('guest') === 'true';
     
+    if (isGuest) {
+      event.preventDefault();
+      alert("ゲストユーザーは温泉地をブックマークできません。");
+      return;
+    }
+
+    event.preventDefault();
+
     const onsenId = $(this).data('onsen-id');
     const form = $(`#bookmark-form-${onsenId}`);
-    
+
     $.ajax({
       url: form.attr('action'),
       method: form.attr('method'),
@@ -165,15 +180,24 @@ $(document).ready(function() {
           button.removeClass('saved');
           button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
         }
-        
+
         countElement.text(data.bookmarked_count);
       },
-      error: function(error) {
+      error: function(xhr, status, error) {
+        const response = xhr.responseJSON;
+      
+        if (response && response.error) {
+          alert(response.error);
+        } else {
+          alert('予期しないエラーが発生しました。');
+        }
+      
         console.error('Error:', error);
-      }
+      }   
     });
   });
 });
+
 
 $(document).ready(function() {
   $('.delete-onsen-btn').on('click', function(event) {

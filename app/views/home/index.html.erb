@@ -64,7 +64,8 @@
               <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? 'saved' : '' %>" 
                       title="ブックマーク" 
                       data-onsen-id="<%= onsen.id %>"
-                      id="bookmark-button-<%= onsen.id %>">
+                      id="bookmark-button-<%= onsen.id %>"
+                      data-guest="<%= current_user.guest? %>">
                 <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: onsen.id) ? '' : '-o' %>"></i>
               </button>
 

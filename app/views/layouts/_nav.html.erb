@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= bookmarked_onsens_path %>">
+            <a class="nav-link bookmark-link" href="<%= bookmarked_onsens_path %>" data-guest="<%= current_user.guest? %>">
               <i class="fas fa-bookmark"></i> 保存済み
             </a>
           </li>
