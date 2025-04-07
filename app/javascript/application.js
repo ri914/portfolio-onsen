@@ -402,3 +402,21 @@ $(document).ready(function () {
     }
   });
 });
+
+$(document).ready(function() {
+  $('.detail-image-container img').on('click', function() {
+    var imgSrc = $(this).attr('src');
+    $('#modal-image').attr('src', imgSrc);
+    $('#image-modal').fadeIn();
+  });
+
+  $('.close-modal').on('click', function() {
+    $('#image-modal').fadeOut();
+  });
+
+  $('#image-modal').on('click', function(e) {
+    if ($(e.target).is('#image-modal')) {
+      $(this).fadeOut();
+    }
+  });
+});

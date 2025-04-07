@@ -44,7 +44,7 @@
                 <% @onsen.images.each_with_index do |image, index| %>
                   <div class="carousel-item <%= 'active' if index == 0 %>">
                     <div class="detail-image-container">
-                      <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded" %>
+                      <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded", data: { bs_toggle: "modal", bs_target: "#imageModal", src: rails_blob_url(image, only_path: true) } %>
                     </div>
                     <p class="detail-image-description">
                       <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
@@ -119,5 +119,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="image-modal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-image">
   </div>
 </div>
