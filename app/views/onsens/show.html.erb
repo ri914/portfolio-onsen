@@ -80,7 +80,15 @@
             <strong class="detail-name">泉質</strong>
             <div class="water-quality-container">
               <% if @onsen.water_quality_ids.any? %>
-                <%= @onsen.water_quality_ids.map { |water_quality_id| WaterQuality.find(water_quality_id).name }.join('、') %>
+                <div class="water-quality-list">
+                  <% @onsen.water_quality_ids.each do |id| %>
+                    <% name = WaterQuality.find(id).name %>
+                    <% tooltip = water_quality_tooltip(name) %>
+                    <span class="water-quality-item" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= tooltip %>">
+                      <%= name %>
+                    </span>
+                  <% end %>
+                </div>
               <% else %>
                 <span class="no-water-quality">泉質情報はありません。</span>
               <% end %>

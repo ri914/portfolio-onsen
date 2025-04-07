@@ -293,6 +293,22 @@ input[type="submit"]:hover {
   margin-bottom: 0px;
 }
 
+.water-quality-container span {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.water-quality-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.water-quality-item {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.1em 0.5em;
+}
+
 .post-user-link {
   font-size: 16px;
   color: #333;
