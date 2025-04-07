@@ -5,7 +5,7 @@ class Onsen < ApplicationRecord
   has_many :image_descriptions, dependent: :destroy
   has_many :saved_onsens, dependent: :destroy
   has_many :users, through: :saved_onsens
-  has_one :room
+  has_one :room, dependent: :destroy
   has_and_belongs_to_many :water_qualities
 
   validates :name, presence: true
