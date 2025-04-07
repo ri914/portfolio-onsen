@@ -105,3 +105,7 @@
     </div>
   </div>
 </nav>
+
+<% if user_signed_in? %>
+  <%= render 'onsens/region-nav' %>
+<% end %>
