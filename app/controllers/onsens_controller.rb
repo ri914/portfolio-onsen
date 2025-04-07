@@ -12,8 +12,7 @@ class OnsensController < ApplicationController
         left_joins(:saved_onsens).
         group('onsens.id').
         select('onsens.*, COUNT(saved_onsens.id) AS bookmarks_count').
-        order(Arel.sql("COUNT(saved_onsens.id) DESC, CASE onsens.location #{location_order_sql} ELSE 999 END, onsens.id ASC")).
-        limit(10)
+        order(Arel.sql("COUNT(saved_onsens.id) DESC, CASE onsens.location #{location_order_sql} ELSE 999 END, onsens.id ASC"))
     else
       @onsens = Onsen.all.sort_by do |onsen|
         [

@@ -148,6 +148,13 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+  $('#sort-select').on('change', function() {
+    const url = $(this).val();
+    window.location.href = url;
+  });
+});
+
+$(document).ready(function() {
   $('.save-button').on('click', function(event) {
     const isGuest = $(this).data('guest') === true || $(this).data('guest') === 'true';
 
