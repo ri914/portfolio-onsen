@@ -287,11 +287,21 @@ input[type="submit"]:hover {
 }
 
 .onsen-location,
-.water-quality-container,
-.post-user {
+.water-quality-container {
   font-size: 16px;
   color: #333;
   margin-bottom: 0px;
+}
+
+.post-user-link {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 0px;
+  text-decoration: none; 
+}
+
+.post-user-link:hover {
+  color: blue;
 }
 
 .detail-button {

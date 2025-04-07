@@ -91,7 +91,9 @@
 
           <div class="onsen-info mb-3">
             <strong class="detail-name">投稿者</strong>
-            <p class="post-user"><%= @onsen.user.name %></p>
+            <p class="post-user">
+              <%= link_to @onsen.user.name, user_path(@onsen.user), class: "post-user-link" %>
+            </p>
           </div>
 
           <div class="onsen-info mb-3">

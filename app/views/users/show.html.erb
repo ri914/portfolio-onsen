@@ -21,12 +21,17 @@
       <p>名前: <%= @user.name.present? ? @user.name : "ゲスト" %></p>
       <p>メールアドレス: <%= @user.email %></p>
       <p>パスワード: ****** </p>
-      <%= link_to '編集', edit_user_registration_path, class: "edit-link btn btn-primary2", data: { guest: current_user.guest? } %>
+
+      <% if current_user == @user %>
+        <%= link_to '編集', edit_user_registration_path, class: "edit-link btn btn-primary2" %>
+      <% end %>
     </div>
 
-    <% unless current_user.guest? %>
-      <div class="onsens-section">
-        <h1>お気に入りの温泉地</h1>
+    <div class="onsens-section">
+      <h1>お気に入りの温泉地</h1>
+      <% if current_user.guest? && current_user == @user %>
+        <p class="note">ゲストユーザーはこの機能を利用できません。</p>
+      <% else %>
         <% if @saved_onsens.any? %>
           <ul class="mypage-ul">
             <% @saved_onsens.each do |saved_onsen| %>
@@ -38,10 +43,14 @@
         <% else %>
           <p class="note">お気に入りの温泉地はありません。</p>
         <% end %>
-      </div>
+      <% end %>
+    </div>
 
-      <div class="onsens-section">
-        <h1>投稿した温泉地</h1>
+    <div class="onsens-section">
+      <h1>投稿した温泉地</h1>
+        <% if current_user.guest? && current_user == @user %>
+        <p class="note">ゲストユーザーはこの機能を利用できません。</p>
+      <% else %>
         <% if @posted_onsens.any? %>
           <ul class="mypage-ul">
             <% @posted_onsens.each do |onsen| %>
@@ -53,7 +62,7 @@
         <% else %>
           <p class="note">投稿した温泉地はありません。</p>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
