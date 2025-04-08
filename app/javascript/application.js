@@ -113,7 +113,6 @@ $(document).ready(function() {
 $(document).ready(function() {
   const guestAlert = "ゲストユーザーはこの機能を利用できません。";
 
-  // ゲスト制限用の共通クリックハンドラ
   function restrictForGuest(selector) {
     $(document).on('click', selector, function(event) {
       if ($(this).data('guest') === true || $(this).data('guest') === 'true') {
@@ -281,9 +280,15 @@ $(document).ready(function () {
   if (parentMessageId) {
     const targetMessage = $("#message-" + parentMessageId);
     if (targetMessage.length > 0) {
-      $("html").animate({ scrollTop: targetMessage.offset().top }, 500);
+      const messageOffsetTop = targetMessage.offset().top;
+      const messageHeight = targetMessage.outerHeight();
+      const windowHeight = $(window).height();
+      const scrollToPosition = messageOffsetTop - (windowHeight - messageHeight) / 2;
+  
+      $("html, body").animate({ scrollTop: scrollToPosition }, 500);
     }
   }
+  
 
   function updateRemainingTimes() {
     $('.edit-time-remaining').each(function () {
