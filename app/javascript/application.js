@@ -111,37 +111,29 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('.post-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーは投稿フォームにアクセスできません。");
-      event.preventDefault();
-    }
-  });
+  const guestAlert = "ゲストユーザーはこの機能を利用できません。";
 
-  $('.btn-post-onsen').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーは投稿フォームにアクセスできません。");
-      event.preventDefault();
-    }
-  });
+  // ゲスト制限用の共通クリックハンドラ
+  function restrictForGuest(selector) {
+    $(document).on('click', selector, function(event) {
+      if ($(this).data('guest') === true || $(this).data('guest') === 'true') {
+        alert(guestAlert);
+        event.preventDefault();
+      }
+    });
+  }
 
-  $('.bookmark-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはブックマーク機能を利用できません。");
-      event.preventDefault();
-    }
-  });
+  restrictForGuest('.post-link');
+  restrictForGuest('.btn-post-onsen');
+  restrictForGuest('.bookmark-link');
+  restrictForGuest('.edit-link');
+  restrictForGuest('.edit-button');
+  restrictForGuest('.user-dropdown-link');
+  restrictForGuest('.save-button');
 
-  $('.user-dropdown-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を利用できません。");
-      event.preventDefault();
-    }
-  });
-
-  $('.edit-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を利用できません。");
+  $('form[action*="users"]').on('submit', function(event) {
+    if ($(this).find('[data-guest="true"]').length > 0) {
+      alert(guestAlert);
       event.preventDefault();
     }
   });
@@ -190,7 +182,7 @@ $(document).ready(function() {
         if (response && response.error) {
           alert(response.error);
         } else {
-          alert('予期しないエラーが発生しました。');
+          alert('ゲストユーザーはブックマーク機能を利用できません');
         }
       
         console.error('Error:', error);

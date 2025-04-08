@@ -22,7 +22,10 @@
           </div>
 
           <div class="show-edit-button">
-             <%= link_to '<i class="fas fa-cog"></i>'.html_safe, edit_onsen_path(@onsen), class: 'edit-button', title: '編集' %>
+            <%= link_to '<i class="fas fa-cog"></i>'.html_safe, edit_onsen_path(@onsen),
+                        class: 'edit-button',
+                        title: '編集',
+                        data: { guest: current_user.guest? } %>
           </div>
         </div>
 
