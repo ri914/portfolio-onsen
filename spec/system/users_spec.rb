@@ -76,7 +76,7 @@ RSpec.describe "User", type: :system do
         sign_in guest_user
       end
 
-      it 'ゲストユーザーは投稿フォームにアクセスできないこと1' do
+      it 'ゲストユーザーは投稿フォームにアクセスできないこと' do
         visit new_onsen_path
 
         expect(page).to have_content("ゲストユーザーはこの機能を利用できません。")
