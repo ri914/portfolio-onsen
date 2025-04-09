@@ -276,20 +276,6 @@ $(document).ready(function () {
     window.history.replaceState({}, "", replyUrl);
   });
 
-  const parentMessageId = new URL(window.location).searchParams.get("parent_message_id");
-  if (parentMessageId) {
-    const targetMessage = $("#message-" + parentMessageId);
-    if (targetMessage.length > 0) {
-      const messageOffsetTop = targetMessage.offset().top;
-      const messageHeight = targetMessage.outerHeight();
-      const windowHeight = $(window).height();
-      const scrollToPosition = messageOffsetTop - (windowHeight - messageHeight) / 2;
-  
-      $("html, body").animate({ scrollTop: scrollToPosition }, 500);
-    }
-  }
-  
-
   function updateRemainingTimes() {
     $('.edit-time-remaining').each(function () {
       const editableUntil = parseInt($(this).data('editable-until'), 10);

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resource :room, only: [:show, :create] do
       get 'messages/:id/edit', to: 'rooms#edit_message', as: 'edit_message'
       patch 'messages/:id', to: 'rooms#update_message', as: 'update_message'
+      get 'thread/:parent_message_id', to: 'rooms#thread', as: 'thread'
     end
   end
 end

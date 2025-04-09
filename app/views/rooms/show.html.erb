@@ -1,6 +1,7 @@
 <div class="room">
   <h1 class="room-title"><%= link_to @onsen.name, onsen_path(@onsen) %>の掲示板</h1>
-  <%= link_to '詳細ページ', onsen_path(@onsen), class: "back-link" %>
+  
+  <%= link_to '詳細ページへ', onsen_path(@onsen), class: "back-link" %>
 
   <div class="messages">
     <% @messages.each_with_index do |message, index| %>
@@ -42,13 +43,9 @@
                 <% parent_page = (parent_index / 15) + 1 %>
                 <div class="reply-to">
                   >>
-                  <% if parent_page == params[:page].to_i %>
-                    <a href="#message-<%= parent_message.id %>">#<%= parent_index + 1 %></a>
-                  <% else %>
-                    <a href="<%= onsen_room_path(@onsen, page: parent_page, parent_message_id: parent_message.id) %>#message-<%= parent_message.id %>">
-                      #<%= parent_index + 1 %>
-                    </a>
-                  <% end %>
+                  <%= link_to "##{parent_index + 1}",
+                      thread_onsen_room_path(@onsen, parent_message_id: parent_message.id),
+                      class: "reply-thread-link" %>
                 </div>
               <% else %>
                 <div class="reply-to">>>(メッセージが見つかりません)</div>
