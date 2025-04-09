@@ -69,7 +69,7 @@ class RoomsController < ApplicationController
       @messages = [@parent_message] + @replies
       @page_title = "#{@onsen.name}のスレッド表示"
     else
-      redirect_to onsen_room_path(@onsen), alert: "指定されたメッセージが見つかりませんでした"
+      redirect_to onsen_room_path(@onsen), alert: I18n.t('alerts.message_not_found')
     end
   end
 

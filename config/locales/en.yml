@@ -44,3 +44,4 @@ en:
     guest_user: 'ゲストユーザーはこの機能を利用できません。'
     edit_expired: "編集期限が過ぎました。"
     not_authorized_to_edit: "自分以外のメッセージは編集できません。"
+    message_not_found: "指定されたメッセージが見つかりませんでした。"
