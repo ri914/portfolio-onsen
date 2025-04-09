@@ -71,9 +71,9 @@
 }
 
 .bubble {
-  padding: 10px;
+  padding: 10px 0;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-left: 40px;
   position: relative;
 }
 
@@ -461,4 +461,20 @@
 
 .reply-label {
   color: #666;
+}
+
+.reply-count {
+  margin-left: 40px;
+  font-size: 1.0rem;
+}
+
+.reply-count a {
+  color: #337ab7;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.reply-count a:hover {
+  color: #23527c;
+  text-decoration: underline;
 }

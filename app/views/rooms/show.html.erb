@@ -61,6 +61,12 @@
               </div>
             <% end %>
           </div>
+
+          <% if message.replies.any? %>
+            <div class="reply-count">
+              <%= link_to "返信: #{message.replies.count}件", thread_onsen_room_path(@onsen, parent_message_id: message.id) %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
