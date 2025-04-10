@@ -208,6 +208,7 @@ input[type="submit"]:hover {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .detail-image-description {
@@ -286,11 +287,37 @@ input[type="submit"]:hover {
 }
 
 .onsen-location,
-.water-quality-container,
-.post-user {
+.water-quality-container {
   font-size: 16px;
   color: #333;
   margin-bottom: 0px;
+}
+
+.water-quality-container span {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.water-quality-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.water-quality-item {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.1em 0.5em;
+}
+
+.post-user-link {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 0px;
+  text-decoration: none; 
+}
+
+.post-user-link:hover {
+  color: blue;
 }
 
 .detail-button {
@@ -400,109 +427,7 @@ input[type="submit"]:hover {
   border-color: #FFF;
 }
 
-.region-nav {
-  border-bottom: 1px solid #ccc;
-}
-
-.menu-list {
-  display: table;
-  margin: 0 auto;
-  padding: 0;
-  width: 80%;
-  text-align: center;
-}
-
-.menu-item {
-  display: table-cell;
-  min-width: 50px;
-  border-right: 1px solid #ccc;
-  position: relative;
-}
-
-.menu-item:first-child {
-  border-left: 1px solid #ccc;
-}
-
-.menu-item .region-link {
-  display: block;
-  width: 100%;
-  padding: 10px 0;
-  text-decoration: none;
-  color: #aaa;
-}
-
-.menu-item .region-link:hover {
-  background-color: bisque;
-  border-bottom: 5px solid bisque;
-}
-
-.menu-item.current {
-  font-weight: bold;
-}
-
-.menu-item.current .region-link {
-  border-bottom: 5px solid #00B0F0;
-  color: #00B0F0;
-}
-
-.menu-item:hover .drop-menu-list {
-  transform: scaleY(1);
-}
-
-.drop-menu-list {
-  display: block;
-  left: 0;
-  position: absolute;
-  top: 100%;
-  transform: scaleY(0);
-  transform-origin: center top;
-  transition: transform .3s;
-  z-index: 1;
-  width: 100%;
-  list-style: none; 
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-}
-
-.drop-menu-item {
-  transition: opacity .3s;
-  border: 1px solid #ccc;
-  background-color: darksalmon;
-}
-
-.drop-menu-item a {
-  display: block;
-  width: 100%;
-  padding: 10px 0;
-  text-decoration: none;
-  color: #ffffff;
-}
-
-.drop-menu-item a:hover {
-  background-color: bisque;
-  border-bottom: 5px solid bisque;
-}
-
 .onsen-list {
-  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 85vh;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.region-onsen-list {
-  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
-  background-size: cover;
-  min-height: 85vh;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.prefecture-onsen-list {
   background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
   background-size: cover;
   min-height: 85vh;

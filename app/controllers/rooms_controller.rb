@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_onsen, only: [:show, :create, :edit_message, :update_message]
+  before_action :set_onsen, only: [:show, :create, :edit_message, :update_message, :thread]
   before_action :set_room, only: [:show, :edit_message, :update_message]
   before_action :set_message, only: [:edit_message, :update_message]
   before_action :ensure_correct_user, only: [:edit_message, :update_message]
@@ -54,9 +54,22 @@ class RoomsController < ApplicationController
       message_page = (message_index / 15) + 1 if message_index
 
       redirect_to onsen_room_path(@onsen, page: message_page, anchor: "message-#{@message.id}"),
-notice: t("notices.message_updated")
+      notice: t("notices.message_updated")
     else
       render :edit_message
+    end
+  end
+
+  def thread
+    @room = @onsen.room
+    @parent_message = @room.messages.includes(:user).find_by(id: params[:parent_message_id])
+
+    if @parent_message
+      @replies = @room.messages.includes(:user).where(parent_message_id: @parent_message.id).order(:created_at)
+      @messages = [@parent_message] + @replies
+      @page_title = "#{@onsen.name}のスレッド表示"
+    else
+      redirect_to onsen_room_path(@onsen), alert: I18n.t('alerts.message_not_found')
     end
   end
 

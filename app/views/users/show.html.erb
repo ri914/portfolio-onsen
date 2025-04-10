@@ -21,37 +21,55 @@
       <p>名前: <%= @user.name.present? ? @user.name : "ゲスト" %></p>
       <p>メールアドレス: <%= @user.email %></p>
       <p>パスワード: ****** </p>
-      <%= link_to '編集', edit_user_registration_path, class: "edit-link btn btn-primary2", data: { guest: current_user.guest? } %>
+
+      <% if current_user == @user %>
+        <%= link_to '編集', edit_user_registration_path,
+                    class: "edit-link btn btn-primary2",
+                    data: { guest: current_user.guest? } %>
+      <% end %>
     </div>
 
     <div class="onsens-section">
       <h1>お気に入りの温泉地</h1>
-      <% if @saved_onsens.any? %>
-        <ul>
-          <% @saved_onsens.each do |saved_onsen| %>
-            <li class="mypage-li">
-              <%= link_to saved_onsen.onsen.name, onsen_path(saved_onsen.onsen) %>
-            </li>
-          <% end %>
-        </ul>
+      <% if current_user.guest? && current_user == @user %>
+        <p class="note">ゲストユーザーはこの機能を利用できません。</p>
       <% else %>
-        <p class="note">お気に入りの温泉地はありません。</p>
+        <% if @saved_onsens.any? %>
+          <ul class="mypage-ul">
+            <% @saved_onsens.each do |saved_onsen| %>
+              <li class="mypage-li">
+                <%= link_to saved_onsen.onsen.name, onsen_path(saved_onsen.onsen) %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="note">お気に入りの温泉地はありません。</p>
+        <% end %>
       <% end %>
     </div>
 
     <div class="onsens-section">
       <h1>投稿した温泉地</h1>
-      <% if @posted_onsens.any? %>
-        <ul class="mypage-ul">
-          <% @posted_onsens.each do |onsen| %>
-            <li class="mypage-li">
-              <%= link_to onsen.name, onsen_path(onsen) %>
-            </li>
-          <% end %>
-        </ul>
+        <% if current_user.guest? && current_user == @user %>
+        <p class="note">ゲストユーザーはこの機能を利用できません。</p>
       <% else %>
-        <p class="note">投稿した温泉地はありません。</p>
+        <% if @posted_onsens.any? %>
+          <ul class="mypage-ul">
+            <% @posted_onsens.each do |onsen| %>
+              <li class="mypage-li">
+                <%= link_to onsen.name, onsen_path(onsen) %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="note">投稿した温泉地はありません。</p>
+        <% end %>
       <% end %>
     </div>
+  </div>
+
+  <div id="image-modal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-image">
   </div>
 </div>

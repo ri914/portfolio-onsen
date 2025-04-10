@@ -128,4 +128,42 @@ RSpec.describe "Rooms", type: :system do
       expect(page).to have_content(">> #1")
     end
   end
+
+  describe "返信スレッド表示" do
+    let!(:parent_message) { create(:message, content: '親メッセージ', user: user, room: room) }
+    let!(:reply1) { create(:message, content: '返信1', user: user, room: room, parent_message_id: parent_message.id) }
+    let!(:reply2) { create(:message, content: '返信2', user: user, room: room, parent_message_id: parent_message.id) }
+
+    before do
+      visit onsen_room_path(onsen)
+    end
+
+    it "返信スレッドリンクをクリックすると返信スレッドページが表示されること" do
+      within("#message-#{parent_message.id}") do
+        click_link "返信: 2件"
+      end
+
+      expect(current_path).to eq(thread_onsen_room_path(onsen, parent_message_id: parent_message.id))
+      expect(page).to have_content("返信元のメッセージ")
+      expect(page).to have_content("親メッセージ")
+      expect(page).to have_content("返信1")
+      expect(page).to have_content("返信2")
+    end
+
+    it "存在しないparent_message_idを指定した場合は掲示板にリダイレクトされること" do
+      visit thread_onsen_room_path(onsen, parent_message_id: 9999)
+
+      expect(current_path).to eq(onsen_room_path(onsen))
+      expect(page).to have_content("指定されたメッセージが見つかりませんでした")
+    end
+
+    it "返信元と返信の順序が正しいこと" do
+      within("#message-#{parent_message.id}") do
+        click_link "返信: 2件"
+      end
+
+      message_texts = all('.r-message-container.reply-message .bubble').map(&:text)
+      expect(message_texts).to eq(["返信1", "返信2"])
+    end
+  end
 end

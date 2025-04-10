@@ -111,42 +111,49 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('.post-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーは投稿フォームにアクセスできません。");
-      event.preventDefault();
-    }
-  });
+  const guestAlert = "ゲストユーザーはこの機能を利用できません。";
 
-  $('.btn-post-onsen').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーは投稿フォームにアクセスできません。");
-      event.preventDefault();
-    }
-  });
+  function restrictForGuest(selector) {
+    $(document).on('click', selector, function(event) {
+      if ($(this).data('guest') === true || $(this).data('guest') === 'true') {
+        alert(guestAlert);
+        event.preventDefault();
+      }
+    });
+  }
 
-  $('.user-dropdown-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を使用できません。");
-      event.preventDefault();
-    }
-  });
+  restrictForGuest('.post-link');
+  restrictForGuest('.btn-post-onsen');
+  restrictForGuest('.bookmark-link');
+  restrictForGuest('.edit-link');
+  restrictForGuest('.edit-button');
+  restrictForGuest('.user-dropdown-link');
+  restrictForGuest('.save-button');
 
-  $('.edit-link').on('click', function(event) {
-    if ($(this).data('guest') === true) {
-      alert("ゲストユーザーはこの機能を使用できません。");
+  $('form[action*="users"]').on('submit', function(event) {
+    if ($(this).find('[data-guest="true"]').length > 0) {
+      alert(guestAlert);
       event.preventDefault();
     }
   });
 });
 
 $(document).ready(function() {
+  $('#sort-select').on('change', function() {
+    const url = $(this).val();
+    window.location.href = url;
+  });
+});
+
+$(document).ready(function() {
   $('.save-button').on('click', function(event) {
+    const isGuest = $(this).data('guest') === true || $(this).data('guest') === 'true';
+
     event.preventDefault();
-    
+
     const onsenId = $(this).data('onsen-id');
     const form = $(`#bookmark-form-${onsenId}`);
-    
+
     $.ajax({
       url: form.attr('action'),
       method: form.attr('method'),
@@ -165,15 +172,24 @@ $(document).ready(function() {
           button.removeClass('saved');
           button.find('i').removeClass('fa-bookmark').addClass('fa-bookmark-o');
         }
-        
+
         countElement.text(data.bookmarked_count);
       },
-      error: function(error) {
+      error: function(xhr, status, error) {
+        const response = xhr.responseJSON;
+      
+        if (response && response.error) {
+          alert(response.error);
+        } else {
+          alert('ゲストユーザーはブックマーク機能を利用できません');
+        }
+      
         console.error('Error:', error);
-      }
+      }   
     });
   });
 });
+
 
 $(document).ready(function() {
   $('.delete-onsen-btn').on('click', function(event) {
@@ -259,14 +275,6 @@ $(document).ready(function () {
     replyUrl.searchParams.delete("parent_message_id");
     window.history.replaceState({}, "", replyUrl);
   });
-
-  const parentMessageId = new URL(window.location).searchParams.get("parent_message_id");
-  if (parentMessageId) {
-    const targetMessage = $("#message-" + parentMessageId);
-    if (targetMessage.length > 0) {
-      $("html").animate({ scrollTop: targetMessage.offset().top }, 500);
-    }
-  }
 
   function updateRemainingTimes() {
     $('.edit-time-remaining').each(function () {
@@ -376,4 +384,44 @@ $(document).ready(function () {
       e.preventDefault();
     }
   });
+});
+
+$(document).ready(function() {
+  $('.detail-image-container img').on('click', function() {
+    var imgSrc = $(this).attr('src');
+    $('#modal-image').attr('src', imgSrc);
+    $('#image-modal').fadeIn();
+  });
+
+  $('.close-modal').on('click', function() {
+    $('#image-modal').fadeOut();
+  });
+
+  $('#image-modal').on('click', function(e) {
+    if ($(e.target).is('#image-modal')) {
+      $(this).fadeOut();
+    }
+  });
+});
+
+$(document).ready(function() {
+  $('.avatar-container img').on('click', function() {
+    var imgSrc = $(this).attr('src');
+    $('#modal-image').attr('src', imgSrc);
+    $('#image-modal').fadeIn();
+  });
+
+  $('.close-modal').on('click', function() {
+    $('#image-modal').fadeOut();
+  });
+
+  $('#image-modal').on('click', function(e) {
+    if ($(e.target).is('#image-modal')) {
+      $(this).fadeOut();
+    }
+  });
+});
+
+$(function () {
+  $('[data-bs-toggle="tooltip"]').tooltip();
 });

@@ -1,7 +1,8 @@
 class OnsensController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_guest_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :transfer_guest_bookmarks, only: [:bookmarked, :bookmark], if: :user_signed_in?
+  before_action :check_guest_user, only: [:new, :create, :edit, :update, :destroy, :bookmarked]
+  before_action :reject_guest_bookmark, only: [:bookmark]
 
   def index
     if params[:sort] == "bookmarks"
@@ -11,8 +12,7 @@ class OnsensController < ApplicationController
         left_joins(:saved_onsens).
         group('onsens.id').
         select('onsens.*, COUNT(saved_onsens.id) AS bookmarks_count').
-        order(Arel.sql("COUNT(saved_onsens.id) DESC, CASE onsens.location #{location_order_sql} ELSE 999 END, onsens.id ASC")).
-        limit(10)
+        order(Arel.sql("COUNT(saved_onsens.id) DESC, CASE onsens.location #{location_order_sql} ELSE 999 END, onsens.id ASC"))
     else
       @onsens = Onsen.all.sort_by do |onsen|
         [
@@ -282,18 +282,6 @@ class OnsensController < ApplicationController
 
   private
 
-  def check_guest_user
-    if current_user.guest?
-      flash[:alert] = I18n.t('alerts.guest_user')
-
-      if request.get?
-        redirect_back(fallback_location: home_index_path)
-      else
-        redirect_to onsens_path
-      end
-    end
-  end
-
   def transfer_guest_bookmarks
     return if session[:bookmarked_onsens].blank?
 
@@ -317,5 +305,20 @@ class OnsensController < ApplicationController
       images: [],
       image_descriptions: []
     )
+  end
+
+  def check_guest_user
+    if current_user.guest?
+      flash[:alert] = I18n.t('alerts.guest_user')
+      redirect_to home_index_path
+    end
+  end
+
+  def reject_guest_bookmark
+    return unless current_user.guest?
+
+    respond_to do |format|
+      format.json { render json: { error: 'ゲストユーザーはブックマーク機能を利用できません。' }, status: :forbidden }
+    end
   end
 end

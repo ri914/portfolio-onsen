@@ -66,5 +66,43 @@ RSpec.describe "User", type: :system do
       expect(page).to have_content("ゲストユーザーとしてログインしました。")
       expect(current_path).to eq(home_index_path)
     end
+
+    context 'when logged in as a guest user' do
+      let!(:water_quality) { WaterQuality.create(name: '単純温泉') }
+      let!(:onsen) { create(:onsen, user: user, water_quality_ids: [water_quality.id]) }
+      let!(:guest_user) { create(:user, email: 'guest@example.com', password: 'password', name: 'ゲストユーザー') }
+
+      before do
+        sign_in guest_user
+      end
+
+      it 'ゲストユーザーは投稿フォームにアクセスできないこと' do
+        visit new_onsen_path
+
+        expect(page).to have_content("ゲストユーザーはこの機能を利用できません。")
+        expect(current_path).to eq(home_index_path)
+      end
+
+      it 'ゲストユーザーは温泉をブックマークできないこと' do
+        visit bookmarked_onsens_path
+
+        expect(page).to have_content("ゲストユーザーはこの機能を利用できません。")
+        expect(current_path).to eq(home_index_path)
+      end
+
+      it 'ゲストユーザーは温泉情報の編集ページにアクセスできないこと' do
+        visit edit_onsen_path(onsen)
+
+        expect(page).to have_content("ゲストユーザーはこの機能を利用できません。")
+        expect(current_path).to eq(home_index_path)
+      end
+
+      it 'ゲストユーザーはアカウント設定ページにアクセスできないこと' do
+        visit edit_user_registration_path
+
+        expect(page).to have_content('ゲストユーザーはこの機能を利用できません。')
+        expect(current_path).to eq(home_index_path)
+      end
+    end
   end
 end

@@ -28,12 +28,12 @@ RSpec.describe "Onsens Weather", type: :system do
       visit roten_onsens_path
     end
 
-    it "晴天の温泉だけが表示される" do
+    it "晴天の温泉だけが表示されること" do
       expect(page).to have_content(onsen_with_clear_weather.name)
       expect(page).not_to have_content(onsen_with_rainy_weather.name)
     end
 
-    it "晴天の温泉に気温と天気情報が表示される" do
+    it "晴天の温泉に気温と天気情報が表示されること" do
       expect(page).to have_content("気温: 25°C")
       expect(page).to have_content("天気: 晴天")
     end
@@ -44,13 +44,13 @@ RSpec.describe "Onsens Weather", type: :system do
       visit onsen_path(onsen_with_clear_weather)
     end
 
-    it "温泉の詳細ページに天気情報が表示される" do
+    it "温泉の詳細ページに天気情報が表示されること" do
       expect(page).to have_content("気温: 25°C")
       expect(page).to have_content("晴天")
       expect(page).to have_css("img[src*='01d']")
     end
 
-    it "天気情報が取得できない場合、エラーメッセージが表示される" do
+    it "天気情報が取得できない場合、エラーメッセージが表示されること" do
       allow(WeatherService).to receive(:fetch_weather_for).and_return(nil)
       visit onsen_path(onsen_with_clear_weather)
       expect(page).to have_content("天気情報が取得できませんでした。")

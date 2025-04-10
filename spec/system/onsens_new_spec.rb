@@ -9,7 +9,7 @@ RSpec.describe '新規投稿ページ', type: :system do
   end
 
   describe '新しい温泉を投稿する' do
-    it '温泉を投稿できる' do
+    it '温泉を投稿できること' do
       visit new_onsen_path
 
       fill_in 'onsen[name]', with: '箱根温泉郷'
