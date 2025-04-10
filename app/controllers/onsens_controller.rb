@@ -313,4 +313,12 @@ class OnsensController < ApplicationController
       redirect_to home_index_path
     end
   end
+
+  def reject_guest_bookmark
+    return unless current_user.guest?
+
+    respond_to do |format|
+      format.json { render json: { error: 'ゲストユーザーはブックマーク機能を利用できません。' }, status: :forbidden }
+    end
+  end
 end
