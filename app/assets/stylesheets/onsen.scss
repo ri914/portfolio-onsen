@@ -663,3 +663,58 @@ input[type="submit"]:hover {
 .onsen-weather p {
   margin: 0;
 }
+
+@media (max-width: 1000px) {
+  .form-body {
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+    margin: 0;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .card-body {
+    padding: 20px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .form-label {
+    font-size: 16px;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .custom-checkbox-container {
+    flex-direction: column;
+  }
+
+  .custom-checkbox {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1275px) {
+  .img-container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .img-preview {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .description-input {
+    width: 100%;
+  }
+}
