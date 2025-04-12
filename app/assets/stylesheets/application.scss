@@ -147,7 +147,7 @@
 
 .menu-item {
   display: table-cell;
-  min-width: 50px;
+  min-width: 120px;
   border-right: 1px solid #ccc;
   position: relative;
 }
@@ -217,51 +217,51 @@
   border-bottom: 5px solid bisque;
 }
  
- .footer {
-   background-color: #2c3e50;
-   color: #ecf0f1;
-   padding: 40px 20px;
-   text-align: center;
- }
- 
- .footer-content {
-   max-width: 800px;
-   margin: 0 auto;
- }
- 
- .footer-copyright {
-   font-size: 14px;
-   margin-bottom: 10px;
- }
- 
- .footer-description {
-   font-size: 16px;
- }
- 
- .footer-skills {
-   font-size: 14px;
-   margin-bottom: 20px;
- }
- 
- .footer-contact {
-   font-size: 14px;
-   margin-bottom: 20px;
- }
- 
- .social-icon {
-   color: #ecf0f1;
-   font-size: 24px;
-   margin: 0 10px;
-   transition: color 0.3s;
- }
- 
- .social-icon:hover {
-   color: #e74c3c;
- }
- 
- .footer-projects {
-   font-size: 14px;
- }
+.footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer-description {
+  font-size: 16px;
+}
+
+.footer-skills {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.footer-contact {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  color: #ecf0f1;
+  font-size: 24px;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #e74c3c;
+}
+
+.footer-projects {
+  font-size: 14px;
+}
 
 
 .image-modal {
@@ -300,6 +300,10 @@
 
 body.signed-in {
   margin-top: 114px;
+}
+
+.region-toggle {
+  display: none;
 }
 
 @media (max-width: 1199px) {
@@ -377,5 +381,55 @@ body.signed-in {
 
   .nav-avatar {
     margin-right: 10px;
+  }
+}
+
+@media (max-width: 1095px) {
+  .region-toggle {
+    display: block;
+    padding: 8px;
+    background: wheat;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 30px;
+  }
+
+  .menu-list {
+    display: none;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background: #fff;
+  }
+
+  .menu-list.open {
+    display: flex; 
+  }
+
+  .menu-item {
+    border-bottom: 1px solid #ccc;
+    position: relative;
+  }
+
+  .drop-menu-list {
+    display: none;
+    position: static;
+    background-color: #f9f9f9;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu-item.open .drop-menu-list {
+    display: block;
+  }
+
+  .region-link {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
   }
 }

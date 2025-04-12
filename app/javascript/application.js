@@ -425,3 +425,25 @@ $(document).ready(function() {
 $(function () {
   $('[data-bs-toggle="tooltip"]').tooltip();
 });
+
+$(document).ready(function () {
+  const $regionToggle = $(".region-toggle");
+  const $menuList = $(".menu-list");
+
+  $regionToggle.on("click", function () {
+    $menuList.toggleClass("open");
+  });
+
+  $(".menu-item .region-link").on("click", function (e) {
+    const $this = $(this);
+    const isTopLink = $this.data("direct") === true;
+
+    if (isTopLink) {
+      return;
+    }
+
+    e.preventDefault();
+    const $item = $this.closest(".menu-item");
+    $item.toggleClass("open");
+  });
+});
