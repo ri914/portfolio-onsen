@@ -30,6 +30,7 @@
         </div>
 
       <div class="onsen-detail-content">
+        <h1 class="text-center mb-4 onsen-title mb-title"><%= @onsen.name %></h1>
         <div class="onsen-image-container">
           <% if @onsen.images.attached? %>
             <div id="onsenCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -72,7 +73,7 @@
         </div>
 
         <div class="onsen-info-container">
-          <h1 class="text-center mb-4 onsen-title"><%= @onsen.name %></h1>
+          <h1 class="text-center mb-4 onsen-title pc-title"><%= @onsen.name %></h1>
 
           <div class="onsen-info mb-3">
             <strong class="detail-name">都道府県</strong>
