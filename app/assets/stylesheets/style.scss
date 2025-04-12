@@ -54,11 +54,13 @@ button.btn {
 }
 
 a.btn-3d-circle {
+  width: 40%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
   display: block;
   margin: 20px auto;
   padding: 0;
-  border-radius: 50%;
-  overflow: hidden;
 }
 
 .btn-3d-circle-content {
@@ -75,13 +77,15 @@ a.btn-3d-circle {
 }
 
 .btn-3d-circle-front {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #fff;
   line-height: 1.2;
   font-family: "Yuji Mai", serif;
   font-weight: 400;
   font-style: normal;
+  white-space: nowrap;
 }
+
 
 .btn-3d-circle:hover .btn-3d-circle-content {
   transform: rotateY(0.5turn) rotateX(-0.03turn);
@@ -109,29 +113,32 @@ a.btn-3d-circle {
 
 .button-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px; 
 }
 
 .btn-post-onsen {
   background: linear-gradient(to bottom, #a52a2a 0%, #8b0000 100%);
-  width: 330px;
-  height: 330px;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
 }
 
 .btn-find-onsen {
   background: linear-gradient(to bottom, #ff6f61 0%, #e53935 50%, #c62828 100%);
-  width: 400px;
-  height: 400px;
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
 }
 
 .btn-search-onsen {
   background: linear-gradient(to bottom, #d35400 0%, #c0392b 100%);
-  width: 330px;
-  height: 330px;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
 }
+
 
 .fa-plus {
   color: #fff;
@@ -143,4 +150,256 @@ a.btn-3d-circle {
 
 .fa-search {
   color: #fff;
+}
+
+.popular-onsens {
+  position: relative;
+  padding: 40px;
+  background: url("https://www.photolibrary.jp/mhd1/img785/450-20200725133654377777.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.onsen-card-popular {
+  flex: 0 0 auto;
+  width: 300px;
+  min-width: 200px;
+  scroll-snap-align: start;
+}
+
+.popular-title {
+  font-size: 2.5rem !important;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.popular-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 5px;
+  background-color: #f3a847;
+}
+
+.popular-title .icon {
+  font-size: 3rem;
+  margin-right: 10px;
+  color: #f3a847;
+  vertical-align: middle;
+}
+
+.popular-title span {
+  vertical-align: middle;
+}
+
+.crown {
+  font-size: 3rem;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+
+.ranking-badge {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popular-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.onsen-scroll-container{
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  scroll-behavior: smooth;
+  cursor: grab;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.onsen-scroll-container.active {
+  cursor: grabbing;
+}
+
+.onsen-scroll-content {
+  display: flex;
+  gap: 15px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.onsen-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.popular-onsens::before,
+.popular-onsens::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.popular-onsens::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.popular-onsens::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+@media (max-width: 986px) {
+  .home-main {
+    padding: 20px;
+    background-size: cover;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .main-title {
+    font-size: 4rem;
+    margin-bottom: 5px;
+  }
+
+  .sub-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    border-bottom: 1px solid #C62135;
+  }
+  
+  .btn-3d-circle-front {
+    font-size: 2rem;
+    color: #fff;
+    line-height: 1.2;
+    font-family: "Yuji Mai", serif;
+    font-weight: 400;
+    font-style: normal;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 806px) {
+  .btn-3d-circle-front {
+    font-size: 1.6rem;
+    color: #fff;
+    line-height: 1.2;
+    font-family: "Yuji Mai", serif;
+    font-weight: 400;
+    font-style: normal;
+    white-space: nowrap;
+  }
+
+  .onsen-scroll-container {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 500px;
+    padding-bottom: 0;
+  }
+
+  .onsen-scroll-content {
+    flex-direction: column;
+  }
+
+  .onsen-card-popular {
+    width: 100%;
+    min-width: unset;
+    margin: 0;
+  }
+
+  .popular-onsens::before,
+  .popular-onsens::after {
+    display: none;
+  }
+}
+
+@media (max-width: 660px) {
+  .btn-3d-circle-front {
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 1.2;
+    font-family: "Yuji Mai", serif;
+    font-weight: 400;
+    font-style: normal;
+    white-space: nowrap;
+  }
+
+  .sub-title {
+    font-size: 1.0rem;
+    color: #fff;
+    line-height: 1.6;
+    margin-top: 0;
+    padding: 0 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #C62135;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 545px) {
+  .btn-3d-circle-front {
+    font-size: 0.6rem;
+    color: #fff;
+    line-height: 1.2;
+    font-family: "Yuji Mai", serif;
+    font-weight: 400;
+    font-style: normal;
+    white-space: nowrap;
+  }
+
+  .main-title {
+    font-size: 3rem;
+    color: #C62135;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .sub-title {
+    font-size: 0.8rem;
+    color: #fff;
+    line-height: 1.6;
+    margin-top: 0;
+    padding: 0 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #C62135;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
 }
