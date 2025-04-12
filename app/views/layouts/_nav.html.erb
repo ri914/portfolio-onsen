@@ -1,7 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <div class="container-fluid justify-content-center">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
         <% if user_signed_in? %>
           <li class="nav-item dropdown me-2">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,8 +58,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= onsens_path %>">
-              <i class="fas fa-hot-tub"></i>
-              <span class="d-none d-lg-inline"> 温泉地一覧</span>
+              <i class="fas fa-hot-tub"></i>温泉地一覧
             </a>
           </li>
           <li class="nav-item">
@@ -66,18 +70,6 @@
             <a class="nav-link" href="<%= detail_search_onsens_path %>">
               <i class="fas fa-search-plus"></i> 詳細検索
             </a>
-          </li>
-          <li class="nav-item">
-            <div class="d-flex align-items-center">
-              <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2" do |form| %>
-                <div class="input-group">
-                  <%= form.text_field :keyword, size: 25, placeholder: 'キーワードを入力...', class: "form-control search-input" %>
-                  <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              <% end %>
-            </div>
           </li>
         <% else %>
           <li class="nav-item">
@@ -102,6 +94,17 @@
           </li>
         <% end %>
       </ul>
+    </div>
+
+    <div class="search-form ms-auto">
+      <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2" do |form| %>
+        <div class="input-group">
+          <%= form.text_field :keyword, size: 25, placeholder: 'キーワードを入力...', class: "form-control search-input" %>
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </nav>
