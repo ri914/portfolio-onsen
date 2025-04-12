@@ -5,13 +5,13 @@
 }
 
 .settings-main {
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 80%;
   padding: 30px;
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; 
 }
 
 h1 {
@@ -77,4 +77,47 @@ h1 {
 
 .mypage-li a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .settings-container {
+    padding: 0;
+  }
+  
+  
+  .settings-main {
+    width: 100%;
+  }
+
+  .profile-section,
+  .onsens-section {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .current-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .edit-link {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .mypage-li {
+    font-size: 14px;
+  }
+
+  .mypage-li a {
+    font-size: 14px;
+  }
+
+  .note {
+    font-size: 14px;
+  }
 }
