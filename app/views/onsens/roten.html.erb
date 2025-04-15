@@ -1,9 +1,9 @@
 <% if @onsens.present? %>
   <div class="onsen-list">
     <h2 class="heading-9">露天風呂日和の温泉</h2>
-    <div class="d-flex flex-wrap">
+    <div class="onsen-card-container">
       <% @onsens.each do |onsen| %>
-        <div class="card onsen-card shadow-lg position-relative">
+        <div class="card onsen-card">
           <div class="onsen-card-body">
             <% if onsen.images.attached? %>
               <%= link_to image_tag(onsen.images.first, class: 'card-img-top'), onsen_path(onsen) %>
