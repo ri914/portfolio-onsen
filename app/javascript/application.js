@@ -426,24 +426,36 @@ $(function () {
   $('[data-bs-toggle="tooltip"]').tooltip();
 });
 
+function setupRegionMenu() {
+  const windowWidth = $(window).width();
+
+  if (windowWidth <= 1023) {
+    $(".region-toggle").off("click");
+    $(".menu-item .region-link").off("click");
+
+    $(".region-toggle").on("click", function () {
+      $(".menu-list").toggleClass("open");
+    });
+
+    $(".menu-item .region-link").on("click", function (e) {
+      const $this = $(this);
+      const isTopLink = $this.data("direct") === true;
+
+      if (isTopLink) return;
+
+      e.preventDefault();
+      const $item = $this.closest(".menu-item");
+      $item.toggleClass("open");
+    });
+  } else {
+    $(".menu-list").removeClass("open");
+    $(".menu-item").removeClass("open");
+    $(".region-toggle").off("click");
+    $(".menu-item .region-link").off("click");
+  }
+}
+
 $(document).ready(function () {
-  const $regionToggle = $(".region-toggle");
-  const $menuList = $(".menu-list");
-
-  $regionToggle.on("click", function () {
-    $menuList.toggleClass("open");
-  });
-
-  $(".menu-item .region-link").on("click", function (e) {
-    const $this = $(this);
-    const isTopLink = $this.data("direct") === true;
-
-    if (isTopLink) {
-      return;
-    }
-
-    e.preventDefault();
-    const $item = $this.closest(".menu-item");
-    $item.toggleClass("open");
-  });
+  setupRegionMenu();
+  $(window).on("resize", setupRegionMenu);
 });

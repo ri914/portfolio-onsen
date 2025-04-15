@@ -147,7 +147,7 @@
 
 .menu-item {
   display: table-cell;
-  min-width: 120px;
+  min-width: 100px;
   border-right: 1px solid #ccc;
   position: relative;
 }
@@ -384,7 +384,7 @@ body.signed-in {
   }
 }
 
-@media (max-width: 1095px) {
+@media (max-width: 1023px) {
   .region-toggle {
     display: block;
     padding: 8px;
@@ -431,5 +431,11 @@ body.signed-in {
     padding: 10px;
     color: #333;
     text-decoration: none;
+  }
+}
+
+@media (max-width: 350px) {
+  .input-group {
+    width: 180px;
   }
 }

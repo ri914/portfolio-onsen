@@ -905,3 +905,25 @@ input[type="submit"]:hover {
     min-width: 400px;
   }
 }
+
+@media (max-width: 350px) {
+  .onsen-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 4px;
+    margin: 0 auto;
+    justify-content: center; 
+  }
+  
+  .onsen-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 150px;
+    margin: 10px 0;
+  }
+}
