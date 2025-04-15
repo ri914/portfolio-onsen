@@ -444,24 +444,41 @@ input[type="submit"]:hover {
   padding: 20px;
 }
 
+.onsen-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  margin: 0 auto;
+}
+
 .onsen-card {
-  width: 310px;
-  height: 440px;
-  margin: 20px;
-  border: 1px solid #ddd;
+  background-color: #fff;
+  border: 1px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 10px 0;
+}
+
+.onsen-card-body {
+  padding: 10px;
 }
 
 .card-img-top {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  display: block;
 }
 
-.onsen-card-body {
-  padding: 15px;
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+  display: block;
 }
 
 .cardtitle {
@@ -538,12 +555,13 @@ input[type="submit"]:hover {
 
 .table-save-button .save-button {
   position: absolute;
-  top: 10px;
-  right: 0px;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
 }
 
 .table-save-button .save-button:hover {
@@ -641,7 +659,7 @@ input[type="submit"]:hover {
 
 .sort-dropdown {
   text-align: right;
-  margin-right: 30px;
+  margin-right: 18px;
 }
 
 #sort-select {
@@ -780,4 +798,81 @@ input[type="submit"]:hover {
   .text-muted {
     white-space: nowrap;
   }
+}
+
+@media (max-width: 610px) {
+  .onsen-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 4px;
+  }
+  
+  .onsen-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 10px 0;
+  }
+
+  .onsen-card-body {
+    padding: 8px;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .image-placeholder {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+    display: block;
+  }
+
+  .cardtitle {
+    font-size: 0.9rem;
+    margin: 6px 0;
+  }
+
+  .prefecture-name {
+    font-size: 0.7rem;
+    color: #666;
+    margin: 3px 0;
+  }
+
+  .saved-count,  
+  .last-updated  {
+    font-size: 0.5rem;
+    color: #666;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .sort-dropdown {
+    text-align: right;
+    margin-right: 12px;
+  }
+
+  .table-save-button .save-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0;
+  }
+
+  .table-save-button .save-button i {
+    font-size: 16px;
+  }  
 }
