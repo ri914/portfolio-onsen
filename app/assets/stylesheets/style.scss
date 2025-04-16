@@ -217,13 +217,6 @@ a.btn-3d-circle {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.popular-title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
 .onsen-scroll-container{
   overflow-x: auto;
   white-space: nowrap;
@@ -324,29 +317,6 @@ a.btn-3d-circle {
     font-style: normal;
     white-space: nowrap;
   }
-
-  .onsen-scroll-container {
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 500px;
-    padding-bottom: 0;
-  }
-
-  .onsen-scroll-content {
-    flex-direction: column;
-  }
-
-  .onsen-card-popular {
-    width: 100%;
-    min-width: unset;
-    margin: 0;
-  }
-
-  .popular-onsens::before,
-  .popular-onsens::after {
-    display: none;
-  }
 }
 
 @media (max-width: 660px) {
@@ -401,5 +371,60 @@ a.btn-3d-circle {
     border-bottom: 2px solid #C62135;
     padding-bottom: 10px;
     margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .popular-onsens {
+    position: relative;
+    padding: 10px;
+    background: url("https://www.photolibrary.jp/mhd1/img785/450-20200725133654377777.jpg") no-repeat center center;
+    background-size: cover;
+  }
+
+  .popular-title {
+    font-size: 2.0rem !important;
+    font-weight: bold;
+    color: #4a4a4a;
+    text-align: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+  }  
+  
+  .onsen-card-popular {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 180px;
+    margin: 10px 0;
+  }
+
+  .popular-onsens::before,
+  .popular-onsens::after {
+    display: none;
+  }
+
+  .crown {
+    font-size: 2.4rem;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+  }
+  
+  .ranking-badge {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   }
 }

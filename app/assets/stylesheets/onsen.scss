@@ -113,7 +113,6 @@ input[type="submit"]:hover {
   flex-direction: column;
   align-items: center;
   margin: 15px;
-  width: calc(30% - 30px);
   position: relative;
 }
 
@@ -134,7 +133,7 @@ input[type="submit"]:hover {
 .remove-btn {
   position: absolute;
   top: 5px;
-  right: 15px;
+  right: 5px;
   width: 30px;
   height: 30px;
   background: rgba(255, 0, 0, 0.3);
@@ -607,28 +606,6 @@ input[type="submit"]:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.remove-btn {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 0, 0, 0.3);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 0;
-  cursor: pointer;
-  transition: background 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.remove-btn:hover {
-  background: rgba(255, 0, 0, 1);
-}
-
 .edit-description-input {
   margin-top: 5px;
   width: 100px;
@@ -691,61 +668,6 @@ input[type="submit"]:hover {
   margin: 0;
 }
 
-@media (max-width: 1000px) {
-  .form-body {
-    padding: 0;
-  }
-
-  .card {
-    width: 100%;
-    margin: 0;
-    border-radius: 10px;
-    box-shadow: none;
-  }
-
-  .card-body {
-    padding: 20px;
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .form-label {
-    font-size: 16px;
-  }
-
-  input,
-  textarea,
-  select {
-    padding: 12px;
-    font-size: 15px;
-  }
-
-  .custom-checkbox-container {
-    flex-direction: column;
-  }
-
-  .custom-checkbox {
-    margin-right: 0;
-  }
-}
-
-@media (max-width: 1275px) {
-  .img-container {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .img-preview {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
-
-  .description-input {
-    width: 100%;
-  }
-}
-
 @media (max-width: 1199px) {
   .onsen-detail-body {
     padding: 0;
@@ -802,6 +724,68 @@ input[type="submit"]:hover {
 }
 
 @media (max-width: 768px) {
+  .form-body {
+    padding: 0;
+    width: 100%;
+  }
+
+  .card {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 30px;
+    max-height: 696.63px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+  }
+
+  .card-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .post-card {
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-label {
+    font-size: 16px;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .custom-checkbox-container {
+    flex-direction: column;
+  }
+
+  .custom-checkbox {
+    margin-right: 0;
+  } 
+  
+  .img-container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .img-preview {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .description-input {
+    width: 100%;
+  }
+
   .onsen-card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -878,7 +862,20 @@ input[type="submit"]:hover {
 
   .table-save-button .save-button i {
     font-size: 16px;
-  }  
+  }
+
+  .detail-image-description {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+  }
+  
 
   .edit-image-description {
     left: 50%;
@@ -901,8 +898,8 @@ input[type="submit"]:hover {
     position: relative;
   }
 
-  .form-body {
-    min-width: 400px;
+  .form-body-search {
+    padding: 0;
   }
 }
 
