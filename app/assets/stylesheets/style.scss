@@ -119,21 +119,21 @@ a.btn-3d-circle {
 }
 
 .btn-post-onsen {
-  background: linear-gradient(to bottom, #a52a2a 0%, #8b0000 100%);
+  background: linear-gradient(to bottom, #c28a60, #b97d57, #8b5a2b);
   width: 30%;
   height: 30%;
   border-radius: 50%;
 }
 
 .btn-find-onsen {
-  background: linear-gradient(to bottom, #ff6f61 0%, #e53935 50%, #c62828 100%);
+  background: linear-gradient(to bottom, #a2c779, #88b04b, #5e7d2b);
   width: 35%;
   height: 35%;
   border-radius: 50%;
 }
 
 .btn-search-onsen {
-  background: linear-gradient(to bottom, #d35400 0%, #c0392b 100%);
+  background: linear-gradient(to bottom, #f8a5c2, #f5a5c8, #e4a0d1);
   width: 30%;
   height: 30%;
   border-radius: 50%;
@@ -344,33 +344,39 @@ a.btn-3d-circle {
 }
 
 @media (max-width: 545px) {
-  .btn-3d-circle-front {
-    font-size: 0.6rem;
-    color: #fff;
-    line-height: 1.2;
-    font-family: "Yuji Mai", serif;
-    font-weight: 400;
-    font-style: normal;
-    white-space: nowrap;
-  }
-
   .main-title {
-    font-size: 3rem;
-    color: #C62135;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    font-size: 3.5rem;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    padding-top: 32px;
+    padding-bottom: 50px;
   }
 
-  .sub-title {
-    font-size: 0.8rem;
-    color: #fff;
-    line-height: 1.6;
-    margin-top: 0;
-    padding: 0 20px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    border-bottom: 2px solid #C62135;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+  .button-container::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: #9ed48f;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  .button-container .btn-3d-circle {
+    position: relative;
+    z-index: 1;
+  }
+
+  a.btn-3d-circle {
+    margin: 0;
+    width: 100%;
   }
 }
 
