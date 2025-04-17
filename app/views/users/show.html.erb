@@ -19,7 +19,13 @@
         </div>
       <% end %>     
       <p>名前: <%= @user.name.present? ? @user.name : "ゲスト" %></p>
-      <p>メールアドレス: <%= @user.email %></p>
+      <p>メールアドレス:
+        <% if current_user == @user %>
+          <%= @user.email %>
+        <% else %>
+          <%= @user.email.gsub(/(?<=.).(?=.*@)/, '*') %>
+        <% end %>
+      </p>
       <p>パスワード: ****** </p>
 
       <% if current_user == @user %>
