@@ -18,7 +18,7 @@
                 <% else %>
                   <%= image_tag 'default_avatar.png', class: "nav-avatar" %>
                 <% end %>
-                <%= current_user.name %>
+                <span class=nav-user-name><%= current_user.name %></span>
               <% end %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
