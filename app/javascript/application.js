@@ -309,7 +309,7 @@ $(document).ready(function () {
 
       reader.onload = function (e) {
         $previewContainer.html(`
-          <img src="${e.target.result}" class="edit-room__uploaded-image uploaded-image" />
+          <img src="${e.target.result}" class="edit-room__uploaded-image" />
           <label class="edit-room__remove-image-label">
             <input type="checkbox" name="message[remove_image]" value="1" /> 画像を削除
           </label>

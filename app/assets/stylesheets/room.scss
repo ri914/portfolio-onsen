@@ -254,6 +254,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 80%;
 }
 
 .edit-room__textarea {
@@ -292,11 +293,6 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;
-}
-
-.edit-room__uploaded-image {
-  max-width: 100%;
-  border-radius: 8px;
 }
 
 .edit-room__remove-image-label {
@@ -349,8 +345,7 @@
 }
 
 .edit-room__uploaded-image {
-  max-width: 100%;
-  max-height: 300px;
+  width: 60%;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -608,5 +603,10 @@
 
   .edit-button {
     font-size: 12px;
+  }
+
+  .edit-room__title {
+    font-size: 16px;
+    margin-top: 10px;
   }
 }

@@ -14,7 +14,7 @@
         <%= f.file_field :image, id: "image-upload", class: "d-none" %>
         <% if @message.image.attached? %>
           <div class="edit-room__current-image current-image">
-            <%= image_tag @message.image, class: "edit-room__uploaded-image uploaded-image" %>
+            <%= image_tag @message.image, class: "edit-room__uploaded-image" %>
             <label class="edit-room__remove-image-label">
               <%= f.check_box :remove_image %> 画像を削除
             </label>
