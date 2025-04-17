@@ -44,6 +44,8 @@ class RoomsController < ApplicationController
     if @message.editable_until.present? && Time.now > @message.editable_until
       redirect_to onsen_room_path(@onsen, anchor: "message-#{@message.id}"), alert: t("alerts.edit_expired")
     end
+
+    @page_title = "メッセージの編集"
   end
 
   def update_message
