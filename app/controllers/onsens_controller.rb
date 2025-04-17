@@ -22,7 +22,7 @@ class OnsensController < ApplicationController
       end
     end
 
-    @current_region = 'トップ'
+    @current_region = '全国'
     @page_title = "全国の温泉"
   end
 

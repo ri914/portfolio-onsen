@@ -2,7 +2,7 @@
   <div class="region-toggle">地域カテゴリ</div>
 
   <ul class="menu-list">
-    <li class="menu-item <%= 'current' if @current_region == 'トップ' %>">
+    <li class="menu-item <%= 'current' if @current_region == '全国' %>">
       <%= link_to '全国', onsens_path, class: 'region-link', data: { direct: true } %>
     </li>
 

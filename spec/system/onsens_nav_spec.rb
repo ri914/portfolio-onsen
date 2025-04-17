@@ -14,7 +14,7 @@ RSpec.describe "温泉ナビゲーション", type: :system do
     it "地域リンクが正しく表示され、クリックできること" do
       visit onsens_path
 
-      expect(page).to have_link('トップ', href: onsens_path)
+      expect(page).to have_link('全国', href: onsens_path)
       expect(page).to have_link('北海道', href: region_onsens_path(region: '北海道'))
       expect(page).to have_link('東北', href: region_onsens_path(region: '東北'))
       expect(page).to have_link('関東', href: region_onsens_path(region: '関東'))

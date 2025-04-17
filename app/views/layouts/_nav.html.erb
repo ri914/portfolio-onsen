@@ -18,7 +18,7 @@
                 <% else %>
                   <%= image_tag 'default_avatar.png', class: "nav-avatar" %>
                 <% end %>
-                <span class=nav-user-name><%= current_user.name %></span>
+                <span class="nav-user-name"><%= current_user.name %></span>
               <% end %>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
@@ -58,7 +58,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= onsens_path %>">
-              <i class="fas fa-hot-tub"></i>温泉地一覧
+              <i class="fas fa-hot-tub"></i> 温泉地一覧
             </a>
           </li>
           <li class="nav-item">
@@ -96,16 +96,18 @@
       </ul>
     </div>
 
-    <div class="search-form ms-auto">
-      <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2" do |form| %>
-        <div class="input-group">
-          <%= form.text_field :keyword, size: 25, placeholder: 'キーワードを入力...', class: "form-control search-input" %>
-          <button class="btn btn-primary" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      <% end %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="search-form ms-auto">
+        <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2" do |form| %>
+          <div class="input-group">
+            <%= form.text_field :keyword, size: 25, placeholder: 'キーワードを入力...', class: "form-control search-input" %>
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </nav>
 
