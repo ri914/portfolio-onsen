@@ -26,12 +26,14 @@
             <span class="message-time"><%= message.created_at.in_time_zone('Asia/Tokyo').strftime("%Y/%m/%d %H:%M") %></span>
           </div>
 
-          <% if message.user == current_user %>
-            <% if message.editable_until.present? && Time.now < message.editable_until %>
-              <%= link_to '編集', edit_message_onsen_room_path(@onsen, message), class: 'edit-button' %>
-              <span class="edit-time-remaining" data-editable-until="<%= message.editable_until.to_i %>"></span>
-            <% end %>
-          <% end %>
+          <div class=edit-area>
+            <% if message.user == current_user %>
+              <% if message.editable_until.present? && Time.now < message.editable_until %>
+                <%= link_to '編集', edit_message_onsen_room_path(@onsen, message), class: 'edit-button' %>
+                <span class="edit-time-remaining" data-editable-until="<%= message.editable_until.to_i %>"></span>
+              <% end %>
+            <% end %>        
+          </div>
         </div>
 
         <div class="message-content">
@@ -72,7 +74,7 @@
     <% end %>
 
     <div class="pagination">
-      <%= paginate @messages %>
+      <%= paginate @messages, window: 2, outer_window: 1 %>
     </div>
   </div>
 
