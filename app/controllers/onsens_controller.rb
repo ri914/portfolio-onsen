@@ -1,6 +1,5 @@
 class OnsensController < ApplicationController
   before_action :authenticate_user!
-  before_action :transfer_guest_bookmarks, only: [:bookmarked, :bookmark], if: :user_signed_in?
 
   def index
     if params[:sort] == "bookmarks"
@@ -279,21 +278,6 @@ class OnsensController < ApplicationController
   end
 
   private
-
-  def transfer_guest_bookmarks
-    return if session[:bookmarked_onsens].blank?
-
-    onsen_ids = session[:bookmarked_onsens].compact.uniq
-
-    existing_onsen_ids = SavedOnsen.where(user: current_user, onsen_id: onsen_ids).pluck(:onsen_id)
-    new_onsen_ids = onsen_ids - existing_onsen_ids
-
-    new_onsen_ids.each do |onsen_id|
-      SavedOnsen.create(user: current_user, onsen_id: onsen_id)
-    end
-
-    session.delete(:bookmarked_onsens)
-  end
 
   def onsen_params
     params.require(:onsen).permit(

@@ -5,10 +5,11 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def guest_login
-    guest_user = User.find_or_create_by!(email: 'guest@example.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.name = 'ゲストユーザー'
-    end
+    guest_user = User.create!(
+      email: "guest_#{SecureRandom.uuid}@example.com",
+      password: SecureRandom.urlsafe_base64,
+      name: 'ゲストユーザー'
+    )
 
     sign_in guest_user
     keyword = params[:keyword]
@@ -27,6 +28,9 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope.is_a?(User) && resource_or_scope.email&.start_with?("guest_")
+      resource_or_scope.destroy
+    end
     root_path
   end
 end
