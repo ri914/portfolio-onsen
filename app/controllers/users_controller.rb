@@ -1,18 +1,16 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :reject_guest_user, only: [:update, :destroy]
+
   def show
-    @user = User.find(params[:id])
     @saved_onsens = @user.saved_onsens
     @posted_onsens = @user.onsens
     @page_title = "マイページ"
   end
 
   def update
-    @user = User.find(params[:id])
-
     if @user.valid_password?(params[:user][:current_password])
-      if params[:user][:remove_avatar] == "1"
-        @user.avatar.purge
-      end
+      @user.avatar.purge if params[:user][:remove_avatar] == "1"
 
       if @user.update(params.require(:user).permit(:name, :avatar))
         redirect_to user_path(@user), notice: t('devise.registrations.account_updated')
@@ -26,20 +24,22 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = current_user
-
-    if @user.guest?
-      redirect_to request.referer || root_path, alert: t('devise.registrations.guest_account_deletion_error')
-      return
-    end
-
     @user.onsens.destroy_all if @user.onsens.present?
-
     @user.destroy
     redirect_to root_path, notice: t('devise.registrations.account_deleted')
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def reject_guest_user
+    if @user.guest?
+      redirect_to home_index_path, alert: t('alerts.guest_user')
+    end
+  end
 
   def user_params
     params.require(:user).permit(:email, :name, :avatar, :password, :password_confirmation, :current_password)

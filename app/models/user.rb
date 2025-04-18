@@ -3,7 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def guest?
-    email == 'guest@example.com'
+    email.present? && email.start_with?('guest_') && email.end_with?('@example.com')
   end
 
   has_many :onsens, dependent: :destroy

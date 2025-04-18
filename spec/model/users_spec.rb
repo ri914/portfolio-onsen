@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
 
   describe "ゲスト" do
     it "ゲストユーザーの場合はtrueを返すこと" do
-      user = User.new(email: 'guest@example.com')
+      user = User.new(email: 'guest_test@example.com')
       expect(user.guest?).to be_truthy
     end
 
