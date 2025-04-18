@@ -122,13 +122,8 @@ $(document).ready(function() {
     });
   }
 
-  restrictForGuest('.post-link');
-  restrictForGuest('.btn-post-onsen');
-  restrictForGuest('.bookmark-link');
   restrictForGuest('.edit-link');
-  restrictForGuest('.edit-button');
   restrictForGuest('.user-dropdown-link');
-  restrictForGuest('.save-button');
 
   $('form[action*="users"]').on('submit', function(event) {
     if ($(this).find('[data-guest="true"]').length > 0) {
@@ -147,8 +142,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('.save-button').on('click', function(event) {
-    const isGuest = $(this).data('guest') === true || $(this).data('guest') === 'true';
-
     event.preventDefault();
 
     const onsenId = $(this).data('onsen-id');
@@ -177,19 +170,18 @@ $(document).ready(function() {
       },
       error: function(xhr, status, error) {
         const response = xhr.responseJSON;
-      
+
         if (response && response.error) {
           alert(response.error);
         } else {
-          alert('ゲストユーザーはブックマーク機能を利用できません');
+          alert('エラーが発生しました。');
         }
-      
+
         console.error('Error:', error);
-      }   
+      }
     });
   });
 });
-
 
 $(document).ready(function() {
   $('.delete-onsen-btn').on('click', function(event) {
