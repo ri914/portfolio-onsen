@@ -1,24 +1,127 @@
-# README
+# ♨️ 温泉「郷」
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+日本全国の温泉地を探して、投稿して、語り合えるWebサービスです。  
+宿や観光情報ではなく、「温泉地そのもの」に焦点を当てているのが特徴です。
 
-Things you may want to cover:
+---
 
-* Ruby version
+## 🔗 サービスURL
 
-* System dependencies
+➡️ [https://onsen-online-d53fb2bc7ef0.herokuapp.com/](https://onsen-online-d53fb2bc7ef0.herokuapp.com/)
 
-* Configuration
+---
 
-* Database creation
+## 🎯 サービスの概要
 
-* Database initialization
+**温泉「郷」** は、日本全国の温泉地を検索・閲覧・投稿できるWebアプリケーションです。  
+ユーザーは、温泉地を記録・共有したり、掲示板を通じて他のユーザーと交流できます。
 
-* How to run the test suite
+---
 
-* Services (job queues, cache servers, search engines, etc.)
+## 💡 開発の背景・想い
 
-* Deployment instructions
+有名な温泉情報サイトの多くは、宿泊施設や観光地の紹介が中心です。  
+しかしこのサービスは、**温泉地自体にフォーカス**した投稿形式を採用しています。
 
-* ...
+「ここに行けばよかった」という後悔をなくしたい。  
+そんな思いから、各温泉地ごとに**掲示板機能**を用意し、レビュー形式ではなく  
+「交流」からリアルな情報を得られる仕組みにしました。
+
+また、温泉地に焦点を当てることで、実際に行ったことのある方々の意見を取り入れることもでき、**派手さや商業性ではなく、  
+その土地に根付いた文化・歴史・自然とのつながり**に目を向けられると考えています。
+
+---
+
+## 🛠 使用技術
+
+### フロントエンド
+
+| 技術        | 内容                                     |
+|-------------|------------------------------------------|
+| HTML / SCSS | UIの構築とスタイル設計                  |
+| Bootstrap 5 | デザインフレームワーク |
+| JavaScript / jQuery | DOM操作・アニメーション・イベント管理など |
+
+### バックエンド
+
+| 技術        | 内容                                     |
+|-------------|------------------------------------------|
+| Ruby 3.1.0  | アプリケーション言語                    |
+| Rails 7.1.5 | フルスタックWebフレームワーク           |
+| PostgreSQL  | RDBMS（本番/開発環境共通）             |
+| Devise      | 認証（ユーザー登録・ログイン等）       |
+| ActiveStorage + AWS S3 | 画像アップロード              |
+| Kaminari    | ページネーション                        |
+| Weather API（WeatherService） | 天気連携機能           |
+
+---
+
+## 🧪 開発環境・テストツール
+
+- RSpec（モデル・リクエスト・システムスペック）
+- FactoryBot / Faker（テストデータ作成）
+- Capybara / Selenium（ブラウザ操作テスト）
+- RuboCop（Airbnbスタイル）
+- pry / web-console / bootsnap（デバッグ支援）
+
+---
+
+## 🚀 主な機能一覧
+
+| 機能                 | 説明 |
+|----------------------|------|
+| 🔐 Devise認証         | 新規登録 / ログイン / ログアウト |
+| 🎫 ゲストログイン機能 | 登録不要で閲覧・一部操作可能 |
+| 👤 マイページ          | 投稿履歴・ブックマーク・ユーザー情報管理 |
+| 🔍 温泉地検索         | キーワード / 都道府県 / 泉質で検索可能 |
+| 🗾 温泉地一覧         | 全国の温泉地を一覧表示 |
+| ♨️ 温泉地詳細ページ   | 基本情報・写真・レビューの表示 |
+| ✏️ 温泉地の投稿・編集 | 写真・都道府県・泉質を投稿 |
+| ⭐️ ブックマーク機能   | 気になる温泉をお気に入り保存 |
+| 💬 掲示板 | 各温泉地ごとの掲示板 |
+| 🌤 露天日和（天気API）| 晴れの温泉地をピックアップ表示 |
+| 🧭 地域別メニュー     | 地域別に温泉地を絞り込み　|
+| 💧泉質    | tooltipで説明　|
+---
+
+## 主要な画面
+
+### 新規登録  
+![新規登録](https://i.gyazo.com/70930a269cefc27b6d3af3a75784b4b4.png)
+
+### ログイン
+![ログイン](https://i.gyazo.com/d8b21230ce20fc7834e0ce27133d402e.png)
+
+### ホームページ  
+![ホームページ](https://i.gyazo.com/1e9e7c169683642e89b971b9c0cf8a05.png)
+
+### 温泉地一覧  
+![温泉地一覧](https://i.gyazo.com/d2ab083d62455c9cbc3a46c0d0048c4d.png)
+
+### 温泉地投稿  
+![温泉投稿](https://i.gyazo.com/1955427a53d2cd77cff0233182c99039.png)
+
+### ユーザー詳細ページ  
+![ユーザー詳細](https://i.gyazo.com/0b2cea4106ca56b14cc142a18a0fd1ed.png)
+
+### 温泉詳細ページ  
+![温泉地詳細](https://i.gyazo.com/12ac7f4481308191e70585c5576fc1cf.png)
+
+### 掲示板（スレッド）  
+![掲示板](https://i.gyazo.com/fecb221cd4f773cefe40b046e6e66bfb.png)
+
+### 返信一覧  
+![返信一覧](https://i.gyazo.com/b2dc0be3c6a6aab05314ef2617a65a28.png)
+
+### 詳細検索ページ  
+![詳細検索](https://i.gyazo.com/29dcb5525855c73c9e42304c3453b91e.png)
+
+---
+
+## 💻 環境構築手順
+
+### 1. Ruby / Rails をインストール
+
+```bash
+$ ruby -v    # 3.1.0
+$ rails -v   # 7.1.5
