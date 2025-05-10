@@ -1,0 +1,71 @@
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="<%= user_signed_in? ? home_index_path : root_path %>">
+              <i class="fas fa-home"></i> ホーム
+            </a>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%#= onsen_index_path %>">
+                <i class="fas fa-globe"></i> 温泉地一覧
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <% if current_user.email == 'guest@example.com' %>
+                  <%= image_tag 'default_avatar.png', class: "nav-avatar" %>
+                  ゲスト
+                <% else %>
+                  <% if current_user.avatar.attached? %>
+                    <%= image_tag current_user.avatar, class: "nav-avatar" %>
+                  <% else %>
+                    <%= image_tag 'default_avatar.png', class: "nav-avatar" %>
+                  <% end %>
+                  <%= current_user.name %>
+                <% end %>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="<%= user_path(current_user) %>"><i class="fas fa-user-circle"></i> マイページ</a></li>
+                <li><a class="dropdown-item" href="<%= edit_user_registration_path %>"><i class="fas fa-cog"></i> 設定</a></li>
+                <li class="nav-item">
+                  <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
+                    <button type="submit" class="dropdown-item d-flex align-items-center" onclick="return confirm('ログアウトしますか？');">
+                      <i class="fas fa-sign-out-alt me-2"></i>
+                      ログアウト
+                    </button>
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= form_with url: user_path(current_user), method: :delete, local: true do |form| %>
+                    <button type="submit" class="dropdown-item d-flex align-items-center" onclick="return confirm('本当に退会しますか？');">
+                      <i class="fas fa-user-slash me-2"></i>
+                      退会
+                    </button>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <form method="get" action="#" class="search_container">
+                <input type="text" size="25" placeholder="キーワードを入力...">
+                <input type="submit" value="&#xf002">
+              </form>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_user_registration_path %>"><i class="fas fa-user-plus"></i> 新規登録</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= new_user_session_path %>"><i class="fas fa-sign-in-alt"></i> ログイン</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= guest_login_path %>"><i class="fas fa-user-friends"></i> ゲストログイン</a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>

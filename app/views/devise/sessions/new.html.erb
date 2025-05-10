@@ -1,0 +1,18 @@
+<div class="wrapper"> 
+  <div class="device">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <p class="title">ログイン</p>     
+      <%= f.email_field :email, placeholder: "メールアドレス", required: true %>
+      <i class="fa fa-envelope"></i>    
+      <%= f.password_field :password, placeholder: "パスワード(6文字以上)", minlength: 6, required: true %>
+      <i class="fa fa-key"></i>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>     
+      <%= f.submit "ログインする", class: "submit-button" %>
+    <% end %>
+  </div>
+</div>

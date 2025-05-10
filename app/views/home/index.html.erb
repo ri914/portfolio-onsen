@@ -1,0 +1,43 @@
+<div class="home-container">
+  <main class="home-main">
+    <div class="title">
+      <h1 class="main-title">温泉オンライン</h1>
+      <p class="sub-title">〜現地の人々とリアルタイムでつながる温泉情報共有サイト〜</p>
+    </div>
+    <div class="button-container">
+      <a href="<%= new_onsen_path %>" class="btn btn-3d-circle btn-post-onsen">
+        <span class="btn-3d-circle-content">
+          <span class="btn-3d-circle-front">新しい温泉地を <br> 投稿する</span>
+        </span>
+        <span class="btn-3d-circle-back"><i class="fas fa-plus"></i></span>
+      </a>        
+      <a href="<%#= nearby_onsens_path %>" class="btn btn-3d-circle btn-find-onsen">
+        <span class="btn-3d-circle-content">
+          <span class="btn-3d-circle-front">近くの温泉を <br> 探す</span>
+        </span>
+        <span class="btn-3d-circle-back"><i class="fas fa-map-marker-alt"></i></span>
+      </a>  
+      <a href="<%#= search_onsen_path %>" class="btn btn-3d-circle btn-search-onsen">
+        <span class="btn-3d-circle-content">
+          <span class="btn-3d-circle-front">温泉地を <br> 詳細検索する</span>
+        </span>
+        <span class="btn-3d-circle-back"><i class="fas fa-search"></i></span>
+      </a>
+    </div>
+  </main>
+  <h2>人気の温泉地</h2>
+  <div>
+    <% @onsens.each do |onsen| %>
+      <div>
+        <div>
+          <img src="<%= onsen.image || 'default_image.jpg' %>" alt="<%= onsen.name %>" style="height: 200px; object-fit: cover;">
+          <div>
+            <h5><%= link_to onsen.name, onsen_path(onsen) %></h5>
+            <p><%= truncate(onsen.description, length: 100) %></p>
+            <a href="<%= onsen_path(onsen) %>">詳細を見る</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

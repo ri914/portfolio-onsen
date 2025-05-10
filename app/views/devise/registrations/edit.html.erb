@@ -1,0 +1,60 @@
+<div class="edit-wrapper"> 
+  <div class="device">
+    <%= form_with(model: current_user, url: user_path(current_user), local: true) do |f| %>
+      <p class="title">設定</p>
+
+      <% if guest_user? %>
+        <p>ゲストユーザーは設定を変更できません。</p>
+      <% else %>
+        <% if current_user.errors.any? %>
+          <div class="error-messages">
+            <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% current_user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= f.label :current_password, "現在のパスワード" %>
+        <%= f.password_field :current_password, placeholder: "現在のパスワード", required: true %>
+        <i class="fa fa-key"></i>
+
+        <%= f.label :avatar, "アイコンを変更", class: "avatar-label" %>
+        <%= f.file_field :avatar, class: "file-input", style: "display: none;", onchange: "updateImagePreview(this)" %>       
+
+        <div class="current-avatar-container" onclick="document.querySelector('.file-input').click();">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: "current-avatar" %>
+          <% else %>
+            <%= image_tag 'default_avatar.png', class: "current-avatar", alt: "デフォルトアイコン" %>
+          <% end %>
+          <p>現在のアイコン</p>     
+
+          <% if current_user.avatar.attached? %>
+            <div class="remove-avatar" onclick="event.stopPropagation();">
+              <%= f.check_box :remove_avatar, class: "remove-avatar-checkbox" %>
+              <%= f.label :remove_avatar, "アイコンを削除", onclick: "event.stopPropagation();" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= f.text_field :name, placeholder: "ユーザー名(20文字まで)", maxlength: 20, required: true %>
+        <i class="fa fa-user"></i>
+
+        <%= f.email_field :email, placeholder: "メールアドレス", required: true %>
+        <i class="fa fa-envelope"></i>
+
+        <%= f.password_field :password, placeholder: "新しいパスワード(6文字以上)", minlength: 6 %>
+        <i class="fa fa-key"></i>
+
+        <%= f.password_field :password_confirmation, placeholder: "新しいパスワード(確認用)" %>
+        <i class="fa fa-key"></i>
+
+        <p class="note">* 変更がある場合、現在のパスワードを入力してください。</p>
+        <%= f.submit "変更を保存", class: "submit-button" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

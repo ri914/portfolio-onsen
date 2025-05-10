@@ -1,0 +1,146 @@
+.home-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  width: 100%;
+  background: url("https://i.pinimg.com/originals/bb/eb/bb/bbebbb4df287d64069f021dde49134dd.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 40px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  font-family: "Yuji Syuku", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+}
+
+.main-title {
+  font-size: 7rem;
+  color: #C62135;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.sub-title {
+  font-size: 1.5rem;
+  color: #fff;
+  line-height: 1.6;
+  margin-top: 0;
+  padding: 0 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #C62135;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.btn,
+a.btn,
+button.btn {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  user-select: none;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+a.btn-3d-circle {
+  display: block;
+  margin: 20px auto;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.btn-3d-circle-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s;
+  border-radius: 50%;
+  perspective: 150px;
+  text-align: center;
+  padding: 10px;
+}
+
+.btn-3d-circle-front {
+  font-size: 2rem;
+  color: #fff;
+  line-height: 1.2;
+  font-family: "Yuji Mai", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.btn-3d-circle:hover .btn-3d-circle-content {
+  transform: rotateY(0.5turn) rotateX(-0.03turn);
+}
+
+.btn-3d-circle:hover .btn-3d-circle-front {
+  opacity: 0;
+}
+
+.btn-3d-circle:hover .btn-3d-circle-back {
+  top: calc(50% - 2rem);
+  left: calc(50% - 0.75rem);
+  opacity: 1;
+}
+
+.btn-3d-circle-back {
+  font-size: 3rem;
+  position: absolute;
+  top: 70%;
+  left: 70%;
+  transition: all 0.3s;
+  letter-spacing: 0;
+  opacity: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-post-onsen {
+  background: linear-gradient(to bottom, #a52a2a 0%, #8b0000 100%);
+  width: 330px;
+  height: 330px;
+}
+
+.btn-find-onsen {
+  background: linear-gradient(to bottom, #ff6f61 0%, #e53935 50%, #c62828 100%);
+  width: 400px;
+  height: 400px;
+}
+
+.btn-search-onsen {
+  background: linear-gradient(to bottom, #d35400 0%, #c0392b 100%);
+  width: 330px;
+  height: 330px;
+}
+
+.fa-plus {
+  color: #fff;
+}
+
+.fa-heart {
+  color: #fff;
+}
+
+.fa-search {
+  color: #fff;
+}
