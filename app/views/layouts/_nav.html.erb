@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown me-2">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if current_user.guest? %>
+                <%= image_tag 'default_avatar.png', class: "nav-avatar" %> ゲスト
+              <% else %>
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar, class: "nav-avatar" %>
+                <% else %>
+                  <%= image_tag 'default_avatar.png', class: "nav-avatar" %>
+                <% end %>
+                <span class="nav-user-name"><%= current_user.name %></span>
+              <% end %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="<%= user_path(current_user) %>"><i class="fas fa-user-circle"></i> マイページ</a></li>
+              <li>
+                <a class="dropdown-item user-dropdown-link" href="<%= edit_user_registration_path %>" data-guest="<%= current_user.guest? %>">
+                  <i class="fas fa-cog"></i> 設定
+                </a>
+              </li>
+              <li class="nav-item">
+                <%= form_with url: destroy_user_session_path, method: :delete, local: true do |form| %>
+                  <button type="submit" class="dropdown-item d-flex align-items-center" onclick="return confirm('ログアウトしますか？');">
+                    <i class="fas fa-sign-out-alt me-2"></i> ログアウト
+                  </button>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= form_with url: user_path(current_user), method: :delete, local: true do |form| %>
+                  <button type="submit" class="dropdown-item d-flex align-items-center user-dropdown-link" data-guest="<%= current_user.guest? %>" onclick="return confirm('本当に退会しますか？');">
+                    <i class="fas fa-user-slash me-2"></i> 退会
+                  </button>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="<%= home_index_path %>">
+              <i class="fas fa-home"></i> ホーム
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link post-link" href="<%= new_onsen_path %>" data-guest="<%= current_user.guest? %>">
+              <i class="fas fa-plus-circle"></i> 投稿
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= onsens_path %>">
+              <i class="fas fa-hot-tub"></i> 温泉地一覧
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bookmark-link" href="<%= bookmarked_onsens_path %>" data-guest="<%= current_user.guest? %>">
+              <i class="fas fa-bookmark"></i> 保存済み
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= detail_search_onsens_path %>">
+              <i class="fas fa-search-plus"></i> 詳細検索
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link active" href="<%= root_path %>">
+              <i class="fas fa-home"></i> ホーム
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_user_registration_path %>">
+              <i class="fas fa-user-plus"></i> 新規登録
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_user_session_path %>">
+              <i class="fas fa-sign-in-alt"></i> ログイン
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= guest_login_path %>">
+              <i class="fas fa-user-friends"></i> ゲストログイン
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% if user_signed_in? %>
+      <div class="search-form ms-auto">
+        <%= form_with url: search_onsens_path, method: :get, local: true, class: "d-flex me-2" do |form| %>
+          <div class="input-group">
+            <%= form.text_field :keyword, size: 25, placeholder: 'キーワードを入力...', class: "form-control search-input" %>
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</nav>
+
+<% if user_signed_in? %>
+  <%= render 'onsens/region-nav' %>
+<% end %>

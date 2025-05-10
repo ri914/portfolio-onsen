@@ -23,5 +23,13 @@ module PortfolioOnsen
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.before_initialize do
+      config.weather_api = config_for(:weather_api)
+    end
+
+    config.time_zone = 'Asia/Tokyo'
+
+    config.active_record.default_timezone = :local
   end
 end

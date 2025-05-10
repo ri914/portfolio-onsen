@@ -1,0 +1,926 @@
+.form-body {
+  background: url("https://user0514.cdnw.net/shared/img/thumb/YAMA_DSC1754_TP_V.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 60px;
+}
+
+.card {
+  border: none;
+  width: 70%;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.text-center {
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.card-body {
+  padding: 30px;
+  max-height: 696.63px;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input,
+textarea,
+select {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  background-color: #007bff;
+  transition: background-color 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 14px;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.check-label {
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  position: relative;
+}
+
+.img-preview {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.img-preview:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+.description-input {
+  margin-top: 5px;
+  width: 100px;
+  transition: all 0.3s ease;
+}
+
+.onsen-detail-body {
+  padding: 20px;
+  background: url("https://user0514.cdnw.net/shared/img/thumb/YAMA_DSC1754_TP_V.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin: 20px auto;
+}
+
+.detail-card-body {
+  padding: 20px;
+  display: flex;
+  position: relative;
+}
+
+.onsen-detail-content {
+  display: flex;
+  gap: 35px;
+}
+
+.mb-title {
+  display: none;
+} 
+
+.pc-title {
+  display: block;
+}
+
+.onsen-image-container {
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  height: 400px;
+  position: relative;
+}
+
+.detail-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.detail-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.detail-image-description {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.carousel-indicators {
+  bottom: 10px;
+}
+
+.carousel-inner {
+  position: relative;
+}
+
+.image-slide {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background: none !important;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.onsen-info-container {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.onsen-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.onsen-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.detail-name p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+.onsen-location,
+.water-quality-container {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 0px;
+}
+
+.water-quality-container span {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.water-quality-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.water-quality-item {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 0.1em 0.5em;
+}
+
+.post-user-link {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 0px;
+  text-decoration: none; 
+}
+
+.post-user-link:hover {
+  color: blue;
+}
+
+.detail-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.detail-button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.detail-button .edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #666;
+}
+
+.detail-button .edit-button i {
+  font-size: 36px;
+}
+
+.detail-button .edit-button:hover {
+  color: rgba(108, 117, 125, 0.8);
+}
+
+.show-save-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.show-save-button .save-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  color: #aaa;
+  width: auto;
+  padding: 0;
+}
+
+.show-save-button .save-button:hover {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.show-save-button .save-button.saved {
+  background: none;
+  border: none;
+  color: darkorange;
+}
+
+.show-save-button .save-button i {
+  font-size: 36px;
+}
+
+.enter-button a {
+  background-color: rgb(169, 31, 40);
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  max-width: 400px;
+  padding: 10px 25px;
+  font-family: "Noto Sans Japanese";
+  color: #fff;
+  line-height: 2.5;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.enter-button a:hover {
+  background-color: #fff;
+  color: rgb(169, 31, 40);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 31, 40);
+}
+
+.enter-button a:after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-top: 3px solid #333;
+  border-right: 3px solid #333;
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  border-radius: 1px;
+  transition: 0.3s ease-in-out;
+}
+
+.enter-button a:hover:after {
+  border-color: #FFF;
+}
+
+.onsen-list {
+  background: url("https://www.fukei-kabegami.com/photo/fukei-kabegami/member/m000552/m000552_k00009900_1024-768.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 85vh;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.onsen-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  margin: 0 auto;
+  justify-content: center; 
+}
+
+.onsen-card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  max-width: 320px;
+  margin: 10px 0;
+}
+
+.onsen-card-body {
+  padding: 10px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+  display: block;
+}
+
+.cardtitle {
+  font-size: 1.25rem;
+  margin: 10px 0;
+}
+
+.cardtitle a {
+  text-decoration: none; 
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.saved-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.weather {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+.onsen-card {
+  transition: transform 0.2s;
+}
+
+.onsen-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.heading-9 {
+  display: inline-block;
+  position: relative;
+  padding: .5em .7em;
+  border-radius: 10px;
+  background-color: #d01632;
+  color: #fff;
+}
+
+.heading-9::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-top: 11px solid #d01632;
+}
+
+.prefecture-name {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+.table-save-button .save-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+}
+
+.table-save-button .save-button:hover {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.table-save-button .save-button.saved {
+  background: none;
+  border: none;
+  color: darkorange;
+}
+
+.table-save-button .save-button i {
+  font-size: 24px;
+}
+
+.edit-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+  width: calc(30% - 30px);
+  position: relative;
+}
+
+.edit-img-preview {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.edit-img-preview:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.edit-description-input {
+  margin-top: 5px;
+  width: 100px;
+  transition: all 0.3s ease;
+}
+
+.edit-image-description {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 85%;
+}
+
+.form-body-search {
+  background: url("https://www.mapple.net/cms/wp-content/uploads/2018/02/0f620923173a52b5f893de6dea1e5106.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 60px;
+}
+
+.bookmarked-count {
+  margin-right: 5px;
+}
+
+.sort-dropdown {
+  text-align: right;
+  margin-right: 18px;
+}
+
+#sort-select {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.onsen-weather {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.onsen-weather img {
+  width: 50px;
+  height: 50px;
+}
+
+.onsen-weather h2 {
+  margin-right: 20px;
+}
+
+.onsen-weather p {
+  margin: 0;
+}
+
+@media (max-width: 1199px) {
+  .onsen-detail-body {
+    padding: 0;
+  }
+
+  .detail-card {
+    margin: 0;
+    width: 100%;
+    border-radius: 0px;
+  }
+  
+  .onsen-detail-content {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    gap: 0px;
+  }
+
+  .mb-title {
+    display: block;
+  } 
+
+  .pc-title {
+    display: none;
+  }
+
+  .onsen-image-container {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+
+  .onsen-info-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+
+  .detail-card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail-name {
+    white-space: nowrap;
+  }
+
+  .text-muted {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-body {
+    padding: 0;
+    width: 100%;
+  }
+
+  .card {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 30px;
+    max-height: 696.63px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+  }
+
+  .card-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .post-card {
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-label {
+    font-size: 16px;
+  }
+
+  input,
+  textarea,
+  select {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .custom-checkbox-container {
+    flex-direction: column;
+  }
+
+  .custom-checkbox {
+    margin-right: 0;
+  } 
+  
+  .img-container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .img-preview {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .description-input {
+    width: 100%;
+  }
+
+  .onsen-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 4px;
+    margin: 0 auto;
+    justify-content: center; 
+  }
+  
+  .onsen-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 220px;
+    margin: 10px 0;
+  }
+
+  .onsen-card-body {
+    padding: 8px;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .image-placeholder {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+    display: block;
+  }
+
+  .cardtitle {
+    font-size: 0.9rem;
+    margin: 6px 0;
+  }
+
+  .prefecture-name {
+    font-size: 0.7rem;
+    color: #666;
+    margin: 3px 0;
+  }
+
+  .saved-count,  
+  .last-updated  {
+    font-size: 0.5rem;
+    color: #666;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .sort-dropdown {
+    text-align: right;
+    margin-right: 12px;
+  }
+
+  .table-save-button .save-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0;
+  }
+
+  .table-save-button .save-button i {
+    font-size: 16px;
+  }
+
+  .detail-image-description {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+  }
+  
+
+  .edit-image-description {
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 8px;
+    width: 85%;
+    margin-bottom: 10px;
+  }
+
+  .edit-img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    width: calc(42% - 15px);
+    position: relative;
+  }
+
+  .form-body-search {
+    padding: 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .onsen-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 4px;
+    margin: 0 auto;
+    justify-content: center; 
+  }
+  
+  .onsen-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 150px;
+    margin: 10px 0;
+  }
+}

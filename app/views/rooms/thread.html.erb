@@ -1,0 +1,76 @@
+<div class="thread-room">
+
+  <%= link_to '掲示板に戻る', onsen_room_path(@onsen), class: "back-link" %>
+
+  <% if @parent_message %>
+    <h2 class="p-title">返信元のメッセージ</h2>
+    <div class="p-message">
+      <div class="r-message-container" id="message-<%= @parent_message.id %>">
+        <div class="user-info">
+          <% parent_index = @room.messages.order(:created_at).pluck(:id).index(@parent_message.id) %>
+          <span class="message-number">#<%= parent_index + 1 %></span>
+
+          <%= link_to user_path(@parent_message.user) do %>
+            <% if @parent_message.user.avatar.attached? %>
+              <%= image_tag @parent_message.user.avatar, class: "user-icon" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "user-icon" %>
+            <% end %>
+          <% end %>
+
+          <%= link_to @parent_message.user.name, user_path(@parent_message.user), class: 'user-name' %>
+          <span class="message-time"><%= @parent_message.created_at.in_time_zone('Asia/Tokyo').strftime("%Y/%m/%d %H:%M") %></span>
+        </div>
+        <div class="message-content">
+          <div class="bubble">
+            <%= @parent_message.content %>
+            <% if @parent_message.image.attached? %>
+              <div class="message-image">
+                <%= image_tag @parent_message.image, class: "uploaded-image" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <h2 class="replies-title"><span class="reply-label">↪ 返信</span></h2>
+  <div class="r-messages">
+    <% all_ids = @room.messages.order(:created_at).pluck(:id) %>
+    <% @messages.each do |message| %>
+      <% next if message.id == @parent_message&.id %>
+
+      <% index_in_board = all_ids.index(message.id) %>
+      <% number = index_in_board ? index_in_board + 1 : "-" %>
+
+      <div class="r-message-container reply-message" id="message-<%= message.id %>">
+        <div class="user-info">
+          <span class="message-number">#<%= number %></span>
+
+          <%= link_to user_path(message.user) do %>
+            <% if message.user.avatar.attached? %>
+              <%= image_tag message.user.avatar, class: "user-icon" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "user-icon" %>
+            <% end %>
+          <% end %>
+
+          <%= link_to message.user.name, user_path(message.user), class: 'user-name' %>
+          <span class="message-time"><%= message.created_at.in_time_zone('Asia/Tokyo').strftime("%Y/%m/%d %H:%M") %></span>
+        </div>
+
+        <div class="message-content">
+          <div class="bubble">
+            <%= message.content %>
+            <% if message.image.attached? %>
+              <div class="message-image">
+                <%= image_tag message.image, class: "uploaded-image" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

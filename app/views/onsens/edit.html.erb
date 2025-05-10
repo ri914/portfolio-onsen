@@ -1,0 +1,90 @@
+<div class="form-body">
+  <div class="card shadow-lg p-4">
+    <div class="card-body">
+      
+      <h1 class="text-center mb-4">温泉情報を編集</h1>
+
+      <%= form_with(model: @onsen, local: true, html: { id: 'onsen-form' }) do |form| %>
+        <% if @onsen.errors.any? %>
+          <div class="alert alert-danger">
+            <h4 class="alert-heading">エラー!</h4>
+            <ul>
+              <% @onsen.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <% if @error_message %>
+          <div class="alert alert-danger">
+            <%= @error_message %>
+          </div>
+        <% end %>
+
+        <div class="form-group mb-3">
+          <%= form.label :name, "温泉地の名称", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <%= form.text_field :name, class: 'form-control', required: true, placeholder: '例) 道後温泉' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :location, "都道府県", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <%= form.select :location, Onsen.prefectures, { prompt: '選択してください' }, class: 'form-select', required: true %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :water_quality_ids, "泉質", class: 'form-label' %>
+          <span class="text-danger">※必須</span>
+          <div class="custom-checkbox-container">
+            <%= form.collection_check_boxes :water_quality_ids, WaterQuality.all, :id, :name do |b| %>
+              <div class="custom-checkbox">
+                <%= b.check_box(class: 'check-box') %>
+                <%= b.label(class: 'check-label') %>
+              </div>
+            <% end %>
+          </div>
+          <small class="form-text text-muted">複数の泉質を選択できます。</small>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= form.label :images, "新規画像", class: 'form-label' %>
+          <%= form.file_field :images, multiple: true, class: 'form-control', accept: 'image/*', id: 'image-upload' %>
+          <small class="form-text text-muted">※複数の画像を選択できます。</small> <br>
+          <small class="form-text text-muted text-warning">※左上の画像がサムネイルとして表示されます。</small> <br>
+          <small class="form-text text-muted text-warning">※新規画像を追加した場合、既存画像は削除されます。</small>
+          <div id="image-preview" class="image-preview mt-3"></div>
+          
+          <h5 class="form-label">既存画像</h5>
+          <div id="edit-image-preview" class="edit-image-preview mt-3">
+            <% if @onsen.images.attached? %>
+              <% @onsen.images.each_with_index do |image, index| %>
+                <div class="edit-img-container existing-image">
+                  <div class="carousel-inner">
+                    <div class="detail-image-container">
+                      <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded" %>
+                    </div>
+                    <p class="edit-image-description">
+                      <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
+                    </p>
+                  </div>           
+                  <input type="hidden" name="onsen[existing_image_ids][]" value="<%= image.id %>" />
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+
+        <div class="text-center">
+          <%= form.submit "更新", class: 'btn btn-primary2 btn-lg' %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-4">
+        <%= button_to 'この温泉を削除', onsen_path(@onsen), method: :delete, class: 'btn btn-danger delete-onsen-btn' %>
+      </div>
+    </div>
+  </div>
+</div>
