@@ -1,0 +1,113 @@
+<div class="room">
+  <h1 class="room-title"><%= link_to @onsen.name, onsen_path(@onsen) %>の掲示板</h1>
+  
+  <%= link_to '詳細ページへ', onsen_path(@onsen), class: "back-link" %>
+
+  <div class="messages">
+    <% @messages.each_with_index do |message, index| %>
+      <div class="message-container" id="message-<%= message.id %>">
+        <div class="user-info">
+          <span class="message-number">
+            <a href="#" class="reply-link" data-message-id="<%= message.id %>" data-message-number="<%= @start_index + index %>" data-message-content="<%= message.content %>">
+              #<%= @start_index + index %>
+            </a>
+          </span>
+
+          <%= link_to user_path(message.user) do %>
+            <% if message.user.avatar.attached? %>
+              <%= image_tag message.user.avatar, class: "user-icon" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class: "user-icon" %>
+            <% end %>
+          <% end %>
+
+          <div class="user-details">
+            <%= link_to message.user.name, user_path(message.user), class: 'user-name' %>
+            <span class="message-time"><%= message.created_at.in_time_zone('Asia/Tokyo').strftime("%Y/%m/%d %H:%M") %></span>
+          </div>
+
+          <div class=edit-area>
+            <% if message.user == current_user %>
+              <% if message.editable_until.present? && Time.now < message.editable_until %>
+                <%= link_to '編集', edit_message_onsen_room_path(@onsen, message), class: 'edit-button' %>
+                <span class="edit-time-remaining" data-editable-until="<%= message.editable_until.to_i %>"></span>
+              <% end %>
+            <% end %>        
+          </div>
+        </div>
+
+        <div class="message-content">
+          <% if message.parent_message_id.present? %>
+            <% parent_message = Message.find_by(id: message.parent_message_id) %>
+            <% if parent_message %>
+              <% parent_index = @room.messages.order(:created_at).pluck(:id).index(parent_message.id) %>
+              <% if parent_index.present? %>
+                <% parent_page = (parent_index / 15) + 1 %>
+                <div class="reply-to">
+                  >>
+                  <%= link_to "##{parent_index + 1}",
+                      thread_onsen_room_path(@onsen, parent_message_id: parent_message.id),
+                      class: "reply-thread-link" %>
+                </div>
+              <% else %>
+                <div class="reply-to">>>(メッセージが見つかりません)</div>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <div class="bubble">
+            <%= message.content %>
+            <% if message.image.attached? %>
+              <div class="message-image">
+                <%= image_tag message.image, class: "uploaded-image" %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if message.replies.any? %>
+            <div class="reply-count">
+              <%= link_to "返信: #{message.replies.count}件", thread_onsen_room_path(@onsen, parent_message_id: message.id) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="pagination">
+      <%= paginate @messages, window: 2, outer_window: 1 %>
+    </div>
+  </div>
+
+  <div class="message-form">
+    <%= form_with(model: @message, url: onsen_room_path(@onsen), html: { multipart: true }, class: "message-input") do |f| %>
+      <%= hidden_field_tag :parent_message_id, nil, id: "parent_message_id" %>
+
+      <div class="reply-info" id="reply-info" style="display: none;">
+        <span id="reply-target"></span> <button type="button" id="clear-reply" class="clear-reply">×</button>
+      </div>
+
+      <div class="form-elements">
+        <%= f.text_area :content, class: "message-textarea", placeholder: "メッセージを入力..." %>
+
+        <label for="image-upload" class="image-upload-label">
+          <i class="fa-solid fa-image"></i>
+        </label>
+        <%= f.file_field :image, id: "image-upload", class: "d-none" %>
+
+        <div class="room-preview-container" id="room-preview-container" style="display: none;">
+          <div class="room-preview-wrapper">
+            <img id="room-preview" class="uploaded-image-preview" alt="画像プレビュー">
+            <button type="button" id="remove-room-image" class="remove-image-btn">×</button>
+          </div>
+        </div>
+
+        <%= f.submit '送信', class: "message-submit" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div id="image-modal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-image">
+  </div>
+</div>

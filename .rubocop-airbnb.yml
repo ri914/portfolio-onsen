@@ -1,0 +1,7 @@
+require:
+  - rubocop-rails
+  - rubocop-airbnb
+
+inherit_gem:
+  rubocop-airbnb:
+    - config/default.yml

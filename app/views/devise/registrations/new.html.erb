@@ -1,0 +1,17 @@
+<div class="wrapper"> 
+  <div class="device">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <p class="title">アカウントを作成</p>
+      <%= f.text_field :name, placeholder: "ユーザー名(20文字まで)", maxlength: 20, required: true, autofocus: true %>
+      <i class="fa fa-user"></i>     
+      <%= f.email_field :email, placeholder: "メールアドレス", required: true %>
+      <i class="fa fa-envelope"></i>     
+      <%= f.password_field :password, placeholder: "パスワード(6文字以上)", minlength: 6, required: true %>
+      <i class="fa fa-key"></i>     
+      <%= f.password_field :password_confirmation, placeholder: "パスワード(確認用)", required: true %>
+      <i class="fa fa-key"></i>    
+      <p class="note">* 全て必須項目です。</p>     
+      <%= f.submit "新規登録する", class: "submit-button" %>
+    <% end %>
+  </div>
+</div>

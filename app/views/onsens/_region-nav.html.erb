@@ -1,0 +1,24 @@
+<nav class="region-nav">
+  <div class="region-toggle">地域カテゴリ</div>
+
+  <ul class="menu-list">
+    <li class="menu-item <%= 'current' if @current_region == '全国' %>">
+      <%= link_to '全国', onsens_path, class: 'region-link', data: { direct: true } %>
+    </li>
+
+    <% regions = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州・沖縄'] %>
+    <% regions.each do |region| %>
+      <li class="menu-item <%= 'current' if @current_region == region %>">
+        <%= link_to region, region_onsens_path(region: region), class: 'region-link', data: { toggle: 'submenu' } %>
+
+        <ul class="drop-menu-list">
+          <% Onsen.region_locations(region).each do |prefecture| %>
+            <li class="drop-menu-item">
+              <%= link_to prefecture, prefecture_onsens_path(region: region, prefecture: prefecture) %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</nav>

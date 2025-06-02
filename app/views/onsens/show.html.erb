@@ -1,0 +1,140 @@
+<div class="onsen-detail-body">
+  <div class="detail-card shadow-lg p-4">
+    <div class="detail-card-body">
+        
+        <div class="detail-button d-flex">
+          
+          <div class="show-save-button">
+            <div id="bookmarked-count-<%= @onsen.id %>" class="bookmarked-count">
+              <span id="count-<%= @onsen.id %>"><%= @onsen.saved_onsens.count %></span> 件
+            </div>
+
+            <button class="save-button <%= current_user.saved_onsens.exists?(onsen_id: @onsen.id) ? 'saved' : '' %>" 
+                    title="ブックマーク" 
+                    data-onsen-id="<%= @onsen.id %>"
+                    id="bookmark-button-<%= @onsen.id %>">
+              <i class="fas fa-bookmark<%= current_user.saved_onsens.exists?(onsen_id: @onsen.id) ? '' : '-o' %>"></i>
+            </button>
+
+            <%= form_with(url: bookmark_onsen_path(@onsen), method: :post, local: true, id: "bookmark-form-#{@onsen.id}") do %>
+              <%= hidden_field_tag :onsen_id, @onsen.id %>
+            <% end %>
+          </div>
+
+          <div class="show-edit-button">
+            <%= link_to '<i class="fas fa-cog"></i>'.html_safe, edit_onsen_path(@onsen),
+                        class: 'edit-button',
+                        title: '編集',
+                        data: { guest: current_user.guest? } %>
+          </div>
+        </div>
+
+      <div class="onsen-detail-content">
+        <h1 class="text-center mb-4 onsen-title mb-title"><%= @onsen.name %></h1>
+        <div class="onsen-image-container">
+          <% if @onsen.images.attached? %>
+            <div id="onsenCarousel" class="carousel slide" data-bs-ride="carousel">
+
+              <div class="carousel-indicators">
+                <% @onsen.images.each_with_index do |image, index| %>
+                  <button type="button" data-bs-target="#onsenCarousel" data-bs-slide-to="<%= index %>"
+                          class="<%= 'active' if index == 0 %>" aria-label="Slide <%= index + 1 %>"></button>
+                <% end %>
+              </div>
+
+              <div class="carousel-inner">
+                <% @onsen.images.each_with_index do |image, index| %>
+                  <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <div class="detail-image-container">
+                      <%= image_tag rails_blob_url(image, only_path: true), alt: @onsen.name, class: "img-fluid rounded", data: { bs_toggle: "modal", bs_target: "#imageModal", src: rails_blob_url(image, only_path: true) } %>
+                    </div>
+                    <p class="detail-image-description">
+                      <%= @onsen.image_descriptions[index]&.description || "説明はありません。" %>
+                    </p>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="image-slide">
+                <% ["prev", "next"].each do |direction| %>
+                  <button class="carousel-control-<%= direction %>" type="button"
+                          data-bs-target="#onsenCarousel" data-bs-slide="<%= direction %>"
+                          aria-hidden="true">
+                    <span class="carousel-control-<%= direction %>-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><%= direction.capitalize %></span>
+                  </button>
+                <% end %>
+              </div>
+
+            </div>
+          <% else %>
+            <img src="<%= asset_path('default_onsen_image.png') %>" alt="デフォルトの温泉画像" class="img-fluid rounded" />
+          <% end %>
+        </div>
+
+        <div class="onsen-info-container">
+          <h1 class="text-center mb-4 onsen-title pc-title"><%= @onsen.name %></h1>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">都道府県</strong>
+            <p class="onsen-location"><%= @onsen.location %></p>
+          </div>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">泉質</strong>
+            <div class="water-quality-container">
+              <% if @onsen.water_quality_ids.any? %>
+                <div class="water-quality-list">
+                  <% @onsen.water_quality_ids.each do |id| %>
+                    <% name = WaterQuality.find(id).name %>
+                    <% tooltip = water_quality_tooltip(name) %>
+                    <span class="water-quality-item" data-bs-toggle="tooltip" data-bs-placement="top" title="<%= tooltip %>">
+                      <%= name %>
+                    </span>
+                  <% end %>
+                </div>
+              <% else %>
+                <span class="no-water-quality">泉質情報はありません。</span>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="onsen-info mb-3">
+            <strong class="detail-name">投稿者</strong>
+            <p class="post-user">
+              <%= link_to @onsen.user.name, user_path(@onsen.user), class: "post-user-link" %>
+            </p>
+          </div>
+
+          <div class="onsen-info mb-3">
+            <div class="d-flex align-items-center">
+              <strong class="detail-name">天気</strong>
+              <small class="text-muted text-warning ms-2">※主要都市の天気を表示しています。</small>
+            </div>
+            <div class="onsen-weather">
+              <% if @weather %>
+                <p>気温: <%= @weather[:temperature] %>°C</p>
+                <p><%= @weather[:description] %></p>
+                <img src="http://openweathermap.org/img/wn/<%= @weather[:icon] %>@2x.png" alt="天気アイコン">
+              <% else %>
+                <p>天気情報が取得できませんでした。</p>
+              <% end %>
+            </div>
+          </div>
+              
+          <div class="enter-button">
+            <%= link_to onsen_room_path(@onsen) do %>
+              <i class="fas fa-door-open"></i> ルームへ入室
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="image-modal" class="image-modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-image">
+  </div>
+</div>
